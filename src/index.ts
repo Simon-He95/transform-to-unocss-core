@@ -1,4 +1,4 @@
-import { toUnocss } from './toUnocss'
+import { toUnocss, toUnocssClass } from './toUnocss'
 import { transformStyleToUnocss } from './transformStyleToUnocss'
 
-export { toUnocss, transformStyleToUnocss }
+export { toUnocss, transformStyleToUnocss, toUnocssClass }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { toUnocss } from '../src/toUnocss'
+import { toUnocss, toUnocssClass } from '../src/toUnocss'
 describe('text', () => {
   it('text-left', () => {
     expect(toUnocss('text-align:left')).toBe('text-left')
@@ -31,7 +31,8 @@ describe('text', () => {
   })
 
   it('text-decoration-color: #000;', () => {
-    expect(toUnocss('text-decoration-color: #000;')).toBe('decoration-#000')
+    expect(toUnocss('text-decoration-color: #000;')).toBe('decoration="[#000]"')
+    expect(toUnocssClass('text-decoration-color: #000;')).toBe('decoration-[#000]')
   })
 
   it('text-decoration-style: solid;', () => {

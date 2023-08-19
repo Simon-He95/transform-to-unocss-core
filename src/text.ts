@@ -1,4 +1,4 @@
-import { transformImportant } from './utils'
+import { getVal, transformImportant } from './utils'
 
 export function text(key: string, val: string) {
   const [value, important] = transformImportant(val)
@@ -14,7 +14,7 @@ export function text(key: string, val: string) {
     return `${value}${important}`
   }
   if (key.startsWith('text-decoration') || key === 'text-indent')
-    return `${key.split('-')[1]}-${value}${important}`
+    return `${key.split('-')[1]}${getVal(value)}${important}`
 
   if (key === 'text-underline-offset')
     return `underline-offset-${value}${important}`

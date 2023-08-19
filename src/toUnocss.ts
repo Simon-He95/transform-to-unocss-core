@@ -139,3 +139,12 @@ export function toUnocss(css: String, isRem = false) {
 
   return result
 }
+
+export function toUnocssClass(css: String, isRem = false) {
+  const result = toUnocss(css, isRem)
+  if (result)
+    return result.replace(/="([^"]+)"/g, (_: string, v: string) => `-${v}`)
+
+  return result
+}
+
