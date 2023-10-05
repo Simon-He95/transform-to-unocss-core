@@ -42,6 +42,8 @@ export function getVal(val: string, transform?: Function, inClass?: boolean) {
 }
 
 export function getHundred(n: string | number) {
+  if (typeof n === 'string' && n.endsWith('%'))
+    return n.slice(0, -1)
   return +n * 100
 }
 

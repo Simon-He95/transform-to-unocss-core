@@ -13,6 +13,10 @@ describe('filter', () => {
     expect(toUnocss('filter: brightness(.5);')).toBe('brightness-50')
   })
 
+  it('brightness', () => {
+    expect(toUnocss('filter: brightness(50%);')).toBe('brightness-50')
+  })
+
   it('contrast', () => {
     expect(toUnocss('filter: contrast(.5);')).toBe('contrast-50')
   })
