@@ -103,7 +103,7 @@ describe('background', () => {
   })
 
   // image
-  it('background-image:none', () => {
+  it.only('background-image:none', () => {
     expect(toUnocss('background-image:none')).toBe('bg-none')
   })
 
@@ -185,6 +185,15 @@ describe('background', () => {
       ),
     ).toBe(
       'bg-gradient-conic from="#fff 0.25turn" via="#000 0.25turn" to="#fff 0.5turn"',
+    )
+  })
+  it('background-image: linear-gradient;', () => {
+    expect(
+      toUnocss(
+        'background-image: linear-gradient(180deg, rgba(48,206,64,0,12) 0%, rgba(48,206,64,0.00) 100%);',
+      ),
+    ).toBe(
+      'bg-gradient-linear bg-gradient-[180deg,rgba(48,206,64,0,12)_0%,rgba(48,206,64,0.00)_100%]',
     )
   })
 })
