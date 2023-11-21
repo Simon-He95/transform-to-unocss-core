@@ -51,5 +51,9 @@ export function border(key: string, val: string) {
     )
   }
 
-  return `border="[${joinWithUnderLine(value)}]${important}"`
+  return value.split(' ').map((v) => {
+    if (value === 'currentColor')
+      return `border-current${important}`
+    return `border${getVal(v)}${important}`
+  }).join(' ')
 }

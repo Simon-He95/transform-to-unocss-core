@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { toUnocss } from '../src/toUnocss'
+import { toUnocssClass } from '../src/toUnocssClass'
 describe('border', () => {
   it('red;', () => {
     expect(toUnocss('border-color:red;')).toBe('border-red')
@@ -7,7 +8,13 @@ describe('border', () => {
 
   it('border;', () => {
     expect(toUnocss('border: 2px solid rgba(255, 62, 0, 0);')).toBe(
-      'border="[2px_solid_rgba(255,62,0,0)]"',
+      'border-2px border-solid border="[rgba(255,62,0,0)]"',
+    )
+  })
+  
+  it('border;', () => {
+    expect(toUnocssClass('border: 2px solid rgba(255, 62, 0, 0);')[0]).toBe(
+      'border-2px border-solid border-[rgba(255,62,0,0)]',
     )
   })
 
