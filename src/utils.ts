@@ -33,7 +33,7 @@ export function isRgb(s: string) {
 }
 
 export function getVal(val: string, transform?: Function, inClass?: boolean) {
-  if (isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isPercent(val)) {
+  if (isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isPercent(val) || isVar(val)) {
     return inClass
       ? `-[${trim(val, 'all').replace(/['"]/g, '')}]`
       : `="[${trim(val, 'all').replace(/['"]/g, '')}]"`
@@ -104,4 +104,8 @@ export function joinEmpty(str: string) {
     .replace(/\(\s*/g, '(')
     .replace(/\s*\)/g, ')')
     .replace(/\s*,\s*/g, ',')
+}
+
+export function isVar(s: string) {
+  return s.startsWith('var(--')
 }

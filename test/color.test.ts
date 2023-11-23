@@ -20,4 +20,10 @@ describe('color', () => {
       'text="[rgba(255,255,255,0.1)]"',
     )
   })
+
+  it('color:cssvar', () => {
+    expect(toUnocss('color: var(--color, red);')).toBe(
+      'text="[var(--color,red)]"',
+    )
+  })
 })

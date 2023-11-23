@@ -11,7 +11,7 @@ describe('border', () => {
       'border-2px border-solid border="[rgba(255,62,0,0)]"',
     )
   })
-  
+
   it('border;', () => {
     expect(toUnocssClass('border: 2px solid rgba(255, 62, 0, 0);')[0]).toBe(
       'border-2px border-solid border-[rgba(255,62,0,0)]',

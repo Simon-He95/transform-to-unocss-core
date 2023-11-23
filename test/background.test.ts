@@ -196,4 +196,14 @@ describe('background', () => {
       'bg-gradient-linear bg-gradient-[180deg,rgba(48,206,64,0,12)_0%,rgba(48,206,64,0.00)_100%]',
     )
   })
+
+  it('background-color: var(--default, red);', () => {
+    expect(
+      toUnocss(
+        'background-color: var(--default, red);',
+      ),
+    ).toBe(
+      'bg="[var(--default,red)]"',
+    )
+  })
 })
