@@ -76,6 +76,23 @@ export function trim(s: string, type: TrimType = 'around'): string {
 }
 
 export function transformImportant(v: string) {
+  if (/rgb/.test(v)) {
+    v = v.replace(/rgb[a](\([^\)]+\))/g, (all, k) =>
+      all.replace(k, trim(k, 'all')),
+    )
+  }
+
+  if (/hsl/.test(v)) {
+    v = v.replace(/hsl[a](\([^\)]+\))/g, (all, k) =>
+      all.replace(k, trim(k, 'all')),
+    )
+  }
+
+  if (/var\([^\)]+\)/.test(v)) {
+    v = v.replace(/var(\([^\)]+\))/g, (all, k) =>
+      all.replace(k, trim(k, 'all')))
+  }
+
   if (v.endsWith('!important'))
     return [v.replace(/\s*\!important/, '').trim(), '!']
   return [v.trim(), '']
