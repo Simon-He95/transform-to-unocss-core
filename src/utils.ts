@@ -32,8 +32,12 @@ export function isRgb(s: string) {
   return s.startsWith('rgb')
 }
 
+export function isHsl(s: string) {
+  return s.startsWith('hsl')
+}
+
 export function getVal(val: string, transform?: Function, inClass?: boolean) {
-  if (isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isPercent(val) || isVar(val)) {
+  if (isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isHsl(val) || isPercent(val) || isVar(val)) {
     return inClass
       ? `-[${trim(val, 'all').replace(/['"]/g, '')}]`
       : `="[${trim(val, 'all').replace(/['"]/g, '')}]"`
@@ -76,21 +80,29 @@ export function trim(s: string, type: TrimType = 'around'): string {
 }
 
 export function transformImportant(v: string) {
+  v = v.replace(/\s+/, ' ')
   if (/rgb/.test(v)) {
-    v = v.replace(/rgba?(\([^\)]+\))/g, (all, k) =>
-      all.replace(k, trim(k, 'all')),
+    v = v.replace(/rgba?\(([^\)]+)\)/g, (all, k) => {
+      const _k = k.trim().split(' ')
+      return all.replace(k, _k.map((i: string, index: number) => i.endsWith(',') ? i : i + ((_k.length - 1 === index) ? '' : ',')).join(''))
+    },
     )
   }
 
   if (/hsl/.test(v)) {
-    v = v.replace(/hsla?(\([^\)]+\))/g, (all, k) =>
-      all.replace(k, trim(k, 'all')),
+    v = v.replace(/hsla?\(([^\)]+)\)/g, (all, k) => {
+      const _k = k.trim().split(' ')
+      return all.replace(k, _k.map((i: string, index: number) => i.endsWith(',') ? i : i + ((_k.length - 1 === index) ? '' : ',')).join(''))
+    },
     )
   }
 
   if (/var\([^\)]+\)/.test(v)) {
-    v = v.replace(/var(\([^\)]+\))/g, (all, k) =>
-      all.replace(k, trim(k, 'all')))
+    v = v.replace(/var\(([^\)]+)\)/g, (all, k) => {
+      const _k = k.trim().split(' ')
+      return all.replace(k, _k.map((i: string, index: number) => i.endsWith(',') ? i : i + ((_k.length - 1 === index) ? '' : ',')).join(''))
+    },
+    )
   }
 
   if (v.endsWith('!important'))

@@ -75,4 +75,8 @@ describe('border', () => {
   it('border: 1px solid var(--magenta-3, #FFADD2)', () => {
     expect(toUnocss('border: 1px solid var(--magenta-3, #FFADD2)')).toBe('border-1px border-solid border="[var(--magenta-3,#FFADD2)]"')
   })
+
+  it('border: 1px solid var(--magenta-3, #FFADD2)', () => {
+    expect(toUnocss('border: 1px solid hsl(1 2 3)')).toBe('border-1px border-solid border="[hsl(1,2,3)]"')
+  })
 })
