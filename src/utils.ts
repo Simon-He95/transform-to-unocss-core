@@ -77,13 +77,13 @@ export function trim(s: string, type: TrimType = 'around'): string {
 
 export function transformImportant(v: string) {
   if (/rgb/.test(v)) {
-    v = v.replace(/rgb[a](\([^\)]+\))/g, (all, k) =>
+    v = v.replace(/rgba?(\([^\)]+\))/g, (all, k) =>
       all.replace(k, trim(k, 'all')),
     )
   }
 
   if (/hsl/.test(v)) {
-    v = v.replace(/hsl[a](\([^\)]+\))/g, (all, k) =>
+    v = v.replace(/hsla?(\([^\)]+\))/g, (all, k) =>
       all.replace(k, trim(k, 'all')),
     )
   }
