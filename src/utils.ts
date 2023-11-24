@@ -1,10 +1,12 @@
 export const flag = '.__unocss_transfer__'
+export const cssMathFnRE = /^(?:calc|clamp|min|max)\s*\(.*\)/
+export const numberWithUnitRE = /[0-9]+(px|rem|em|%|vw|vh|vmin|vmax)/
 
 export function isNot(s: string) {
   return /\[&:not\(/.test(s)
 }
 export function isCalc(s: string) {
-  return s.startsWith('calc(')
+  return cssMathFnRE.test(s)
 }
 
 export function getFirstName(s: string) {
@@ -137,4 +139,12 @@ export function joinEmpty(str: string) {
 
 export function isVar(s: string) {
   return s.startsWith('var(--')
+}
+
+export function isSize(s: string) {
+  return cssMathFnRE.test(s) || numberWithUnitRE.test(s)
+}
+
+export function isColor(s: string) {
+  return isHex(s) || isRgb(s) || isHsl(s)
 }

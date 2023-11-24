@@ -27,7 +27,7 @@ export function border(key: string, val: string) {
   }
 
   if (borderSize.some(b => key.startsWith(b)))
-    return `border-${key.split('-')[1][0]}${getVal(value)}${important}`
+    return value.split(' ').map(v => `border-${key.split('-')[1][0]}${getVal(v)}${important}`).join(' ')
   if (key === 'border-inline-end-width')
     return `border-e${getVal(value)}${important}`
   if (key === 'border-inline-start-width')

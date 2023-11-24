@@ -79,4 +79,9 @@ describe('border', () => {
   it('border: 1px solid var(--magenta-3, #FFADD2)', () => {
     expect(toUnocss('border: 1px solid hsl(1 2 3)')).toBe('border-1px border-solid border="[hsl(1,2,3)]"')
   })
+
+  it('border-bottom: 1px solid var(--magenta-3, #FFADD2)', () => {
+    expect(toUnocss('border-bottom: 1px solid var(--magenta-3, #FFADD2)')).toBe('border-b-1px border-b-solid border-b="[var(--magenta-3,#FFADD2)]"')
+    expect(toUnocssClass('border-bottom: 1px solid var(--magenta-3, #FFADD2)')[0]).toBe('border-b-1px border-b-solid border-b-[var(--magenta-3,#FFADD2)]')
+  })
 })
