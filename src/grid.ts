@@ -3,7 +3,6 @@ import {
   getLastName,
   joinWithLine,
   transformImportant,
-  trim,
 } from './utils'
 
 export function grid(key: string, val: string) {
@@ -38,7 +37,7 @@ export function grid(key: string, val: string) {
       matcher[1]
     }${important}`
   }
-  if (trim(value, 'all') === '1/-1')
+  if (value === '1/-1')
     return `${key.slice(5).replace('column', 'col')}-span-full${important}`
   return `${key.slice(5).replace('column', 'col')}-${value}${important}`
 }

@@ -1,4 +1,4 @@
-import { getVal, transformImportant, trim } from './utils'
+import { getVal, transformImportant } from './utils'
 const map: any = {
   'margin-left': 'ml',
   'margin-right': 'mr',
@@ -20,7 +20,7 @@ export function transformMargin(key: string, val: string) {
 
   if (specail)
     return `${specail}${getVal(value)}${important}`
-  const values = trim(value).split(' ')
+  const values = value.split(' ')
   const len = values.length
 
   if (len === 1)

@@ -1,4 +1,4 @@
-import { getVal, isRgb, transformImportant, trim } from './utils'
+import { getVal, isRgb, transformImportant } from './utils'
 
 const backgroundMap = [
   'background-color',
@@ -33,7 +33,7 @@ export function background(key: string, val: string) {
         // eslint-disable-next-line prefer-const
         let [direction, from, via, to] = matcher.slice(1)
 
-        direction = trim(direction, 'around')
+        direction = direction
           .split(' ')
           .map(item => item[0])
           .join('')
@@ -50,7 +50,7 @@ export function background(key: string, val: string) {
       if (!matcher1)
         return
 
-      return `bg-gradient-linear bg-gradient-[${matcher1[1]},${matcher1[2].trim().replace(/\s+/, '_').replaceAll(commaReplacer, ',')},${matcher1[3].trim().replace(/\s+/, '_').replaceAll(commaReplacer, ',')}]`
+      return `bg-gradient-linear bg-gradient-[${matcher1[1]},${matcher1[2].replace(/\s+/, '_').replaceAll(commaReplacer, ',')},${matcher1[3].replace(/\s+/, '_').replaceAll(commaReplacer, ',')}]`
     }
     else if (/(radial|conic)-gradient/.test(value)) {
       // 区分rgba中的,和linear-gradient中的,
@@ -71,7 +71,7 @@ export function background(key: string, val: string) {
     const match = value.match(/rgba?\([^)]+\)/)
     if (match) {
       const rgb = match[0]
-      return `bg="${value.replace(rgb, `[${trim(rgb, 'all')}]`)}${important}"`
+      return `bg="${value.replace(rgb, `[${rgb}]`)}${important}"`
     }
     const urlMatch = value.match(/url\(["'\s\.\-_\w\/]*\)/)
 
@@ -118,10 +118,7 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
   }
   if (from) {
     from = from.replaceAll(commaReplacer, ',')
-    const [fromColor, fromPosition] = trim(from, 'around')
-      .replace(/rgba?\(([^)]+)\)/, (all, v) =>
-        all.replace(v, trim(v, 'all')),
-      )
+    const [fromColor, fromPosition] = from
       .split(' ')
     if (fromPosition) {
       result += ` from="${isRgb(fromColor) ? `[${fromColor}]` : fromColor
@@ -134,10 +131,7 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
 
   if (via) {
     via = via.replaceAll(commaReplacer, ',')
-    const [viaColor, viaPosition] = trim(via, 'around')
-      .replace(/rgba?\(([^)]+)\)/, (all, v) =>
-        all.replace(v, trim(v, 'all')),
-      )
+    const [viaColor, viaPosition] = via
       .split(' ')
     if (viaPosition) {
       result += ` via="${isRgb(viaColor) ? `[${viaColor}]` : viaColor
@@ -150,10 +144,7 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
 
   if (to) {
     to = to.replaceAll(commaReplacer, ',')
-    const [toColor, toPosition] = trim(to, 'around')
-      .replace(/rgba?\(([^)]+)\)/, (all, v) =>
-        all.replace(v, trim(v, 'all')),
-      )
+    const [toColor, toPosition] = to
       .split(' ')
     if (toPosition) {
       result += ` to="${isRgb(toColor) ? `[${toColor}]` : toColor

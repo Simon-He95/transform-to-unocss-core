@@ -3,7 +3,6 @@ import {
   getLastName,
   joinWithUnderLine,
   transformImportant,
-  trim,
 } from './utils'
 
 const lastMaps = ['flex-basis', 'flex-grow', 'flex-shrink']
@@ -14,7 +13,7 @@ export function flex(key: string, val: string) {
     return `${getLastName(key)}-${value}${important}`
   if (value === '1')
     return `flex-1${important}`
-  const firstVal = trim(value)[0]
+  const firstVal = value[0]
   if (key === 'flex' && (firstVal === '0' || firstVal === '1'))
     return `flex="[${joinWithUnderLine(value)}]${important}"`
 

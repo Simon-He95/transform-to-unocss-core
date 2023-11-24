@@ -3,7 +3,6 @@ import {
   joinEmpty,
   joinWithLine,
   transformImportant,
-  trim,
 } from './utils'
 
 export function transform(key: string, val: string) {
@@ -55,7 +54,6 @@ export function transform(key: string, val: string) {
 }
 
 function transformVal(val: string) {
-  val = trim(val, 'all')
   if (val.endsWith('deg'))
     return val.slice(0, -3)
   return val

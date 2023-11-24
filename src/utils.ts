@@ -1,6 +1,6 @@
 export const flag = '.__unocss_transfer__'
 export const cssMathFnRE = /^(?:calc|clamp|min|max)\s*\(.*\)/
-export const numberWithUnitRE = /[0-9]+(px|rem|em|%|vw|vh|vmin|vmax)/
+export const numberWithUnitRE = /[0-9]+(px|rem|em|%|vw|vh|vmin|vmax|deg)/
 
 export function isNot(s: string) {
   return /\[&:not\(/.test(s)
@@ -83,6 +83,8 @@ export function trim(s: string, type: TrimType = 'around'): string {
 
 export function transformImportant(v: string) {
   v = v.replace(/\s+/, ' ')
+    .replace(/\s*,\s*/g, ',')
+    .replace(/\s*\/\s*/, '/')
   if (/rgb/.test(v)) {
     v = v.replace(/rgba?\(([^\)]+)\)/g, (all, k) => {
       const _k = k.trim().split(' ')
