@@ -9,4 +9,11 @@ describe('content', () => {
   it('content: "aa";', () => {
     expect(toUnocss('content: "aa";')).toBe('content="["aa"]"')
   })
+
+  it('content: " ";', () => {
+    expect(toUnocss('content: " ";')).toBe('content-[\'_\']')
+  })
+  it('content: \' \'', () => {
+    expect(toUnocss('content: \' \';')).toBe('content-[\'_\']')
+  })
 })
