@@ -1,6 +1,9 @@
 import {
   getVal,
   isCalc,
+  isHex,
+  isHsl,
+  isRgb,
   joinWithUnderLine,
   transformImportant,
 } from './utils'
@@ -17,8 +20,22 @@ export function border(key: string, val: string) {
 
   if (key === 'border-spacing')
     return `${key}="[${joinWithUnderLine(value)}]${important}"`
-  if (key === 'border-color')
+  if (key === 'border-color') {
+    if (value.includes(' ')) {
+      const len = value.split(' ').length
+      const vs = value.split(' ').map(s => (isHex(s) || isRgb(s) || isHsl(s)) ? `-[${s}]` : `-${s}`)
+      const [top, right, bottom, left] = vs
+      switch (len) {
+        case 2:
+          return `border-y${top}${important} border-x${right}${important}`
+        case 3:
+          return `border-t${top}${important} border-b${bottom}${important} border-x${right}${important}`
+        case 4:
+          return `border-t${top}${important} border-b${bottom}${important} border-r${right}${important} border-l${left}${important}`
+      }
+    }
     return `border${getVal(value)}${important}`
+  }
 
   if (key === 'border-radius') {
     return isCalc(value) || !value.includes(' ')
