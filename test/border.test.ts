@@ -4,6 +4,15 @@ import { toUnocssClass } from '../src/toUnocssClass'
 describe('border', () => {
   it('red;', () => {
     expect(toUnocss('border-color:red;')).toBe('border-red')
+    expect(toUnocss('border-color:red green;')).toBe(
+      'border-y-red border-x-green',
+    )
+    expect(toUnocss('border-color:red green yellow;')).toBe(
+      'border-t-red border-b-yellow border-x-green',
+    )
+    expect(toUnocss('border-color:red green yellow black;')).toBe(
+      'border-t-red border-b-yellow border-r-green border-l-black',
+    )
   })
 
   it('border;', () => {
