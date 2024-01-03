@@ -1,6 +1,9 @@
 import {
   getVal,
   isCalc,
+  isHex,
+  isHsl,
+  isRgb,
   joinWithUnderLine,
   transformImportant,
 } from './utils'
@@ -18,10 +21,9 @@ export function border(key: string, val: string) {
   if (key === 'border-spacing')
     return `${key}="[${joinWithUnderLine(value)}]${important}"`
   if (key === 'border-color') {
-    const val = getVal(value)
-    if (val.includes(' ')) {
-      const len = val.split(' ').length
-      const vs = val.split(' ').map(s => s.startsWith('-') ? s : `-${s}`)
+    if (value.includes(' ')) {
+      const len = value.split(' ').length
+      const vs = value.split(' ').map(s => (isHex(s) || isRgb(s) || isHsl(s)) ? `-[${s}]` : `-${s}`)
       const [top, right, bottom, left] = vs
       switch (len) {
         case 2:

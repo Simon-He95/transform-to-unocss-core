@@ -13,6 +13,9 @@ describe('border', () => {
     expect(toUnocss('border-color:red green yellow black;')).toBe(
       'border-t-red border-b-yellow border-r-green border-l-black',
     )
+    expect(toUnocss('border-color:hsla(46, 100%, 50%, 1) #eee rgba(1, 2, 3, .5) #FFC300FF')).toBe(
+      'border-t-[hsla(46,100%,50%,1)] border-b-[rgba(1,2,3,.5)] border-r-[#eee] border-l-[#FFC300FF]',
+    )
   })
 
   it('border;', () => {
