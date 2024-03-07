@@ -43,6 +43,19 @@ describe('height', () => {
   it('min-height: 0px;', () => {
     expect(toUnocss('min-height: 100%;;')).toBe('min-h="[100%]"')
   })
+  it('min-height calc', () => {
+    expect(toUnocss('min-height:calc(100% - 50px)')).toBe('min-h="[calc(100%-50px)]"')
+  })
+  it('min-height calc not space', () => {
+    expect(toUnocss(' min-height:calc(100%-50px)')).toBe('min-h="[calc(100%-50px)]"')
+  })
+
+  it('min-height calc space', () => {
+    expect(toUnocss(' min-height:calc(100%  -  50px)')).toBe(
+      'min-h="[calc(100%-50px)]"',
+    )
+  })
+
   it('max-height: 0px;', () => {
     expect(toUnocss('max-height: 0px;')).toBe('max-h-0px')
   })
