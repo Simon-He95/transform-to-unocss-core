@@ -50,4 +50,15 @@ describe('width', () => {
   it('max-width: 0px;', () => {
     expect(toUnocss('max-width: max-content;')).toBe('max-w-max')
   })
+
+  it('max-width calc', () => {
+    expect(toUnocss('max-width:calc(100% - 50px)')).toBe('max-w="[calc(100%-50px)]"')
+  })
+  it('max-width calc not space', () => {
+    expect(toUnocss('max-width:calc(100%-50px)')).toBe('max-w="[calc(100%-50px)]"')
+  })
+
+  it('max-width calc space', () => {
+    expect(toUnocss('max-width:calc(100%  -  50px)')).toBe('max-w="[calc(100%-50px)]"')
+  })
 })

@@ -49,4 +49,17 @@ describe('height', () => {
   it('max-height: 0px;', () => {
     expect(toUnocss('max-height: max-content;')).toBe('max-h-max')
   })
+
+  it('max-height calc', () => {
+    expect(toUnocss('max-height:calc(100% - 50px)')).toBe('max-h="[calc(100%-50px)]"')
+  })
+  it('max-height calc not space', () => {
+    expect(toUnocss(' max-height:calc(100%-50px)')).toBe('max-h="[calc(100%-50px)]"')
+  })
+
+  it('max-height calc space', () => {
+    expect(toUnocss(' max-height:calc(100%  -  50px)')).toBe(
+      'max-h="[calc(100%-50px)]"',
+    )
+  })
 })
