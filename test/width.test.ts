@@ -44,6 +44,17 @@ describe('width', () => {
   it('min-width: 0px;', () => {
     expect(toUnocss('min-width: 100%;')).toBe('min-w="[100%]"')
   })
+  it('min-width calc', () => {
+    expect(toUnocss('min-width:calc(100% - 50px)')).toBe('min-w="[calc(100%-50px)]"')
+  })
+  it('min-width calc not space', () => {
+    expect(toUnocss('min-width:calc(100%-50px)')).toBe('min-w="[calc(100%-50px)]"')
+  })
+
+  it('min-width calc space', () => {
+    expect(toUnocss('min-width:calc(100%  -  50px)')).toBe('min-w="[calc(100%-50px)]"')
+  })
+
   it('max-width: 0px;', () => {
     expect(toUnocss('max-width: 0px;')).toBe('max-w-0px')
   })
