@@ -29,14 +29,14 @@ export function transform(key: string, val: string) {
         ).split(' ')
         if (values.length > 1) {
           return `${namePrefix}-${nameSuffix.toLowerCase()}="${values.map(v => isVar(v)
-? `[${v}]`
-: namePrefix === 'scale'
-            ? getHundred(v)
-            : transformVal(v)).join(' ')}${important}"`
+            ? `[${v}]`
+            : namePrefix === 'scale'
+              ? getHundred(v)
+              : transformVal(v)).join(' ')}${important}"`
         }
         return `${namePrefix}="${nameSuffix.toLowerCase()}-${isVar(values[0])
           ? `[${values[0]}]`
-: namePrefix === 'scale'
+          : namePrefix === 'scale'
             ? getHundred(values[0])
             : transformVal(values[0])}${important}"`
       }
@@ -47,14 +47,14 @@ export function transform(key: string, val: string) {
         ).split(' ')
         if (values.length > 1) {
           return `${namePrefix}="${values.map(v => isVar(v)
-? `[${v}]`
-: namePrefix === 'scale'
-            ? getHundred(v)
-            : transformVal(v)).join(' ')}${important}"`
+            ? `[${v}]`
+            : namePrefix === 'scale'
+              ? getHundred(v)
+              : transformVal(v)).join(' ')}${important}"`
         }
         return `${namePrefix}="${isVar(values[0])
           ? `[${values[0]}]`
-: namePrefix === 'scale'
+          : namePrefix === 'scale'
             ? getHundred(values[0])
             : transformVal(values[0])}${important}"`
       }
