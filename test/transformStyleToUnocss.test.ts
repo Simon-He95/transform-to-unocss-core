@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { transformStyleToUnocss } from '../src/transformStyleToUnocss'
 
 describe('transformStyleToUnocss', () => {
-  it.only('transformStyleToUnocss', () => {
+  it('transformStyleToUnocss', () => {
     expect(
       transformStyleToUnocss(
         'transform-origin: center;background:red;width:100%;height:30px',
