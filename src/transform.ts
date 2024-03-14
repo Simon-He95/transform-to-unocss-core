@@ -1,5 +1,6 @@
 import {
   getHundred,
+  isVar,
   joinEmpty,
   joinWithLine,
   transformImportant,
@@ -22,31 +23,40 @@ export function transform(key: string, val: string) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [_, namePrefix, nameSuffix, value] = matcher
       if (nameSuffix) {
-        if (namePrefix === 'scale') {
-          if (value.includes(',')) {
-            return `${namePrefix}-${nameSuffix.toLowerCase()}="${value
-              .split(',')
-              .join(' ')}${important}"`
-          }
-          return `${namePrefix}-${nameSuffix.toLowerCase()}-${getHundred(
-            value,
-          )}${important}`
+        const values = value.replace(
+          /,(?![^()]*\))/g,
+          ' ',
+        ).split(' ')
+        if (values.length > 1) {
+          return `${namePrefix}-${nameSuffix.toLowerCase()}="${values.map(v => isVar(v)
+? `[${v}]`
+: namePrefix === 'scale'
+            ? getHundred(v)
+            : transformVal(v)).join(' ')}${important}"`
         }
-        return `${namePrefix}-${nameSuffix.toLowerCase()}="${transformVal(
-          value,
-        )}${important}"`
+        return `${namePrefix}="${nameSuffix.toLowerCase()}-${isVar(values[0])
+          ? `[${values[0]}]`
+: namePrefix === 'scale'
+            ? getHundred(values[0])
+            : transformVal(values[0])}${important}"`
       }
       else {
-        if (namePrefix === 'scale') {
-          if (value.includes(','))
-            return `${namePrefix}="${value.split(',').join(' ')}${important}"`
-          return `${namePrefix}-${getHundred(value)}${important}`
-        }
-
-        return `${namePrefix}="${transformVal(value).replace(
-          /,/g,
+        const values = value.replace(
+          /,(?![^()]*\))/g,
           ' ',
-        )}${important}"`
+        ).split(' ')
+        if (values.length > 1) {
+          return `${namePrefix}="${values.map(v => isVar(v)
+? `[${v}]`
+: namePrefix === 'scale'
+            ? getHundred(v)
+            : transformVal(v)).join(' ')}${important}"`
+        }
+        return `${namePrefix}="${isVar(values[0])
+          ? `[${values[0]}]`
+: namePrefix === 'scale'
+            ? getHundred(values[0])
+            : transformVal(values[0])}${important}"`
       }
     })
     .filter(Boolean)

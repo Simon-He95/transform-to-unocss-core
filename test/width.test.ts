@@ -72,4 +72,7 @@ describe('width', () => {
   it('max-width calc space', () => {
     expect(toUnocss('max-width:calc(100%  -  50px)')).toBe('max-w="[calc(100%-50px)]"')
   })
+  it('cssvar', () => {
+    expect(toUnocss('max-width: var(--height)')).toBe('max-w="[var(--height)]"')
+  })
 })

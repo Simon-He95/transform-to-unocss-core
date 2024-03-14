@@ -11,27 +11,27 @@ describe('transform', () => {
   })
 
   it('transform: scale(0);', () => {
-    expect(toUnocss('transform: scale(.5);')).toBe('scale-50')
+    expect(toUnocss('transform: scale(.5);')).toBe('scale="50"')
   })
 
   it('transform: scaleX(0);', () => {
-    expect(toUnocss('transform: scaleX( 0.5 );')).toBe('scale-x-50')
+    expect(toUnocss('transform: scaleX( 0.5 );')).toBe('scale="x-50"')
   })
 
   it('transform: rotate(0deg);', () => {
     expect(toUnocss('transform: rotate( 0deg );')).toBe('rotate="0"')
   })
 
-  it('transform: translateX(1px);', () => {
-    expect(toUnocss('transform: translateX(1px);')).toBe('translate-x="1px"')
+  it('transform: translateY(1px);', () => {
+    expect(toUnocss('transform: translateY(1px);')).toBe('translate="y-1px"')
   })
 
   it('transform: translateX(1px);', () => {
-    expect(toUnocss('transform: translateX(1px);')).toBe('translate-x="1px"')
+    expect(toUnocss('transform: translateX(1px);')).toBe('translate="x-1px"')
   })
 
   it('transform: translateX(10%);', () => {
-    expect(toUnocss('transform: translateX(10%);')).toBe('translate-x="10%"')
+    expect(toUnocss('transform: translateX(10%);')).toBe('translate="x-10%"')
   })
   it('transform: ranslate(10%, 20%);', () => {
     expect(toUnocss('transform: translate(10%, 20%);')).toBe(
@@ -40,7 +40,7 @@ describe('transform', () => {
   })
 
   it('transform: skewX(2deg);', () => {
-    expect(toUnocss('transform: skewX(2deg);')).toBe('skew-x="2"')
+    expect(toUnocss('transform: skewX(2deg);')).toBe('skew="x-2"')
   })
 
   it('transform: skew(50deg)', () => {
@@ -48,16 +48,22 @@ describe('transform', () => {
   })
 
   it('transform: scale(0.6)', () => {
-    expect(toUnocss('transform: scale(0.6);')).toBe('scale-60')
+    expect(toUnocss('transform: scale(0.6);')).toBe('scale="60"')
   })
 
   it('transform: scale(0.8, 0.9)', () => {
-    expect(toUnocss('transform: scale(0.8, 0.9)')).toBe('scale="0.8 0.9"')
+    expect(toUnocss('transform: scale(0.8, 0.9)')).toBe('scale="80 90"')
   })
 
   it('transform: translate(-26px, 16px) skew(50deg) scaleY(0.6);', () => {
     expect(
       toUnocss('transform: translate(-26px, 16px) skew(50deg) scaleY(0.6)'),
-    ).toBe('translate="-26px 16px" skew="50" scale-y-60')
+    ).toBe('translate="-26px 16px" skew="50" scale="y-60"')
+  })
+
+  it('transform: translate(-26px, var(--translatey)) skew(var(--skew,60)) scaleY(var(--scale));', () => {
+    expect(
+      toUnocss('transform: translate(-26px, var(--translatey,20px)) skew(var(--skew,60)) scale(var(--scale, 30%))'),
+    ).toBe('translate="-26px [var(--translatey,20px)]" skew="[var(--skew,60)]" scale="[var(--scale,30%)]"')
   })
 })

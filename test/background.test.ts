@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { toUnocss } from '../src/toUnocss'
 describe('background', () => {
   it('background:red !important', () => {
-    expect(toUnocss('background:red !important')).toBe('bg="red!"')
+    expect(toUnocss('background:red !important')).toBe('bg-red!')
   })
 
   it('background:red !important', () => {
@@ -32,7 +32,7 @@ describe('background', () => {
   })
 
   it('background:auto', () => {
-    expect(toUnocss('background:auto')).toBe('bg="auto"')
+    expect(toUnocss('background:auto')).toBe('bg-auto')
   })
   // size
   it('background-size:auto', () => {
@@ -103,7 +103,7 @@ describe('background', () => {
   })
 
   // image
-  it.only('background-image:none', () => {
+  it('background-image:none', () => {
     expect(toUnocss('background-image:none')).toBe('bg-none')
   })
 
@@ -114,7 +114,7 @@ describe('background', () => {
   })
 
   it('background: red', () => {
-    expect(toUnocss('background: red')).toBe('bg="red"')
+    expect(toUnocss('background: red')).toBe('bg-red')
   })
 
   it('background: url("../aa.jpg")', () => {
@@ -201,6 +201,15 @@ describe('background', () => {
     expect(
       toUnocss(
         'background-color: var(--default, red);',
+      ),
+    ).toBe(
+      'bg="[var(--default,red)]"',
+    )
+  })
+  it('background: var(--default, red);', () => {
+    expect(
+      toUnocss(
+        'background: var(--default, red);',
       ),
     ).toBe(
       'bg="[var(--default,red)]"',
