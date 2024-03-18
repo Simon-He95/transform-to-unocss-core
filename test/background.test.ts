@@ -47,6 +47,14 @@ describe('background', () => {
     expect(toUnocss('background-size:contain')).toBe('bg-contain')
   })
 
+  it('background-size:50%', () => {
+    expect(toUnocss('background-size:50%')).toBe('bg="[length:50%]"')
+  })
+
+  it('background-size:50%', () => {
+    expect(toUnocss('background-size: var(--size, 50%)')).toBe('bg="[length:var(--size,50%)]"')
+  })
+
   // attachments
   it('background-attachments:fixed', () => {
     expect(toUnocss('background-attachment:fixed')).toBe('bg-fixed')

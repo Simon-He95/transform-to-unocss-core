@@ -2,7 +2,6 @@ import { getVal, isRgb, transformImportant } from './utils'
 
 const backgroundMap = [
   'background-color',
-  'background-size',
   'background-attachment',
   'background-position',
 ]
@@ -18,6 +17,9 @@ const commaReplacer = '__comma__'
 
 export function background(key: string, val: string) {
   const [value, important] = transformImportant(val)
+  if (key === 'background-size')
+    return `bg${getVal(value, transformSpaceToLine, false, 'length:')}${important}`
+
   if (backgroundMap.includes(key))
     return `bg${getVal(value, transformSpaceToLine)}${important}`
 

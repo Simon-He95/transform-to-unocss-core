@@ -38,11 +38,11 @@ export function isHsl(s: string) {
   return s.startsWith('hsl')
 }
 
-export function getVal(val: string, transform?: Function, inClass?: boolean) {
+export function getVal(val: string, transform?: Function, inClass?: boolean, prefix = '') {
   if (isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isHsl(val) || isPercent(val) || isVar(val)) {
     return inClass
-      ? `-[${trim(val, 'all').replace(/['"]/g, '')}]`
-      : `="[${trim(val, 'all').replace(/['"]/g, '')}]"`
+      ? `-[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]`
+      : `="[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]"`
   }
   return `-${transform ? transform(val) : val}`
 }
