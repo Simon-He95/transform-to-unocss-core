@@ -5,7 +5,7 @@ export function toUnocssClass(css: string, isRem = false): [string, string[]] {
 
   return [
     transferred
-      ? transferred.replace(/="([^"]+)"/g, (_: string, v: string) => `-${v}`)
+      ? transferred.replace(/([^\s\=]+)="([^"]+)"/, (_, v1, v2) => v2.split(' ').map((v: string) => `${v1}-${v}`).join(' '))
       : '',
     noTransferred,
   ]
