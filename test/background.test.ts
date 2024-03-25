@@ -223,4 +223,13 @@ describe('background', () => {
       'bg="[var(--default,red)]"',
     )
   })
+  it('background: var(--sim-col, linear-gradient(90deg, #25AE6A 0%, #68D94B 100%));', () => {
+    expect(
+      toUnocss(
+        'background: var(--sim-col, linear-gradient(90deg, #25AE6A 0%, #68D94B 100%));',
+      ),
+    ).toBe(
+      'bg="[var(--sim-col,linear-gradient(90deg,#25AE6A,0%,#68D94B,100%))]"',
+    )
+  })
 })

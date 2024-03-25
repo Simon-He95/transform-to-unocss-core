@@ -24,7 +24,7 @@ export function background(key: string, val: string) {
     return `bg${getVal(value, transformSpaceToLine)}${important}`
 
   if (['background', 'background-image'].includes(key)) {
-    if (/(linear)-gradient/.test(value)) {
+    if (/^(linear)-gradient/.test(value)) {
       // 区分rgba中的,和linear-gradient中的,
       const newValue = value.replace(/rgba?\(([^)]+)\)/g, (all, v) =>
         all.replace(v, v.replace(/\s*,\s*/g, commaReplacer)),
@@ -54,7 +54,7 @@ export function background(key: string, val: string) {
 
       return `bg-gradient-linear bg-gradient-[${matcher1[1]},${matcher1[2].replace(/\s+/, '_').replaceAll(commaReplacer, ',')},${matcher1[3].replace(/\s+/, '_').replaceAll(commaReplacer, ',')}]`
     }
-    else if (/(radial|conic)-gradient/.test(value)) {
+    else if (/^(radial|conic)-gradient/.test(value)) {
       // 区分rgba中的,和linear-gradient中的,
       const newValue = value.replace(/rgba?\(([^)]+)\)/g, (all, v) =>
         all.replace(v, v.replace(/\s*,\s*/g, commaReplacer)),
