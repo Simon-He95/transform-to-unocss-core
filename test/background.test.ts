@@ -203,6 +203,13 @@ describe('background', () => {
     ).toBe(
       'bg-gradient-linear bg-gradient-[180deg,rgba(48,206,64,0,12)_0%,rgba(48,206,64,0.00)_100%]',
     )
+    expect(
+      toUnocss(
+        'background-image: linear-gradient(90deg, rgba(39, 175, 106, 0.20) 0%, rgba(102, 216, 77, 0.20) 100%), linear-gradient(0deg, rgba(102, 215, 77, 0.16) 0%, rgba(255, 255, 255, 0.00) 100%)',
+      ),
+    ).toBe(
+      'bg="[linear-gradient(90deg,rgba(39,175,106,0.20)_0%,rgba(102,216,77,0.20)_100%),linear-gradient(0deg,rgba(102,215,77,0.16)_0%,rgba(255,255,255,0.00)_100%)]"',
+    )
   })
 
   it('background-color: var(--default, red);', () => {

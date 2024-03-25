@@ -24,8 +24,11 @@ export function background(key: string, val: string) {
     return `bg${getVal(value, transformSpaceToLine)}${important}`
 
   if (['background', 'background-image'].includes(key)) {
+    const temp = value.replace(/rgba?\([^)]+\)/g, 'temp')
+    if (/\)\s*,/.test(temp))
+      return `bg="[${matchMultipleBgAttrs(value)}]"`
     if (/^(linear)-gradient/.test(value)) {
-      // 区分rgba中的,和linear-gradient中的,
+      // 区分rgba中的,和linear-gradient中的
       const newValue = value.replace(/rgba?\(([^)]+)\)/g, (all, v) =>
         all.replace(v, v.replace(/\s*,\s*/g, commaReplacer)),
       )
@@ -157,4 +160,22 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
     }
   }
   return result
+}
+
+const CONSTANTFLAG = '__transform_to_unocss__'
+
+function matchMultipleBgAttrs(value: string) {
+  const map: any = {}
+  let i = 0
+  value = value.replace(/(rgba?|hsla?|lab|lch|hwb|color)\([\)]*\)/, (_) => {
+    map[i++] = _
+    return `${CONSTANTFLAG}${i}}`
+  })
+  value = value.split(/\)\s*,/).map(item =>
+    `${item.replace(/\s*,\s*/g, ',').replace(/\s+/g, '_')}`,
+  ).join('),')
+  Object.keys(map).forEach((key) => {
+    value = value.replace(`${CONSTANTFLAG}${key}}`, map[key])
+  })
+  return value
 }
