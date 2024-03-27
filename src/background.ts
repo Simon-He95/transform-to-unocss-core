@@ -1,4 +1,4 @@
-import { getVal, isRgb, transformImportant } from './utils'
+import { getVal, isRgb, isSize, transformImportant } from './utils'
 
 const backgroundMap = [
   'background-color',
@@ -24,6 +24,9 @@ export function background(key: string, val: string) {
     return `bg${getVal(value, transformSpaceToLine)}${important}`
 
   if (['background', 'background-image'].includes(key)) {
+    if (isSize(value))
+      return `bg${getVal(value, transformSpaceToLine, false, 'position:')}${important}`
+
     const temp = value.replace(/rgba?\([^)]+\)/g, 'temp')
     if (/\)\s*,/.test(temp))
       return `bg="[${matchMultipleBgAttrs(value)}]"`
@@ -78,15 +81,25 @@ export function background(key: string, val: string) {
       const rgb = match[0]
       return `bg="${value.replace(rgb, `[${rgb}]`)}${important}"`
     }
-    const urlMatch = value.match(/url\(["'\s\.\-_\w\/]*\)/)
-
+    const urlMatch = value.match(/^url\(["'\s\.\-_\w\/@]*\)$/)
     if (urlMatch) {
       return `bg="${value.replace(
         urlMatch[0],
         `[${urlMatch[0].replace(/['"]/g, '')}]${important}`,
       )}"`
     }
+    if (value.includes(' ')) {
+      let r: string = value.split(' ').map(v => background(key, `${v}${important ? ' !important' : ''}`)).join(' ')
+      // 如果 r 中包含多个bg-[position:xx], 需要合并用_分隔
+      const bgPositionReg = /bg-\[position:([^\]]*)\]/g
+      const bgPosition = r.match(bgPositionReg)
+      if (bgPosition && bgPosition.length > 1) {
+        const t = `bg-[position:${bgPosition.map(item => item.replace(bgPositionReg, '$1')).join('_')}]`
+        r = `${r.replace(bgPositionReg, '').replace(/\s+/g, ' ').split(' ').filter(Boolean).concat([t]).join(' ')}`
+      }
 
+      return r
+    }
     return `bg${getVal(value, transformSpaceToLine)}${important}`
   }
 

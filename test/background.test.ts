@@ -7,7 +7,7 @@ describe('background', () => {
 
   it('background:red !important', () => {
     expect(toUnocss('background:red center url("./a.jpg") !important')).toBe(
-      'bg="red center [url(./a.jpg)]!"',
+      'bg-red! bg-center! bg="[url(./a.jpg)]!"',
     )
   })
 
@@ -19,7 +19,7 @@ describe('background', () => {
 
   it('background:red center no-repeat url("./xxx.jpg")', () => {
     expect(toUnocss('background:red center no-repeat url("./xxx.jpg")')).toBe(
-      'bg="red center no-repeat [url(./xxx.jpg)]"',
+      'bg-red bg-center bg-no-repeat bg="[url(./xxx.jpg)]"',
     )
   })
 
@@ -36,15 +36,15 @@ describe('background', () => {
   })
   // size
   it('background-size:auto', () => {
-    expect(toUnocss('background-size:auto')).toBe('bg-auto')
+    expect(toUnocss('background-size:auto')).toBe('bg-[length:auto]')
   })
 
   it('background-size:cover', () => {
-    expect(toUnocss('background-size:cover')).toBe('bg-cover')
+    expect(toUnocss('background-size:cover')).toBe('bg-[length:cover]')
   })
 
   it('background-size:contain', () => {
-    expect(toUnocss('background-size:contain')).toBe('bg-contain')
+    expect(toUnocss('background-size:contain')).toBe('bg-[length:contain]')
   })
 
   it('background-size:50%', () => {
@@ -237,6 +237,22 @@ describe('background', () => {
       ),
     ).toBe(
       'bg="[var(--sim-col,linear-gradient(90deg,#25AE6A,0%,#68D94B,100%))]"',
+    )
+  })
+  it('background: url(\'@/assets/images/guide/line.png\') no-repeat 8px 25px;', () => {
+    expect(
+      toUnocss(
+        'background: url(\'@/assets/images/guide/line.png\') no-repeat 8px 25px;',
+      ),
+    ).toBe(
+      'bg="[url(@/assets/images/guide/line.png)]" bg-no-repeat bg-[position:8px_25px]',
+    )
+    expect(
+      toUnocss(
+        'background: url(\'@/assets/images/guide/line.png\') 8px 25px no-repeat;',
+      ),
+    ).toBe(
+      'bg="[url(@/assets/images/guide/line.png)]" bg-no-repeat bg-[position:8px_25px]',
     )
   })
 })

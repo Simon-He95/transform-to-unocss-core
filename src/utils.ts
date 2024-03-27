@@ -1,6 +1,6 @@
 export const flag = '.__unocss_transfer__'
 export const cssMathFnRE = /^(?:calc|clamp|min|max)\s*\(.*\)/
-export const numberWithUnitRE = /[0-9]+(px|rem|em|%|vw|vh|vmin|vmax|deg)/
+export const numberWithUnitRE = /^[0-9]+(px|rem|em|%|vw|vh|vmin|vmax|deg)$/
 
 export function isNot(s: string) {
   return /\[&:not\(/.test(s)
@@ -44,7 +44,9 @@ export function getVal(val: string, transform?: Function, inClass?: boolean, pre
       ? `-[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]`
       : `="[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]"`
   }
-  return `-${transform ? transform(val) : val}`
+  return prefix
+    ? `-[${prefix}${transform ? transform(val) : val}]`
+    : `-${transform ? transform(val) : val}`
 }
 
 export function getHundred(n: string | number) {
