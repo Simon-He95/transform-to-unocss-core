@@ -76,7 +76,7 @@ export function background(key: string, val: string) {
 
       return `bg-gradient-${name}${getLinearGradientPosition(from, via, to)}`
     }
-    const match = value.match(/rgba?\([^)]+\)/)
+    const match = value.match(/^rgba?\([^)]+\)$/)
     if (match) {
       const rgb = match[0]
       return `bg="${value.replace(rgb, `[${rgb}]`)}${important}"`

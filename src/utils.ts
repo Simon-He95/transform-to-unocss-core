@@ -63,6 +63,8 @@ export function joinWithUnderLine(s: string) {
   return s.replace(/\s+/, ' ').split(' ').join('_')
 }
 
+export const positionMap = ['top', 'right', 'bottom', 'left', 'center']
+
 export type TrimType = 'all' | 'pre' | 'around' | 'post'
 
 /**
@@ -146,7 +148,7 @@ export function isVar(s: string) {
 }
 
 export function isSize(s: string) {
-  return cssMathFnRE.test(s) || numberWithUnitRE.test(s)
+  return cssMathFnRE.test(s) || numberWithUnitRE.test(s) || positionMap.includes(s)
 }
 
 export function isColor(s: string) {

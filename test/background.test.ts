@@ -7,19 +7,19 @@ describe('background', () => {
 
   it('background:red !important', () => {
     expect(toUnocss('background:red center url("./a.jpg") !important')).toBe(
-      'bg-red! bg-center! bg="[url(./a.jpg)]!"',
+      'bg-red! bg-[position:center]! bg="[url(./a.jpg)]!"',
     )
   })
 
   it('background:rgb(125, 188, 234)', () => {
-    expect(toUnocss('background:rgb(125, 188, 234) center')).toBe(
-      'bg="[rgb(125,188,234)] center"',
+    expect(toUnocss('background:rgb(125, 188, 234) center center')).toBe(
+      'bg="[rgb(125,188,234)]" bg-[position:center_center]',
     )
   })
 
   it('background:red center no-repeat url("./xxx.jpg")', () => {
     expect(toUnocss('background:red center no-repeat url("./xxx.jpg")')).toBe(
-      'bg-red bg-center bg-no-repeat bg="[url(./xxx.jpg)]"',
+      'bg-red bg-[position:center] bg-no-repeat bg="[url(./xxx.jpg)]"',
     )
   })
 
