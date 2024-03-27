@@ -1,6 +1,6 @@
 export const flag = '.__unocss_transfer__'
 export const cssMathFnRE = /^(?:calc|clamp|min|max)\s*\(.*\)/
-export const numberWithUnitRE = /^[0-9]+(px|rem|em|%|vw|vh|vmin|vmax|deg)$/
+export const numberWithUnitRE = /^-?[0-9\.]+(px|rem|em|%|vw|vh|vmin|vmax|deg)$/
 
 export function isNot(s: string) {
   return /\[&:not\(/.test(s)
