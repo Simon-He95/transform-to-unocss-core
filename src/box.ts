@@ -9,8 +9,9 @@ export function box(key: string, val: string) {
     return `box-decoration-${value}${important}`
   if (key === 'box-sizing')
     return `box-${getFirstName(value)}${important}`
-  if (validKey.includes(key))
+  if (validKey.includes(key)) {
     return `shadow="[${value
       .split(' ')
       .join('_')}]${important}"`
+  }
 }

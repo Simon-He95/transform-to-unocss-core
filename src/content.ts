@@ -5,5 +5,5 @@ export function content(key: string, val: string) {
 
   return (value === '" "' || value === '\' \'')
     ? `content-['_']${important}`
-    : `content="[${value}]${important}"`
+    : `content-[${value.replace(/"/g, '\'')}]${important}`
 }
