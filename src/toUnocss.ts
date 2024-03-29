@@ -121,8 +121,10 @@ const typeMap: any = {
   row,
 }
 const splitReg = /([\w-]+)\s*:\s*([.\w\(\)-\s%+'",#\/!@]+)/
+const browserReg = /-webkit-|-moz-|-ms-|-o-/
 
 export function toUnocss(css: String, isRem = false) {
+  css = css.replace(browserReg, '')
   const match = css.match(splitReg)
   if (!match)
     return
