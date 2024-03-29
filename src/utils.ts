@@ -154,3 +154,5 @@ export function isSize(s: string) {
 export function isColor(s: string) {
   return isHex(s) || isRgb(s) || isHsl(s)
 }
+
+export const browserReg = /-webkit-|-moz-|-ms-|-o-/g

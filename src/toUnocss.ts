@@ -1,4 +1,4 @@
-import { getFirstName } from './utils'
+import { browserReg, getFirstName } from './utils'
 import { size } from './size'
 import { background } from './background'
 import { max } from './max'
@@ -121,7 +121,6 @@ const typeMap: any = {
   row,
 }
 const splitReg = /([\w-]+)\s*:\s*([.\w\(\)-\s%+'",#\/!@]+)/
-const browserReg = /-webkit-|-moz-|-ms-|-o-/
 
 export function toUnocss(css: String, isRem = false) {
   css = css.replace(browserReg, '')
