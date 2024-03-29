@@ -16,7 +16,7 @@ export function transformStyleToUnocss(
           noTransfer.push(cur)
         return (result += `${val} `)
       }, '')
-      .trim(),
+      .trim().replace(/\s+/g, ' '),
     noTransfer,
   ]
 }
