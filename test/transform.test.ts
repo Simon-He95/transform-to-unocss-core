@@ -35,7 +35,7 @@ describe('transform', () => {
   })
   it('transform: ranslate(10%, 20%);', () => {
     expect(toUnocss('transform: translate(10%, 20%);')).toBe(
-      'translate="10% 20%"',
+      'translate="[10%,20%]"',
     )
   })
 
@@ -58,12 +58,17 @@ describe('transform', () => {
   it('transform: translate(-26px, 16px) skew(50deg) scaleY(0.6);', () => {
     expect(
       toUnocss('transform: translate(-26px, 16px) skew(50deg) scaleY(0.6)'),
-    ).toBe('translate="-26px 16px" skew="50" scale="y-60"')
+    ).toBe('translate="[-26px,16px]" skew="50" scale="y-60"')
   })
 
   it('transform: translate(-26px, var(--translatey)) skew(var(--skew,60)) scaleY(var(--scale));', () => {
     expect(
       toUnocss('transform: translate(-26px, var(--translatey,20px)) skew(var(--skew,60)) scale(var(--scale, 30%))'),
-    ).toBe('translate="-26px [var(--translatey,20px)]" skew="[var(--skew,60)]" scale="[var(--scale,30%)]"')
+    ).toBe('translate="[-26px,var(--translatey,20px)]" skew="[var(--skew,60)]" scale="[var(--scale,30%)]"')
+  })
+  it('transform: translate3d(-50%, -50%, 0);', () => {
+    expect(
+      toUnocss('transform: translate3d(-50%, -50%, 0)'),
+    ).toBe('translate="[-50%,-50%,0]"')
   })
 })

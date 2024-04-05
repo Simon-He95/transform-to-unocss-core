@@ -27,5 +27,4 @@ describe('transformStyleToUnocss', () => {
       'text="[#fff]" text-16px',
     )
   })
-  
 })

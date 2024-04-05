@@ -16,12 +16,12 @@ export function transform(key: string, val: string) {
   return joinEmpty(v)
     .split(' ')
     .map((v) => {
-      const matcher = v.match(/([a-z]+)([A-Z])?\((.*)\)/)
+      const matcher = v.match(/([a-z]+)(3d)?([A-Z])?\((.*)\)/)
 
       if (!matcher)
         return undefined
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [_, namePrefix, nameSuffix, value] = matcher
+      const [_, namePrefix, is3d, nameSuffix, value] = matcher
       if (nameSuffix) {
         const values = value.replace(
           /,(?![^()]*\))/g,
@@ -46,6 +46,9 @@ export function transform(key: string, val: string) {
           ' ',
         ).split(' ')
         if (values.length > 1) {
+          if (namePrefix === 'translate')
+            return `${namePrefix}="[${values.join(',')}]"`
+
           return `${namePrefix}="${values.map(v => isVar(v)
             ? `[${v}]`
             : namePrefix === 'scale'
