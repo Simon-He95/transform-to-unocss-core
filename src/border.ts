@@ -9,10 +9,10 @@ import {
 } from './utils'
 
 const borderSize = [
-  'border-left',
   'border-top',
   'border-right',
   'border-bottom',
+  'border-left',
 ]
 export function border(key: string, val: string) {
   // eslint-disable-next-line prefer-const
@@ -51,6 +51,9 @@ export function border(key: string, val: string) {
     return `border-s${getVal(value)}${important}`
   if (key.startsWith('border-image'))
     return ''
+  // fix: https://github.com/Simon-He95/unot/issues/18
+  if (key === 'border-width' && value.includes(' '))
+    return value.split(' ').map((v, i) => `border-${borderSize[i].split('-')[1][0]}${getVal(v)}${important}`).join(' ')
 
   if (/^\d[%|(px)|(rem)]$/.test(value) || key === 'border-collapse')
     return `border-${value}${important}`
