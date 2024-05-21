@@ -89,4 +89,12 @@ describe('grid', () => {
   it('grid-auto-rows: minmax(0, 1fr);', () => {
     expect(toUnocss('grid-auto-rows: minmax(0, 1fr);')).toBe('auto-rows-fr')
   })
+
+  it('grid-template-columns: 60px 60px;', () => {
+    expect(toUnocss('grid-template-columns: 60px 60px;')).toBe('grid-cols-[60px_60px]')
+  })
+
+  it('grid-template-rows: 60px 60px;', () => {
+    expect(toUnocss('grid-template-rows: 60px 60px;')).toBe('grid-rows-[60px_60px]')
+  })
 })
