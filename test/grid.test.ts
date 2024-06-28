@@ -97,4 +97,8 @@ describe('grid', () => {
   it('grid-template-rows: 60px 60px;', () => {
     expect(toUnocss('grid-template-rows: 60px 60px;')).toBe('grid-rows-[60px_60px]')
   })
+  it('grid-template-columns:120px auto;', () => {
+    expect(toUnocss('grid-template-columns:120px auto;')).toBe('grid-cols-[120px_auto]')
+  })
+  
 })
