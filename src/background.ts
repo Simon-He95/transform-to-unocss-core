@@ -6,13 +6,13 @@ const backgroundMap = [
   'background-position',
 ]
 const linearGradientReg
-  = /linear-gradient\(\s*to([\w\s]+),?([\w\(\)#%\s\.]+)?,([\w\(\)#%\s\.]+)?,?([\w#%\s\.]+)?\)$/
+  = /linear-gradient\(\s*to([\w\s]+),?([\w()#%\s.]+)?,([\w()#%\s.]+)?,?([\w#%\s.]+)?\)$/
 
 const linearGradientReg1
-  = /linear-gradient\(\s*([^,]*),?([\w\(\)#%\s\.]+)?,([\w\(\)#%\s\.]+)?,?([\w#%\s\.]+)?\)$/
+  = /linear-gradient\(\s*([^,]*),?([\w()#%\s.]+)?,([\w()#%\s.]+)?,?([\w#%\s.]+)?\)$/
 
 const otherGradientReg
-  = /(radial|conic)-gradient\(([\w\(\)#%\s\.]+)?,([\w\(\)#%\s\.]+)?,?([\w#%\s\.]+)?\)$/
+  = /(radial|conic)-gradient\(([\w()#%\s.]+)?,([\w()#%\s.]+)?,?([\w#%\s.]+)?\)$/
 const commaReplacer = '__comma__'
 
 export function background(key: string, val: string) {
@@ -30,15 +30,13 @@ export function background(key: string, val: string) {
     const temp = value.replace(/rgba?\([^)]+\)/g, 'temp')
     if (/\)\s*,/.test(temp))
       return `bg="[${matchMultipleBgAttrs(value)}]"`
-    if (/^(linear)-gradient/.test(value)) {
+    if (value.startsWith('linear-gradient')) {
       // 区分rgba中的,和linear-gradient中的
       const newValue = value.replace(/rgba?\(([^)]+)\)/g, (all, v) =>
-        all.replace(v, v.replace(/\s*,\s*/g, commaReplacer)),
-      )
+        all.replace(v, v.replace(/\s*,\s*/g, commaReplacer)))
 
       const matcher = newValue.match(linearGradientReg)
       if (matcher) {
-        // eslint-disable-next-line prefer-const
         let [direction, from, via, to] = matcher.slice(1)
 
         direction = direction
@@ -60,11 +58,10 @@ export function background(key: string, val: string) {
 
       return `bg-gradient-linear bg-gradient-[${matcher1[1]},${matcher1[2].replace(/\s+/, '_').replaceAll(commaReplacer, ',')},${matcher1[3].replace(/\s+/, '_').replaceAll(commaReplacer, ',')}]`
     }
-    else if (/^(radial|conic)-gradient/.test(value)) {
+    else if (/^(?:radial|conic)-gradient/.test(value)) {
       // 区分rgba中的,和linear-gradient中的,
       const newValue = value.replace(/rgba?\(([^)]+)\)/g, (all, v) =>
-        all.replace(v, v.replace(/\s*,\s*/g, commaReplacer)),
-      )
+        all.replace(v, v.replace(/\s*,\s*/g, commaReplacer)))
 
       const matcher = newValue.match(otherGradientReg)
       if (!matcher)
@@ -81,7 +78,7 @@ export function background(key: string, val: string) {
       const rgb = match[0]
       return `bg="${value.replace(rgb, `[${rgb}]`)}${important}"`
     }
-    const urlMatch = value.match(/^url\(["'\s\.\-_\w\/@]*\)$/)
+    const urlMatch = value.match(/^url\(["'\s.\-\w/@]*\)$/)
     if (urlMatch) {
       return `bg="${value.replace(
         urlMatch[0],
@@ -116,7 +113,7 @@ function replaceBackground(s: string, val: string) {
 }
 
 function transformBox(s: string) {
-  const reg = /(border)|(content)|(padding)-box/
+  const reg = /border|content|padding-box/
   if (reg.test(s))
     return s.replace('-box', '')
   if (s.startsWith('repeat-'))
@@ -180,7 +177,7 @@ const CONSTANTFLAG = '__transform_to_unocss__'
 function matchMultipleBgAttrs(value: string) {
   const map: any = {}
   let i = 0
-  value = value.replace(/(rgba?|hsla?|lab|lch|hwb|color)\([\)]*\)/, (_) => {
+  value = value.replace(/(rgba?|hsla?|lab|lch|hwb|color)\(\)*\)/, (_) => {
     map[i++] = _
     return `${CONSTANTFLAG}${i}}`
   })

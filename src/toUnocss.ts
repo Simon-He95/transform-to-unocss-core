@@ -120,24 +120,23 @@ const typeMap: any = {
   color,
   row,
 }
-const splitReg = /([\w-]+)\s*:\s*([.\w\(\)-\s%+'",#\/!@]+)/
+const splitReg = /([\w-]+)\s*:\s*([.\w()-\s%+'",#/!@]+)/
 
-export function toUnocss(css: String, isRem = false) {
+export function toUnocss(css: string, isRem = false) {
   css = css.replace(browserReg, '')
   const match = css.match(splitReg)
   if (!match)
     return
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [_, key, val] = match
   const first = getFirstName(key)
   const result = typeMap[first]?.(key, val)
   if (result && isRem) {
     return result.replace(
-      /-([0-9\.]+)px/,
+      /-([0-9.]+)px/,
       (_: string, v: string) => `-${+v / 4}`,
-    ).replace(/\[[^\]]+\]/g, (match: string) => match.replace(/([0-9\.]+)px/g, (_: string, v: string) => `${+v / 16}rem`))
+    ).replace(/\[[^\]]+\]/g, (match: string) => match.replace(/([0-9.]+)px/g, (_: string, v: string) => `${+v / 16}rem`))
   }
 
   return result
 }
-

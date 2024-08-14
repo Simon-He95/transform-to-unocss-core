@@ -20,6 +20,8 @@ module.exports = antfu(
       'no-console': 'off',
       'no-restricted-globals': 'off',
       'style/indent-binary-ops': 'off',
+      'regexp/no-misleading-capturing-group': 'off',
+      'regexp/strict': 'off',
     },
   },
 )

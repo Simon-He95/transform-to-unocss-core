@@ -5,7 +5,7 @@ const hundred = ['contrast', 'brightness', 'saturate']
 const percent = ['grayscale', 'invert', 'sepia']
 export function filter(key: string, val: string) {
   const [v, important] = transformImportant(val)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [_, name, value] = v.match(/([\w-]+)\((.*)\)/)!
 
   if (hundred.includes(name))

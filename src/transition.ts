@@ -1,4 +1,5 @@
 import { getVal, transformImportant } from './utils'
+
 const times = ['transition-delay', 'transition-duration']
 
 export function transition(key: string, val: string) {
@@ -28,7 +29,7 @@ function transformTransition(v: string) {
   return v
     .split(' ')
     .map((item) => {
-      if (/^[0-9]/.test(item) || /^\.[0-9]/.test(item)) {
+      if (/^\d/.test(item) || /^\.\d/.test(item)) {
         if (hasDuration)
           return `delay${getVal(item, undefined, true)}`
         hasDuration = true

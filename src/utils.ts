@@ -1,6 +1,6 @@
 export const flag = '.__unocss_transfer__'
 export const cssMathFnRE = /^(?:calc|clamp|min|max)\s*\(.*\)/
-export const numberWithUnitRE = /^-?[0-9\.]+(px|rem|em|%|vw|vh|vmin|vmax|deg)$/
+export const numberWithUnitRE = /^-?[0-9.]+(px|rem|em|%|vw|vh|vmin|vmax|deg)$/
 
 export function isNot(s: string) {
   return /\[&:not\(/.test(s)
@@ -27,7 +27,7 @@ export function isPercent(s: string) {
 }
 
 export function isHex(hex: string) {
-  return /^#[0-9A-Fa-f]{2,}$/.test(hex)
+  return /^#[0-9A-F]{2,}$/i.test(hex)
 }
 
 export function isRgb(s: string) {
@@ -38,7 +38,7 @@ export function isHsl(s: string) {
   return s.startsWith('hsl')
 }
 
-export function getVal(val: string, transform?: Function, inClass?: boolean, prefix = '') {
+export function getVal(val: string, transform?: (v: string) => string, inClass?: boolean, prefix = '') {
   if (isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isHsl(val) || isPercent(val) || isVar(val)) {
     return inClass
       ? `-[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]`
@@ -71,7 +71,7 @@ export type TrimType = 'all' | 'pre' | 'around' | 'post'
  * 删除空格
  * @param { string } s 字符串
  * @param { TrimType } type 所有 ｜ 前置 ｜ 前后 ｜ 后置 'all' | 'pre' | 'around' | 'post'
- * @returns
+ * @returns string
  */
 export function trim(s: string, type: TrimType = 'around'): string {
   if (type === 'pre')
@@ -90,31 +90,28 @@ export function transformImportant(v: string) {
     .replace(/\s*,\s*/g, ',')
     .replace(/\s*\/\s*/, '/')
   if (/rgb/.test(v)) {
-    v = v.replace(/rgba?\(([^\)]+)\)/g, (all, k) => {
+    v = v.replace(/rgba?\(([^)]+)\)/g, (all, k) => {
       const _k = k.trim().split(' ')
       return all.replace(k, _k.map((i: string, index: number) => i.endsWith(',') ? i : i + ((_k.length - 1 === index) ? '' : ',')).join(''))
-    },
-    )
+    })
   }
 
   if (/hsl/.test(v)) {
-    v = v.replace(/hsla?\(([^\)]+)\)/g, (all, k) => {
+    v = v.replace(/hsla?\(([^)]+)\)/g, (all, k) => {
       const _k = k.trim().split(' ')
       return all.replace(k, _k.map((i: string, index: number) => i.endsWith(',') ? i : i + ((_k.length - 1 === index) ? '' : ',')).join(''))
-    },
-    )
+    })
   }
 
-  if (/var\([^\)]+\)/.test(v)) {
-    v = v.replace(/var\(([^\)]+)\)/g, (all, k) => {
+  if (/var\([^)]+\)/.test(v)) {
+    v = v.replace(/var\(([^)]+)\)/g, (all, k) => {
       const _k = k.trim().split(' ')
       return all.replace(k, _k.map((i: string, index: number) => i.endsWith(',') ? i : i + ((_k.length - 1 === index) ? '' : ',')).join(''))
-    },
-    )
+    })
   }
 
   if (v.endsWith('!important'))
-    return [v.replace(/\s*\!important/, '').trim(), '!']
+    return [v.replace(/\s*!important/, '').trim(), '!']
   return [v.trim(), '']
 }
 
@@ -126,7 +123,7 @@ export function diffTemplateStyle(before: string, after: string) {
 }
 
 export function isEmptyStyle(code: string) {
-  return /<style scoped>[\n\s]*<\/style>/.test(code)
+  return /<style scoped>\s*<\/style>/.test(code)
 }
 
 export function getStyleScoped(code: string) {

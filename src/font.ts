@@ -11,7 +11,7 @@ export function font(key: string, val: string) {
     const match = value.match(/ui-(\w{0,4})/)!
     if (!match)
       return `font-${val}${important}`
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     const [_, family] = match
     return `font-${family}${important}`
   }
@@ -31,6 +31,6 @@ export function font(key: string, val: string) {
 function transformFont(v: string) {
   return v
     .split(' ')
-    .map(item => (/^[0-9]/.test(item) ? `text-${item}` : item))
+    .map(item => (/^\d/.test(item) ? `text-${item}` : item))
     .join(' ')
 }

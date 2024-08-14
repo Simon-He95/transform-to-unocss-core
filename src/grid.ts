@@ -10,7 +10,7 @@ export function grid(key: string, val: string) {
   const [value, important] = transformImportant(val)
 
   if (key.startsWith('grid-template')) {
-    const matcher = value.match(/repeat\s*\(\s*([0-9]+)/)
+    const matcher = value.match(/repeat\s*\(\s*(\d+)/)
     if (matcher) {
       return `grid-${getLastName(key) === 'rows' ? 'rows' : 'cols'}-${matcher[1]
         }${important}`
@@ -29,7 +29,7 @@ export function grid(key: string, val: string) {
     return `auto-${getLastName(key) === 'rows' ? 'rows' : 'cols'}-${matcher ? 'fr' : getFirstName(value)
       }${important}`
   }
-  const matcher = value.match(/span\s+([0-9])/)
+  const matcher = value.match(/span\s+(\d)/)
   if (matcher) {
     return `${key.slice(5).replace('column', 'col')}-span-${matcher[1]
       }${important}`
