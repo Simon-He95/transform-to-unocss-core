@@ -27,6 +27,12 @@ describe('filter', () => {
     ).toBe('drop-shadow="[0_1px_1px_rgba(0,0,0,0.05)]"')
   })
 
+  it('drop-shadow with rem', () => {
+    expect(
+      toUnocss('filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.05));', true),
+    ).toBe('drop-shadow="[0_0.625rem_0.625rem_rgba(0,0,0,0.05)]"')
+  })
+
   it('grayscale 0.1', () => {
     expect(toUnocss('filter: grayscale(0.1);')).toBe('grayscale-10')
   })

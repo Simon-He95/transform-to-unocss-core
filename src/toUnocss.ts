@@ -135,7 +135,7 @@ export function toUnocss(css: String, isRem = false) {
     return result.replace(
       /-([0-9\.]+)px/,
       (_: string, v: string) => `-${+v / 4}`,
-    )
+    ).replace(/\[[^\]]+\]/g, (match: string) => match.replace(/([0-9\.]+)px/g, (_: string, v: string) => `${+v / 16}rem`))
   }
 
   return result
