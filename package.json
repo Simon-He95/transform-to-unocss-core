@@ -1,7 +1,6 @@
 {
   "name": "transform-to-unocss-core",
   "version": "0.0.32",
-  "packageManager": "pnpm@7.33.7",
   "description": "",
   "author": "Simon He",
   "license": "MIT",
@@ -51,8 +50,8 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.11.2",
-    "@types/node": "^18.19.68",
+    "@antfu/eslint-config": "^3.14.0",
+    "@types/node": "^18.19.71",
     "bumpp": "^8.2.1",
     "eslint": "^8.57.1",
     "esno": "^0.16.3",

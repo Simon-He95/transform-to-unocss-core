@@ -22,7 +22,8 @@ export function transformStyleToUnocss(
           noTransfer.push(cur)
         return (result += `${val} `)
       }, '')
-      .trim().replace(/\s+/g, ' '),
+      .trim()
+      .replace(/\s+/g, ' '),
     noTransfer,
   ]
 }

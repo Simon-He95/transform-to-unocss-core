@@ -137,7 +137,7 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
       .split(' ')
     if (fromPosition) {
       result += ` from="${isRgb(fromColor) ? `[${fromColor}]` : fromColor
-        } ${fromPosition}"`
+      } ${fromPosition}"`
     }
     else if (fromColor) {
       result += ` from="${isRgb(fromColor) ? `[${fromColor}]` : fromColor}"`
@@ -150,7 +150,7 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
       .split(' ')
     if (viaPosition) {
       result += ` via="${isRgb(viaColor) ? `[${viaColor}]` : viaColor
-        } ${viaPosition}"`
+      } ${viaPosition}"`
     }
     else if (viaColor) {
       result += ` via="${isRgb(viaColor) ? `[${viaColor}]` : viaColor}"`
@@ -163,7 +163,7 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
       .split(' ')
     if (toPosition) {
       result += ` to="${isRgb(toColor) ? `[${toColor}]` : toColor
-        } ${toPosition}"`
+      } ${toPosition}"`
     }
     else if (toColor) {
       result += ` to="${isRgb(toColor) ? `[${toColor}]` : toColor}"`

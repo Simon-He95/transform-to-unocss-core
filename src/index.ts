@@ -4,4 +4,4 @@ import { transformStyleToUnocss } from './transformStyleToUnocss'
 
 export * from './utils'
 
-export { toUnocss, transformStyleToUnocss, toUnocssClass }
+export { toUnocss, toUnocssClass, transformStyleToUnocss }
