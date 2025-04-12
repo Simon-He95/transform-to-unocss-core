@@ -23,7 +23,7 @@ export function isUrl(s: string) {
 }
 
 export function isPercent(s: string) {
-  return s.endsWith('%')
+  return s.endsWith('%') && !s.includes(' ')
 }
 
 export function isHex(hex: string) {

@@ -17,8 +17,9 @@ const commaReplacer = '__comma__'
 
 export function background(key: string, val: string) {
   const [value, important] = transformImportant(val)
+
   if (key === 'background-size')
-    return `bg${getVal(value, transformSpaceToLine, false, 'length:')}${important}`
+    return `bg${getVal(value, /\d/.test(value) ? transformSpaceToUnderLine : transformSpaceToLine, false, 'length:')}${important}`
 
   if (backgroundMap.includes(key))
     return `bg${getVal(value, transformSpaceToLine)}${important}`
@@ -123,6 +124,10 @@ function transformBox(s: string) {
 
 function transformSpaceToLine(s: string) {
   return s.replace(/\s+/, ' ').replace(' ', '-')
+}
+
+function transformSpaceToUnderLine(s: string) {
+  return s.replace(/\s+/, ' ').replace(' ', '_')
 }
 
 function getLinearGradientPosition(from: string, via: string, to: string) {

@@ -5,4 +5,7 @@ describe('z-index', () => {
   it('z-1', () => {
     expect(toUnocss('z-index:1')).toMatchInlineSnapshot('"z-1"')
   })
+  it('z-1', () => {
+    expect(toUnocss('z-index:-1')).toMatchInlineSnapshot('"-z-1"')
+  })
 })

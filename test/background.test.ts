@@ -39,6 +39,18 @@ describe('background', () => {
     expect(toUnocss('background-size:auto')).toBe('bg-[length:auto]')
   })
 
+  it('background-size:28rpx 28rpx', () => {
+    expect(toUnocss('background-size:28rpx 28rpx')).toBe('bg-[length:28rpx_28rpx]')
+  })
+
+  it('background-size:100% auto', () => {
+    expect(toUnocss('background-size:100% auto')).toBe('bg-[length:100%_auto]')
+  })
+
+  it('background-size:100% 100%', () => {
+    expect(toUnocss('background-size:100% 100%')).toBe('bg-[length:100%_100%]')
+  })
+
   it('background-size:cover', () => {
     expect(toUnocss('background-size:cover')).toBe('bg-[length:cover]')
   })

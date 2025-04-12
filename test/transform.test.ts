@@ -6,6 +6,10 @@ describe('transform', () => {
     expect(toUnocss('transform-origin: center;')).toBe('origin-center')
   })
 
+  it('transform:none', () => {
+    expect(toUnocss('transform:none;')).toBe('transform-none')
+  })
+
   it('transform-origin: top right;', () => {
     expect(toUnocss('transform-origin: top right;')).toBe('origin-top-right')
   })

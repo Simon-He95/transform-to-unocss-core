@@ -12,6 +12,8 @@ export function transform(key: string, val: string) {
     return `origin-${joinWithLine(v)}${important}`
   if (key === 'transform-style')
     return `transform-${v}`
+  if (val === 'none')
+    return `${key}-none`
 
   return joinEmpty(v)
     .split(' ')
