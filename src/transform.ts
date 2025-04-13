@@ -3,13 +3,14 @@ import {
   isVar,
   joinEmpty,
   joinWithLine,
+  joinWithUnderLine,
   transformImportant,
 } from './utils'
 
 export function transform(key: string, val: string) {
   const [v, important] = transformImportant(val)
   if (key === 'transform-origin')
-    return `origin-${joinWithLine(v)}${important}`
+    return `origin-${/\d/.test(v) && v.includes(' ') ? `[${joinWithUnderLine(v)}]` : joinWithLine(v)}${important}`
   if (key === 'transform-style')
     return `transform-${v}`
   if (val === 'none')

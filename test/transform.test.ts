@@ -14,6 +14,14 @@ describe('transform', () => {
     expect(toUnocss('transform-origin: top right;')).toBe('origin-top-right')
   })
 
+  it('transform-origin: 0 0;', () => {
+    expect(toUnocss('transform-origin: 0 0;')).toBe('origin-[0_0]')
+  })
+
+  it('transform-origin: 50% 50%;', () => {
+    expect(toUnocss('transform-origin: 50% 50%;')).toBe('origin-[50%_50%]')
+  })
+
   it('transform: scale(0);', () => {
     expect(toUnocss('transform: scale(.5);')).toBe('scale="50"')
   })
