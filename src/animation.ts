@@ -5,7 +5,12 @@ export function animation(key: string, val: string) {
 
   if (key === 'animation-delay')
     return `animate${getVal(value)}${important}`
-  if (key === 'animation')
-    return `animate-${value.split(' ')[0]}${important}`
+  if (key === 'animation') {
+    return value.split(' ').map((v) => {
+      if (v.endsWith('s'))
+        return `animate${getVal(v)}${important}`
+      return `animate-${v}${important}`
+    }).join(' ')
+  }
   return `animate-${value}${important}`
 }

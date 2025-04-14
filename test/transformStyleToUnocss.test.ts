@@ -2,6 +2,27 @@ import { describe, expect, it } from 'vitest'
 import { transformStyleToUnocss } from '../src/transformStyleToUnocss'
 
 describe('transformStyleToUnocss', () => {
+  it('line-clamp', () => {
+    expect(
+      transformStyleToUnocss(
+        `overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 0;
+  line-clamp: 0;`,
+      )[0],
+    ).toBe('line-clamp-0')
+
+    expect(
+      transformStyleToUnocss(
+        `overflow: visible;
+  display: block;
+  -webkit-box-orient: horizontal;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;`,
+      )[0],
+    ).toBe('line-clamp-unset')
+  })
   it('transformStyleToUnocss', () => {
     expect(
       transformStyleToUnocss(

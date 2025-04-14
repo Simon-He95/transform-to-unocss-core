@@ -1,4 +1,4 @@
-import { transformImportant } from './utils'
+import { joinWithUnderLine, transformImportant } from './utils'
 
 export function font(key: string, val: string) {
   const [value, important] = transformImportant(val)
@@ -10,7 +10,7 @@ export function font(key: string, val: string) {
   if (key === 'font-family') {
     const match = value.match(/ui-(\w{0,4})/)!
     if (!match)
-      return `font-${val}${important}`
+      return `font-[${joinWithUnderLine(val)}]${important}`
 
     const [_, family] = match
     return `font-${family}${important}`

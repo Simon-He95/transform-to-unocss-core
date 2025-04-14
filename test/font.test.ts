@@ -48,9 +48,25 @@ describe('font-family', () => {
   it('mono', () => {
     expect(
       toUnocss(
-        '  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;',
+        'font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;',
       ),
     ).toBe('font-mono')
+  })
+
+  it('monospace', () => {
+    expect(
+      toUnocss(
+        'font-family: monospace;',
+      ),
+    ).toBe('font-[monospace]')
+  })
+
+  it('font-family: \'Source Han Serif CN\'', () => {
+    expect(
+      toUnocss(
+        'font-family: \'Source Han Serif CN\';',
+      ),
+    ).toBe('font-[\'Source_Han_Serif_CN\']')
   })
 })
 

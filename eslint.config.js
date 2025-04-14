@@ -12,6 +12,7 @@ module.exports = antfu(
   {
     rules: {
       // overrides
+      'no-template-curly-in-string': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-vars': 'off',
       'regexp/no-super-linear-backtracking': 'off',
