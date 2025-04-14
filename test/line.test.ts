@@ -38,7 +38,7 @@ describe('line-height', () => {
   })
 
   it('line-height: 1.2', () => {
-    expect(toUnocss('line-height: 1.2;')).toBe('lh-1.2')
+    expect(toUnocss('line-height: 1.2;')).toBe('lh-[1.2]')
   })
 
   it('calc', () => {

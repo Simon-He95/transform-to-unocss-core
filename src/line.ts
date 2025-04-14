@@ -12,5 +12,5 @@ export function line(key: string, val: string) {
   const [value, important] = transformImportant(val)
   if (value in lineMap)
     return `lh-${lineMap[value]}${important}`
-  return `lh${getVal(value)}${important}`
+  return `lh${getVal(value, v => /\d$/.test(v) ? `[${v}]` : v)}${important}`
 }
