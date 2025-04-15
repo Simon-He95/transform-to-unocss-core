@@ -4,21 +4,35 @@ const transformer: Record<string, (v: Record<string, string>) => { transformedRe
       'overflow': 'hidden',
       'display': '-webkit-box',
       '-webkit-box-orient': 'vertical',
-      '-webkit-line-clamp': /\d/,
-      'line-clamp': /\d/,
     }
-    const keys = Object.keys(rule)
+
+    // 单独处理 line-clamp 相关属性，只需一个匹配即可
+    const lineClampRegex = /\d/
+    const hasWebkitLineClamp = v['-webkit-line-clamp'] && lineClampRegex.test(v['-webkit-line-clamp'])
+    const hasLineClamp = v['line-clamp'] && lineClampRegex.test(v['line-clamp'])
+
+    if (!hasWebkitLineClamp && !hasLineClamp) {
+      return {
+        transformedResult: '',
+        deleteKeys: [],
+      }
+    }
+
+    // 使用匹配到的值，优先使用 line-clamp
+    const lineClampValue = v['line-clamp'] || v['-webkit-line-clamp']
+
+    // 检查其他规则
+    const keys = [...Object.keys(rule), '-webkit-line-clamp', 'line-clamp']
     for (const key in rule) {
       if (rule[key] instanceof RegExp ? rule[key].test(v[key]) : v[key] === rule[key]) {
         delete rule[key]
       }
     }
+
     if (!Object.keys(rule).length) {
-      // 全部匹配成功
-      // 返回新的结果，和需要被删除的属性
-      // 这里需要注意的是，line-clamp的值是0-6之间的数字
+      // 其他规则全部匹配成功，line-clamp 至少有一个匹配成功
       return {
-        transformedResult: `line-clamp-${v['line-clamp']}`,
+        transformedResult: `line-clamp-${lineClampValue}`,
         deleteKeys: keys,
       }
     }
@@ -33,21 +47,35 @@ const transformer: Record<string, (v: Record<string, string>) => { transformedRe
       'overflow': 'visible',
       'display': 'block',
       '-webkit-box-orient': 'horizontal',
-      '-webkit-line-clamp': /(?:inherit|initial|revert|unset)/,
-      'line-clamp': /(?:inherit|initial|revert|unset)/,
     }
-    const keys = Object.keys(rule)
+
+    // 单独处理 line-clamp 相关属性，只需一个匹配即可
+    const lineClampRegex = /inherit|initial|revert|unset/
+    const hasWebkitLineClamp = v['-webkit-line-clamp'] && lineClampRegex.test(v['-webkit-line-clamp'])
+    const hasLineClamp = v['line-clamp'] && lineClampRegex.test(v['line-clamp'])
+
+    if (!hasWebkitLineClamp && !hasLineClamp) {
+      return {
+        transformedResult: '',
+        deleteKeys: [],
+      }
+    }
+
+    // 使用匹配到的值，优先使用 line-clamp
+    const lineClampValue = v['line-clamp'] || v['-webkit-line-clamp']
+
+    // 检查其他规则
+    const keys = [...Object.keys(rule), '-webkit-line-clamp', 'line-clamp']
     for (const key in rule) {
       if (rule[key] instanceof RegExp ? rule[key].test(v[key]) : v[key] === rule[key]) {
         delete rule[key]
       }
     }
+
     if (!Object.keys(rule).length) {
-      // 全部匹配成功
-      // 返回新的结果，和需要被删除的属性
-      // 这里需要注意的是，line-clamp的值是0-6之间的数字
+      // 其他规则全部匹配成功，line-clamp 至少有一个匹配成功
       return {
-        transformedResult: `line-clamp-${v['line-clamp']}`,
+        transformedResult: `line-clamp-${lineClampValue}`,
         deleteKeys: keys,
       }
     }
@@ -71,6 +99,7 @@ export function transformStyleToUnocssPre(styles: string) {
     }
     return r
   }, {})
+
   for (const key in transformer) {
     const { transformedResult, deleteKeys } = transformer[key](styleToObj)
     if (transformedResult && deleteKeys.length) {

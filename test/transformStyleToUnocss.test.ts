@@ -22,6 +22,25 @@ describe('transformStyleToUnocss', () => {
   line-clamp: unset;`,
       )[0],
     ).toBe('line-clamp-unset')
+
+    expect(
+      transformStyleToUnocss(
+        `overflow: visible;
+  display: block;
+  -webkit-box-orient: horizontal;
+  -webkit-line-clamp: unset;
+  `,
+      )[0],
+    ).toBe('line-clamp-unset')
+
+    expect(
+      transformStyleToUnocss(
+        `overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;`,
+      )[0],
+    ).toBe('line-clamp-1')
   })
   it('transformStyleToUnocss', () => {
     expect(
