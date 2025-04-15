@@ -1,92 +1,118 @@
+// 通用的规则处理函数
+function createRuleProcessor(config: {
+  allMatch: Record<string, string | RegExp>
+  anyMatch?: Array<{ key: string, pattern: RegExp | string }>
+  priority?: string[]
+  outputTemplate: string | ((value: string) => string)
+}) {
+  return (v: Record<string, string>): { transformedResult: string, deleteKeys: string[] } => {
+    // 规范化配置，确保所有字段都存在
+    const anyMatch = config.anyMatch || []
+    const priority = config.priority || []
+
+    // 如果有 anyMatch 规则，则检查是否满足"任一匹配"条件
+    let matchedAnyRule = null
+    if (anyMatch.length > 0) {
+      matchedAnyRule = anyMatch.find(rule =>
+        v[rule.key] && (rule.pattern instanceof RegExp
+          ? rule.pattern.test(v[rule.key])
+          : v[rule.key] === rule.pattern),
+      )
+
+      if (!matchedAnyRule) {
+        return { transformedResult: '', deleteKeys: [] }
+      }
+    }
+
+    // 按优先级获取要使用的值（仅当有 anyMatch 和 priority 时）
+    let valueToUse = ''
+    if (anyMatch.length > 0 && priority.length > 0) {
+      for (const key of priority) {
+        const rule = anyMatch.find(r => r.key === key)
+        if (rule && v[key] && (rule.pattern instanceof RegExp
+          ? rule.pattern.test(v[key])
+          : v[key] === rule.pattern)) {
+          valueToUse = v[key]
+          break
+        }
+      }
+    }
+
+    // 检查必须全部匹配的规则
+    const allMatchRules = { ...config.allMatch }
+    const allMatchKeys = Object.keys(allMatchRules)
+
+    for (const key of allMatchKeys) {
+      const expectedValue = allMatchRules[key]
+      if (!(expectedValue instanceof RegExp
+        ? expectedValue.test(v[key])
+        : v[key] === expectedValue)) {
+        // 有规则不匹配，直接返回空结果
+        return { transformedResult: '', deleteKeys: [] }
+      }
+    }
+
+    // 构建要删除的键列表
+    const deleteKeys = [
+      ...allMatchKeys,
+      ...anyMatch.map(rule => rule.key),
+    ]
+
+    // 生成输出结果
+    const transformedResult = typeof config.outputTemplate === 'function'
+      ? config.outputTemplate(valueToUse)
+      : config.outputTemplate.replace('${value}', valueToUse)
+
+    return {
+      transformedResult,
+      deleteKeys,
+    }
+  }
+}
+
 const transformer: Record<string, (v: Record<string, string>) => { transformedResult: string, deleteKeys: string[] }> = {
-  'line-clamp-${number}': (v: Record<string, string>) => {
-    const rule: any = {
+  'line-clamp-${number}': createRuleProcessor({
+    allMatch: {
       'overflow': 'hidden',
       'display': '-webkit-box',
       '-webkit-box-orient': 'vertical',
-    }
+    },
+    anyMatch: [
+      { key: '-webkit-line-clamp', pattern: /\d/ },
+      { key: 'line-clamp', pattern: /\d/ },
+    ],
+    priority: ['line-clamp', '-webkit-line-clamp'],
+    outputTemplate: value => `line-clamp-${value}`,
+  }),
 
-    // 单独处理 line-clamp 相关属性，只需一个匹配即可
-    const lineClampRegex = /\d/
-    const hasWebkitLineClamp = v['-webkit-line-clamp'] && lineClampRegex.test(v['-webkit-line-clamp'])
-    const hasLineClamp = v['line-clamp'] && lineClampRegex.test(v['line-clamp'])
-
-    if (!hasWebkitLineClamp && !hasLineClamp) {
-      return {
-        transformedResult: '',
-        deleteKeys: [],
-      }
-    }
-
-    // 使用匹配到的值，优先使用 line-clamp
-    const lineClampValue = v['line-clamp'] || v['-webkit-line-clamp']
-
-    // 检查其他规则
-    const keys = [...Object.keys(rule), '-webkit-line-clamp', 'line-clamp']
-    for (const key in rule) {
-      if (rule[key] instanceof RegExp ? rule[key].test(v[key]) : v[key] === rule[key]) {
-        delete rule[key]
-      }
-    }
-
-    if (!Object.keys(rule).length) {
-      // 其他规则全部匹配成功，line-clamp 至少有一个匹配成功
-      return {
-        transformedResult: `line-clamp-${lineClampValue}`,
-        deleteKeys: keys,
-      }
-    }
-
-    return {
-      transformedResult: '',
-      deleteKeys: [],
-    }
-  },
-  'line-clamp-${prop}': (v: Record<string, string>) => {
-    const rule: any = {
+  'line-clamp-${prop}': createRuleProcessor({
+    allMatch: {
       'overflow': 'visible',
       'display': 'block',
       '-webkit-box-orient': 'horizontal',
-    }
+    },
+    anyMatch: [
+      { key: '-webkit-line-clamp', pattern: /inherit|initial|revert|unset/ },
+      { key: 'line-clamp', pattern: /inherit|initial|revert|unset/ },
+    ],
+    priority: ['line-clamp', '-webkit-line-clamp'],
+    outputTemplate: value => `line-clamp-${value}`,
+  }),
 
-    // 单独处理 line-clamp 相关属性，只需一个匹配即可
-    const lineClampRegex = /inherit|initial|revert|unset/
-    const hasWebkitLineClamp = v['-webkit-line-clamp'] && lineClampRegex.test(v['-webkit-line-clamp'])
-    const hasLineClamp = v['line-clamp'] && lineClampRegex.test(v['line-clamp'])
+  'truncate': createRuleProcessor({
+    allMatch: {
+      'overflow': 'hidden',
+      'text-overflow': 'ellipsis',
+      'white-space': 'nowrap',
+    },
+    // 纯 allMatch 规则，不需要 anyMatch 和 priority
+    outputTemplate: () => 'truncate',
+  }),
 
-    if (!hasWebkitLineClamp && !hasLineClamp) {
-      return {
-        transformedResult: '',
-        deleteKeys: [],
-      }
-    }
-
-    // 使用匹配到的值，优先使用 line-clamp
-    const lineClampValue = v['line-clamp'] || v['-webkit-line-clamp']
-
-    // 检查其他规则
-    const keys = [...Object.keys(rule), '-webkit-line-clamp', 'line-clamp']
-    for (const key in rule) {
-      if (rule[key] instanceof RegExp ? rule[key].test(v[key]) : v[key] === rule[key]) {
-        delete rule[key]
-      }
-    }
-
-    if (!Object.keys(rule).length) {
-      // 其他规则全部匹配成功，line-clamp 至少有一个匹配成功
-      return {
-        transformedResult: `line-clamp-${lineClampValue}`,
-        deleteKeys: keys,
-      }
-    }
-
-    return {
-      transformedResult: '',
-      deleteKeys: [],
-    }
-  },
-
+  // 您可以轻松添加更多规则
+  // 例如: 'aspect-ratio-${value}': createRuleProcessor({ ... })
 }
+
 // 提前转换一些组合的预设，比如 line-clamp-xxx
 export function transformStyleToUnocssPre(styles: string) {
   const preTransformedList = []
