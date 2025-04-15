@@ -11,7 +11,7 @@ export function transition(key: string, val: string) {
     return `ease="[${value}]${important}"`
   }
   if (key === 'transition')
-    return `transition="${transformTransition(value)}"`
+    return `transition="${transformTransition(value, important)}"`
 
   if (key === 'transition-property') {
     if (value.includes('color'))
@@ -24,16 +24,16 @@ export function transition(key: string, val: string) {
     return `${key.split('-')[1]}-${value.slice(0, -2)}`
 }
 
-function transformTransition(v: string) {
+function transformTransition(v: string, important: string) {
   let hasDuration = false
   return v
     .split(' ')
     .map((item) => {
       if (/^\d/.test(item) || /^\.\d/.test(item)) {
         if (hasDuration)
-          return `delay${getVal(item, undefined, true)}`
+          return `delay${getVal(item, undefined, true)}${important}`
         hasDuration = true
-        return `duration${getVal(item, undefined, true)}`
+        return `duration${getVal(item, undefined, true)}${important}`
       }
       if (item === 'background-color')
         return 'colors'

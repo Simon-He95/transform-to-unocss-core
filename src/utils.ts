@@ -38,8 +38,12 @@ export function isHsl(s: string) {
   return s.startsWith('hsl')
 }
 
+export function isCubicBezier(s: string) {
+  return s.startsWith('cubic-bezier')
+}
+
 export function getVal(val: string, transform?: (v: string) => string, inClass?: boolean, prefix = '') {
-  if (isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isHsl(val) || isPercent(val) || isVar(val)) {
+  if (isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isHsl(val) || isPercent(val) || isVar(val) || isCubicBezier(val)) {
     return inClass
       ? `-[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]`
       : `="[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]"`
