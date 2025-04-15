@@ -33,5 +33,10 @@ describe('animation', () => {
       'animate-duration-0.3s animate-[fade-in] animate-ease-[linear]',
     )
   })
-  
+
+  it('animation: slide-in-from-top 0.4s 0.2s ease normal', () => {
+    expect(toUnocss('animation: slide-in-from-top 0.4s 0.2s ease normal')).toBe(
+      'animate-[slide-in-from-top] animate-duration-0.4s animate-delay-0.2s animate-ease-[ease] animate-normal',
+    )
+  })
 })
