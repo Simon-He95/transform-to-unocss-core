@@ -35,7 +35,7 @@ jobs:
         run: nci
 
       - name: Lint
-        run: nr lint
+        run: nr lint:fix
 
   test:
     runs-on: ${{ matrix.os }}

@@ -1,7 +1,7 @@
 import { toUnocss } from './toUnocss'
 import { toUnocssClass } from './toUnocssClass'
-import { transformStyleToUnocss } from './transformStyleToUnocss'
 import { transformStyleToUnocssPre } from './transformer'
+import { transformStyleToUnocss } from './transformStyleToUnocss'
 
 export * from './utils'
 
