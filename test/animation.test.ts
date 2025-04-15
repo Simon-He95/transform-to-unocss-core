@@ -7,7 +7,7 @@ describe('animation', () => {
   })
 
   it('animation: revert;', () => {
-    expect(toUnocss('animation: revert;')).toBe('animate-revert')
+    expect(toUnocss('animation: revert;')).toBe('animate-[revert]')
   })
 
   it('animation-play-state: paused;', () => {
@@ -24,13 +24,13 @@ describe('animation', () => {
 
   it('animation: back-in-down 1s linear 1;', () => {
     expect(toUnocss('animation: back-in-down 1s linear 1;')).toBe(
-      'animate-back-in-down animate-duration-1s animate-linear animate-delay-1',
+      'animate-[back-in-down] animate-duration-1s animate-ease-[linear] animate-delay-1',
     )
   })
 
   it('animation: 0.3s fade-in linear;', () => {
     expect(toUnocss('animation: 0.3s fade-in linear;')).toBe(
-      'animate-duration-0.3s animate-fade-in animate-linear',
+      'animate-duration-0.3s animate-[fade-in] animate-ease-[linear]',
     )
   })
   

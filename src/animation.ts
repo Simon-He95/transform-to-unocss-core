@@ -13,26 +13,15 @@ export function animation(key: string, val: string) {
     return `animate-duration${getVal(value)}${important}`
   }
 
+  if (key === 'animation-name') {
+    // 处理 animation-name
+    return `animate-keyframes-${value}${important}`
+  }
+
   // 处理 animation-timing-function
   if (key === 'animation-timing-function') {
     // 常见的 timing functions 可以直接使用命名格式
-    const commonTimings = {
-      'linear': 'linear',
-      'ease': 'ease',
-      'ease-in': 'ease-in',
-      'ease-out': 'ease-out',
-      'ease-in-out': 'ease-in-out',
-      'step-start': 'step-start',
-      'step-end': 'step-end',
-    }
-
-    if (value in commonTimings) {
-      return `animate-${value}${important}`
-    }
-    else if (value.startsWith('cubic-bezier') || value.startsWith('steps')) {
-      // 对于自定义的 cubic-bezier 或 steps，使用方括号语法
-      return `animate-[${value}]${important}`
-    }
+    return `animate-ease-[${value}]${important}`
   }
 
   const playStates: any = {
@@ -77,7 +66,7 @@ export function animation(key: string, val: string) {
       }
       else if (/^(?:linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end)$/.test(part)) {
         // 常见的时间函数
-        result.push(`animate-${part}`)
+        result.push(`animate-ease-[${part}]`)
       }
       else if (part.startsWith('cubic-bezier') || part.startsWith('steps')) {
         // 自定义时间函数
@@ -97,7 +86,7 @@ export function animation(key: string, val: string) {
       }
       else if (part !== 'infinite' && part !== 'normal' && !(/^\d+$/.test(part))) {
         // 动画名称（排除关键字和纯数字）
-        result.push(`animate-${part}`)
+        result.push(`animate-[${part}]`)
       }
       else {
         // 其他值（如 iteration count, direction, fill-mode 等）使用原始语法
