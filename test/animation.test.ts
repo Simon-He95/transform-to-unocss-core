@@ -15,11 +15,11 @@ describe('animation', () => {
   })
 
   it('animation-direction: reverse;', () => {
-    expect(toUnocss(' animation-direction: reverse;')).toBe('animate-reverse')
+    expect(toUnocss(' animation-direction: reverse;')).toBe('animate-direction-reverse')
   })
 
   it('animation-fill-mode: forwards;', () => {
-    expect(toUnocss('animation-fill-mode: forwards;')).toBe('animate-forwards')
+    expect(toUnocss('animation-fill-mode: forwards;')).toBe('animate-fill-forwards')
   })
 
   it('animation: back-in-down 1s linear 1;', () => {
@@ -36,7 +36,19 @@ describe('animation', () => {
 
   it('animation: slide-in-from-top 0.4s 0.2s ease normal', () => {
     expect(toUnocss('animation: slide-in-from-top 0.4s 0.2s ease normal')).toBe(
-      'animate-[slide-in-from-top] animate-duration-0.4s animate-delay-0.2s animate-ease-[ease] animate-normal',
+      'animate-[slide-in-from-top] animate-duration-0.4s animate-delay-0.2s animate-ease-[ease] animate-direction-normal',
+    )
+  })
+
+  it('animation-iteration-count: infinite', () => {
+    expect(toUnocss('animation-iteration-count: infinite')).toBe(
+      'animate-count-infinite',
+    )
+  })
+
+  it('animation-iteration-count: 2', () => {
+    expect(toUnocss('animation-iteration-count: 2')).toBe(
+      'animate-count-2',
     )
   })
 })
