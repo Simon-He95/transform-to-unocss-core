@@ -34,6 +34,10 @@ describe('transform', () => {
     expect(toUnocss('transform: rotate( 0deg );')).toBe('rotate="0"')
   })
 
+  it('transform: rotate(-180deg);', () => {
+    expect(toUnocss('transform: rotate( -180deg );')).toBe('rotate="-180"')
+  })
+
   it('transform: translateY(1px);', () => {
     expect(toUnocss('transform: translateY(1px);')).toBe('translate="y-1px"')
   })

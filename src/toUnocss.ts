@@ -120,7 +120,7 @@ const typeMap: any = {
   color,
   row,
 }
-const splitReg = /([\w-]+)\s*:\s*([.\w()-\s%+'",#/!@]+)/
+const splitReg = /([\w-]+)\s*:\s*([^;]+)/
 
 export function toUnocss(css: string, isRem = false) {
   css = css.replace(browserReg, '')

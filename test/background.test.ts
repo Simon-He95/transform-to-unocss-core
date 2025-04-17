@@ -266,5 +266,15 @@ describe('background', () => {
     ).toBe(
       'bg="[url(@/assets/images/guide/line.png)]" bg-no-repeat bg-[position:8px_25px]',
     )
+
+    expect(
+      toUnocss(
+        'background: url(https://p9-semi-sign.byteimg.com/tos-cn-i-acvclvrq33/58555135a82b413da78fca29c1e857f9.PNG?rk3s=521bdb00&x-expires=1744871326&x-signature=Z92x16k%2FRqWT5yU%2Fxj2poYUMZyI%3D)',
+      ),
+    ).toBe(
+      'bg="[url(https://p9-semi-sign.byteimg.com/tos-cn-i-acvclvrq33/58555135a82b413da78fca29c1e857f9.PNG?rk3s=521bdb00&x-expires=1744871326&x-signature=Z92x16k%2FRqWT5yU%2Fxj2poYUMZyI%3D)]"',
+    )
+
+    
   })
 })
