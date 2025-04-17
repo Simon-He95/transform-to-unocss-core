@@ -31,6 +31,7 @@ import { outline } from './outline'
 import { overscroll } from './overscroll'
 import { place } from './place'
 import { resize } from './resize'
+import { rotate } from './rotate'
 import { row } from './row'
 import { scroll } from './scroll'
 import { size } from './size'
@@ -95,6 +96,7 @@ const typeMap: any = {
   word,
   content,
   background,
+  rotate,
   border,
   outline,
   opacity,
