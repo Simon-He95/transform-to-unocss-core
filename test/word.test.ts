@@ -17,4 +17,9 @@ describe('word-break', () => {
   it('word-spacing: 0em;', () => {
     expect(toUnocss('word-spacing: 0em;')).toBe('word-spacing-0em')
   })
+
+  it('word-wrap: break-word', () => {
+    expect(toUnocss('word-wrap: break-word')).toBe('break-words')
+  })
+  
 })

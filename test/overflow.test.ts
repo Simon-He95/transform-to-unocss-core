@@ -13,4 +13,8 @@ describe('overflow', () => {
   it('overflow-x: visible;', () => {
     expect(toUnocss('overflow-x: visible;')).toBe('overflow-x-visible')
   })
+
+  it('overflow-wrap: break-word;', () => {
+    expect(toUnocss('overflow-wrap: break-word;')).toBe('break-words')
+  })
 })

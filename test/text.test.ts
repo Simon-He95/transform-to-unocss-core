@@ -9,8 +9,17 @@ describe('text', () => {
   it('text-right', () => {
     expect(toUnocss('text-align:right')).toBe('text-right')
   })
+
+  it('text-justify', () => {
+    expect(toUnocss('text-align:justify')).toBe('text-justify')
+  })
+  
   it('text-center', () => {
     expect(toUnocss('text-align:center')).toBe('text-center')
+  })
+
+  it('text-wrap', () => {
+    expect(toUnocss('text-wrap:wrap')).toBe('text-wrap')
   })
 
   it('text-ellipsis', () => {

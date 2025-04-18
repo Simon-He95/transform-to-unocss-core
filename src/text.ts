@@ -8,6 +8,7 @@ export function text(key: string, val: string) {
       return `no-underline${important}`
     return `${value}${important}`
   }
+
   if (key === 'text-transform') {
     if (value === 'none')
       return `normal-case${important}`
