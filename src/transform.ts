@@ -12,9 +12,9 @@ export function transform(key: string, val: string) {
   if (key === 'transform-origin')
     return `origin-${/\d/.test(v) && v.includes(' ') ? `[${joinWithUnderLine(v)}]` : joinWithLine(v)}${important}`
   if (key === 'transform-style')
-    return `transform-${v}`
+    return `transform-${v}${important}`
   if (val === 'none')
-    return `${key}-none`
+    return `${key}-none${important}`
 
   return joinEmpty(v)
     .split(' ')

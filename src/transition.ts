@@ -21,7 +21,7 @@ export function transition(key: string, val: string) {
     return `transition-${value}${important}`
   }
   if (times.includes(key))
-    return `${key.split('-')[1]}-${value.slice(0, -2)}`
+    return `${key.split('-')[1]}-${value.slice(0, -2)}${important}`
 }
 
 function transformTransition(v: string, important: string) {

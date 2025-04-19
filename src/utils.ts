@@ -157,3 +157,22 @@ export function isColor(s: string) {
 }
 
 export const browserReg = /-webkit-|-moz-|-ms-|-o-/g
+export const linearGradientReg
+  = /linear-gradient\(\s*to([\w\s]+),?([\-\w()#%\s.]+)?,([\-\w()#%\s.]+)?,?([\-\w#%\s.]+)?\)$/
+
+export const linearGradientReg1
+  = /linear-gradient\(\s*([^,]*),?([\-\w()#%\s.]+)?,([\-\w()#%\s.]+)?,?([\-\w#%\s.]+)?\)$/
+
+export const otherGradientReg
+  = /(radial|conic)-gradient\(([\-\w()#%\s.]+)?,([\-\w()#%\s.]+)?,?([\-\w#%\s.]+)?\)$/
+export const commaReplacer = '__comma__'
+
+export function getGradient(s: string) {
+  return s.startsWith('linear-gradient')
+    ? 'linear'
+    : s.startsWith('radial-gradient')
+      ? 'radial'
+      : s.startsWith('conic-gradient')
+        ? 'conic'
+        : ''
+}

@@ -23,6 +23,7 @@ import { letter } from './letter'
 import { line } from './line'
 import { list } from './list'
 import { transformMargin } from './margin'
+import { mask } from './mask'
 import { max } from './max'
 import { mix } from './mix'
 import { object } from './object'
@@ -92,6 +93,8 @@ const typeMap: any = {
   line,
   list,
   text,
+  mask,
+  hyphens: top,
   vertical,
   white,
   word,

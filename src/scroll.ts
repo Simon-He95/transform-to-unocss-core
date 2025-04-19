@@ -1,4 +1,4 @@
-import { transformImportant } from './utils'
+import { getVal, transformImportant } from './utils'
 
 export function scroll(key: string, val: string) {
   const [value, important] = transformImportant(val)
@@ -13,8 +13,8 @@ export function scroll(key: string, val: string) {
     /scroll-(margin|padding)-?(\w+)?-?(\w+)?/,
   )!
   if (suffix === 'inline' && way)
-    return `scroll-${prefix[0]}${way[0]}-${value}${important}`
+    return `scroll-${prefix[0]}${way[0]}${getVal(value)}${important}`
   if (suffix)
-    return `scroll-${prefix[0]}${suffix[0]}-${value}${important}`
+    return `scroll-${prefix[0]}${suffix[0]}${getVal(value)}${important}`
   return `scroll-${prefix[0]}-${value}${important}`
 }
