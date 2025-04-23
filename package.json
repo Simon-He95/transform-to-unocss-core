@@ -1,5 +1,6 @@
 {
   "name": "transform-to-unocss-core",
+  "type": "module",
   "version": "0.0.46",
   "description": "",
   "author": "Simon He",
@@ -15,13 +16,12 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
@@ -50,10 +50,10 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.16.0",
+    "@antfu/eslint-config": "^4.12.0",
     "@types/node": "^18.19.86",
     "bumpp": "^8.2.1",
-    "eslint": "^8.57.1",
+    "eslint": "^9.25.1",
     "esno": "^0.16.3",
     "picocolors": "^1.1.1",
     "prettier": "^2.8.8",
