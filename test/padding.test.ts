@@ -40,6 +40,12 @@ describe('padding-bottom', () => {
   it('padding-bottom:50px', () => {
     expect(toUnocss('padding-bottom:50px')).toBe('pb-50px')
   })
+  it('padding-bottom: constant(safe-area-inset-bottom)', () => {
+    expect(toUnocss('padding-bottom: constant(safe-area-inset-bottom)')).toBe('pb="[constant(safe-area-inset-bottom)]"')
+  })
+  it('padding-bottom: env(safe-area-inset-bottom)', () => {
+    expect(toUnocss('padding-bottom: env(safe-area-inset-bottom)')).toBe('pb="[env(safe-area-inset-bottom)]"')
+  })
 })
 
 describe('padding-inline-start: 0px;', () => {

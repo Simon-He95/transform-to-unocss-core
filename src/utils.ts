@@ -42,8 +42,28 @@ export function isCubicBezier(s: string) {
   return s.startsWith('cubic-bezier')
 }
 
+export function isAttr(s: string) {
+  return /^attr\(/i.test(s)
+}
+
+export function isRepeatingLinearGradient(s: string) {
+  return /^repeating-linear-gradient\(/i.test(s)
+}
+
+export function isRepeatingRadialGradient(s: string) {
+  return /^repeating-radial-gradient\(/i.test(s)
+}
+
+export function isConstant(s: string) {
+  return /^constant\(/.test(s)
+}
+
+export function isEnv(s: string) {
+  return /^env\(/.test(s)
+}
+
 export function getVal(val: string, transform?: (v: string) => string, inClass?: boolean, prefix = '') {
-  if (isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isHsl(val) || isPercent(val) || isVar(val) || isCubicBezier(val)) {
+  if (isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isHsl(val) || isPercent(val) || isVar(val) || isCubicBezier(val) || isConstant(val) || isAttr(val) || isEnv(val) || isRepeatingLinearGradient(val) || isRepeatingRadialGradient(val)) {
     return inClass
       ? `-[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]`
       : `="[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]"`
