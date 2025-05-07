@@ -37,7 +37,15 @@ function transformTransition(v: string, important: string) {
       }
       if (item === 'background-color')
         return 'colors'
-      return item
+      if (/^(?:linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end)$/.test(item)) {
+        // 常见的时间函数，与 animation-timing-function 处理一致
+        return `ease-[${item}]${important}`
+      }
+      else if (item.startsWith('cubic-bezier') || item.startsWith('steps')) {
+        // 自定义时间函数，与 animation-timing-function 处理一致
+        return `ease-[${item}]${important}`
+      }
+      return `${item}${important}`
     })
     .join(' ')
 }

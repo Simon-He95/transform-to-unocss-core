@@ -4,7 +4,13 @@ import { toUnocss } from '../src/toUnocss'
 describe('transition', () => {
   it('transition: background-color 0.5s ease;', () => {
     expect(toUnocss('transition: background-color 0.5s 1.5s ease;')).toBe(
-      'transition="colors duration-0.5s delay-1.5s ease"',
+      'transition="colors duration-0.5s delay-1.5s ease-[ease]"',
+    )
+  })
+
+  it('transition: transform 0.15s linear;', () => {
+    expect(toUnocss('transition: transform 0.15s linear;')).toBe(
+      'transition="transform duration-0.15s ease-[linear]"',
     )
   })
 
