@@ -36,7 +36,7 @@ function transformTransition(v: string, important: string) {
         return `duration${getVal(item, undefined, true)}${important}`
       }
       if (item === 'background-color')
-        return 'colors'
+        return `colors${important}`
       if (/^(?:linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end)$/.test(item)) {
         // 常见的时间函数，与 animation-timing-function 处理一致
         return `ease-[${item}]${important}`
