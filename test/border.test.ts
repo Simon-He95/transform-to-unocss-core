@@ -34,6 +34,11 @@ describe('border', () => {
     expect(toUnocss('border-radius: 0.25rem;')).toBe('border-rd-0.25rem')
   })
 
+  it('border-top-left-radius: 20px', () => {
+    expect(toUnocss('border-top-left-radius: 20px;')).toBe('border-rd-tl-20px')
+  })
+  
+
   it('border-width', () => {
     expect(toUnocss('border-width: 2px;')).toBe('border-2px')
   })

@@ -43,8 +43,13 @@ export function border(key: string, val: string) {
       : `border-rd="[${joinWithUnderLine(value)}]${important}"`
   }
 
-  if (borderSize.some(b => key.startsWith(b)))
+  if (borderSize.some(b => key.startsWith(b))) {
+    const keys = key.split('-')
+    if (keys.slice(-1)[0] === 'radius')
+      return value.split(' ').map(v => `border-rd-${keys.slice(1, -1).map(s => s[0]).join('')}${getVal(v)}${important}`).join(' ')
+
     return value.split(' ').map(v => `border-${key.split('-')[1][0]}${getVal(v)}${important}`).join(' ')
+  }
   if (key === 'border-inline-end-width')
     return `border-e${getVal(value)}${important}`
   if (key === 'border-inline-start-width')
