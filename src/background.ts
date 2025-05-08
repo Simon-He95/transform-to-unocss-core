@@ -48,7 +48,7 @@ export function background(key: string, val: string) {
       if (!matcher1)
         return
 
-      return `bg-gradient-linear bg-gradient-[${matcher1[1]},${matcher1[2].replace(/\s+/, '_').replaceAll(commaReplacer, ',')},${matcher1[3].replace(/\s+/, '_').replaceAll(commaReplacer, ',')}]`
+      return `bg-gradient-linear bg-gradient-[${matcher1[1]}${matcher1[2] ? `,${matcher1[2].replace(/\s+/, '_').replaceAll(commaReplacer, ',')}` : ''},${matcher1[3].replace(/\s+/, '_').replaceAll(commaReplacer, ',')}]`
     }
     else if (/^(?:radial|conic)-gradient/.test(value)) {
       // 区分rgba中的,和linear-gradient中的,
@@ -133,7 +133,7 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
       .split(' ')
     if (fromPosition) {
       result += ` from="${isRgb(fromColor) ? `[${fromColor}]` : fromColor
-      } ${fromPosition}"`
+        } ${fromPosition}"`
     }
     else if (fromColor) {
       result += ` from="${isRgb(fromColor) ? `[${fromColor}]` : fromColor}"`
@@ -146,7 +146,7 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
       .split(' ')
     if (viaPosition) {
       result += ` via="${isRgb(viaColor) ? `[${viaColor}]` : viaColor
-      } ${viaPosition}"`
+        } ${viaPosition}"`
     }
     else if (viaColor) {
       result += ` via="${isRgb(viaColor) ? `[${viaColor}]` : viaColor}"`
@@ -159,7 +159,7 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
       .split(' ')
     if (toPosition) {
       result += ` to="${isRgb(toColor) ? `[${toColor}]` : toColor
-      } ${toPosition}"`
+        } ${toPosition}"`
     }
     else if (toColor) {
       result += ` to="${isRgb(toColor) ? `[${toColor}]` : toColor}"`
