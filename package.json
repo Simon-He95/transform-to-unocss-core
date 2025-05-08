@@ -61,15 +61,15 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.12.0",
-    "@types/node": "^18.19.87",
+    "@antfu/eslint-config": "^4.13.0",
+    "@types/node": "^18.19.98",
     "bumpp": "^8.2.1",
-    "eslint": "^9.25.1",
+    "eslint": "^9.26.0",
     "esno": "^0.16.3",
     "picocolors": "^1.1.1",
     "prettier": "^2.8.8",
     "rimraf": "^3.0.2",
-    "tsdown": "^0.10.1",
+    "tsdown": "^0.10.2",
     "tsx": "^3.14.0",
     "typescript": "^4.9.5",
     "vitest": "^0.15.2"
