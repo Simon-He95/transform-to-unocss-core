@@ -6,6 +6,10 @@ describe('flex', () => {
     expect(toUnocss('flex: none;')).toBe('flex-none')
   })
 
+  it('flex: 2;', () => {
+    expect(toUnocss('flex: 2;')).toBe('flex-[2]')
+  })
+
   it('flex-basis: calc(50% - 20px);', () => {
     expect(toUnocss('flex-basis: calc(50% - 20px);')).toBe('basis="[calc(50%-20px)]"')
   })
