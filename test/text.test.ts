@@ -18,6 +18,10 @@ describe('text', () => {
     expect(toUnocss('text-align:center')).toBe('text-center')
   })
 
+  it('text-align:inherit', () => {
+    expect(toUnocss('text-align: inherit')).toBe('text-align-inherit')
+  })
+
   it('text-wrap', () => {
     expect(toUnocss('text-wrap:wrap')).toBe('text-wrap')
   })
