@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { toUnocss } from '../src/toUnocss'
+
 describe('filter', () => {
   it('blur 0', () => {
     expect(toUnocss('filter: blur(0);')).toBe('blur-0')
@@ -13,7 +14,7 @@ describe('filter', () => {
     expect(toUnocss('filter: brightness(.5);')).toBe('brightness-50')
   })
 
-  it('brightness', () => {
+  it('brightness percent', () => {
     expect(toUnocss('filter: brightness(50%);')).toBe('brightness-50')
   })
 

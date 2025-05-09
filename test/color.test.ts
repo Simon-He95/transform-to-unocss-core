@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { toUnocss } from '../src/toUnocss'
+
 describe('color', () => {
   it('color:red', () => {
     expect(toUnocss('color: red')).toBe('text-red')

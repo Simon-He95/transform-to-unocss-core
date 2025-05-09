@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { toUnocss } from '../src/toUnocss'
+
 describe('line-height', () => {
   it('rem;', () => {
     expect(toUnocss('line-height: 0.25rem;')).toBe('lh-0.25rem')

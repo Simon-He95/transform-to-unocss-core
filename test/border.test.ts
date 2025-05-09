@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { toUnocss } from '../src/toUnocss'
 import { toUnocssClass } from '../src/toUnocssClass'
+
 describe('border', () => {
   it('red;', () => {
     expect(toUnocss('border-color:red;')).toBe('border-red')
@@ -24,7 +25,7 @@ describe('border', () => {
     )
   })
 
-  it('border;', () => {
+  it('toUnocssClass border;', () => {
     expect(toUnocssClass('border: 2px solid rgba(255, 62, 0, 0);')[0]).toBe(
       'border-2px border-solid border-[rgba(255,62,0,0)]',
     )
@@ -37,7 +38,6 @@ describe('border', () => {
   it('border-top-left-radius: 20px', () => {
     expect(toUnocss('border-top-left-radius: 20px;')).toBe('border-rd-tl-20px')
   })
-  
 
   it('border-width', () => {
     expect(toUnocss('border-width: 2px;')).toBe('border-2px')
@@ -93,7 +93,7 @@ describe('border', () => {
     expect(toUnocss('border: 1px solid var(--magenta-3, #FFADD2)')).toBe('border-1px border-solid border="[var(--magenta-3,#FFADD2)]"')
   })
 
-  it('border: 1px solid var(--magenta-3, #FFADD2)', () => {
+  it('border: 1px solid hsl(1 2 3)', () => {
     expect(toUnocss('border: 1px solid hsl(1 2 3)')).toBe('border-1px border-solid border="[hsl(1,2,3)]"')
   })
 

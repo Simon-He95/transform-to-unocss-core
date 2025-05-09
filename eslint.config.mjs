@@ -5,7 +5,6 @@ export default antfu(
   {
     ignores: [
       // eslint ignore globs here
-      'test/**/*',
       'components.d.ts',
     ],
   },

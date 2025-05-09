@@ -40,7 +40,7 @@ describe('height', () => {
     expect(toUnocss('min-height: 0px;')).toBe('min-h-0px')
   })
 
-  it('min-height: 0px;', () => {
+  it('min-height: 100%;', () => {
     expect(toUnocss('min-height: 100%;;')).toBe('min-h="[100%]"')
   })
   it('min-height calc', () => {
@@ -59,7 +59,7 @@ describe('height', () => {
   it('max-height: 0px;', () => {
     expect(toUnocss('max-height: 0px;')).toBe('max-h-0px')
   })
-  it('max-height: 0px;', () => {
+  it('max-height: max-content;', () => {
     expect(toUnocss('max-height: max-content;')).toBe('max-h-max')
   })
 

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { toUnocss } from '../src/toUnocss'
 import { toUnocssClass } from '../src/toUnocssClass'
+
 describe('text', () => {
   it('text-left', () => {
     expect(toUnocss('text-align:left')).toBe('text-left')
@@ -13,7 +14,7 @@ describe('text', () => {
   it('text-justify', () => {
     expect(toUnocss('text-align:justify')).toBe('text-justify')
   })
-  
+
   it('text-center', () => {
     expect(toUnocss('text-align:center')).toBe('text-center')
   })

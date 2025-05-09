@@ -18,15 +18,11 @@ describe('flex', () => {
     expect(toUnocss('flex-direction: column;')).toBe('flex-col')
   })
 
-  it('flex-direction: column-reverse;', () => {
-    expect(toUnocss('flex-direction: column-reverse;')).toBe('flex-col-reverse')
-  })
-
   it('flex-grow: 1;', () => {
     expect(toUnocss('flex-grow: 1;')).toBe('grow-1')
   })
 
-  it('flex-grow: 1;', () => {
+  it('flex: 1;', () => {
     expect(toUnocss('flex: 1;')).toBe('flex-1')
   })
 

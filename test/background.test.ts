@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { toUnocss } from '../src/toUnocss'
+
 describe('background', () => {
   it('background:red !important', () => {
     expect(toUnocss('background:red !important')).toBe('bg-red!')
   })
 
-  it('background:red !important', () => {
+  it('background with multiple', () => {
     expect(toUnocss('background:red center url("./a.jpg") !important')).toBe(
       'bg-red! bg-[position:center]! bg="[url(./a.jpg)]!"',
     )
@@ -63,7 +64,7 @@ describe('background', () => {
     expect(toUnocss('background-size:50%')).toBe('bg="[length:50%]"')
   })
 
-  it('background-size:50%', () => {
+  it('background-size with var', () => {
     expect(toUnocss('background-size: var(--size, 50%)')).toBe('bg="[length:var(--size,50%)]"')
   })
 
@@ -77,7 +78,7 @@ describe('background', () => {
     expect(toUnocss('background-clip:border-box')).toBe('bg-clip-border')
   })
 
-  it('background-clip:border-box', () => {
+  it('background-clip:padding-box', () => {
     expect(toUnocss('background-clip:padding-box')).toBe('bg-clip-padding')
   })
 
@@ -188,7 +189,7 @@ describe('background', () => {
     )
   })
 
-  it('background: linear-gradient(to bottom, #00ffff 0, #0ea5e9 ,#0066ff 100%);', () => {
+  it('background: linear-gradient(to bottom, #00ffff 0, #0ea5e9 30 ,#0066ff 100%);', () => {
     expect(
       toUnocss(
         'background: linear-gradient(to bottom, #00ffff 0, #0ea5e9 30 ,#0066ff 100%);',

@@ -41,7 +41,7 @@ describe('width', () => {
     expect(toUnocss('min-width: 0px;')).toBe('min-w-0px')
   })
 
-  it('min-width: 0px;', () => {
+  it('min-width: 100%;', () => {
     expect(toUnocss('min-width: 100%;')).toBe('min-w="[100%]"')
   })
   it('min-width calc', () => {
@@ -58,7 +58,7 @@ describe('width', () => {
   it('max-width: 0px;', () => {
     expect(toUnocss('max-width: 0px;')).toBe('max-w-0px')
   })
-  it('max-width: 0px;', () => {
+  it('max-width: max-content;', () => {
     expect(toUnocss('max-width: max-content;')).toBe('max-w-max')
   })
 

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { toUnocss } from '../src/toUnocss'
+
 describe('box-shadow', () => {
   it('box-decoration-break: clone;', () => {
     expect(toUnocss('box-decoration-break: clone;')).toBe(

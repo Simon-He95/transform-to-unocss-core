@@ -48,7 +48,7 @@ describe('transformStyleToUnocss', () => {
       transformStyleToUnocss(
         `overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;`
+  white-space: nowrap;`,
       )[0],
     ).toBe('truncate')
   })

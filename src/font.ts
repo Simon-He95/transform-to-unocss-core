@@ -3,8 +3,11 @@ import { joinWithUnderLine, transformImportant } from './utils'
 export function font(key: string, val: string) {
   const [value, important] = transformImportant(val)
 
-  if (key === 'font-size')
+  if (key === 'font-size') {
+    if (['inherit', 'initial', 'revert', 'unset', 'revert-layer'].includes(value))
+      return `font-size-${value}${important}`
     return `text-${value}${important}`
+  }
   if (key === 'font-weight')
     return `font-${value}${important}`
   if (key === 'font-family') {
@@ -25,6 +28,7 @@ export function font(key: string, val: string) {
       return `normal-nums${important}`
     return `${value}${important}`
   }
+
   return `font="${transformFont(value)}${important}"`
 }
 

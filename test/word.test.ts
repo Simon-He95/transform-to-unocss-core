@@ -21,5 +21,4 @@ describe('word-break', () => {
   it('word-wrap: break-word', () => {
     expect(toUnocss('word-wrap: break-word')).toBe('break-words')
   })
-  
 })

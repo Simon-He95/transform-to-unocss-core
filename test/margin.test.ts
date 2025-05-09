@@ -46,7 +46,7 @@ describe('margin-bottom', () => {
     expect(toUnocss('margin-bottom:50px')).toBe('mb-50px')
   })
 
-  it('margin-bottom:50px', () => {
+  it('margin-bottom:calc(100% - 30px)', () => {
     expect(toUnocss('margin-bottom:calc(100% - 30px)')).toBe(
       'mb="[calc(100%-30px)]"',
     )

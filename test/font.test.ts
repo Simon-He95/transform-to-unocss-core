@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { toUnocss } from '../src/toUnocss'
+
 describe('font-size', () => {
   it('rem', () => {
     expect(toUnocss('font-size: 1.5rem')).toBe('text-1.5rem')
@@ -9,6 +10,9 @@ describe('font-size', () => {
   })
   it('px', () => {
     expect(toUnocss('font-size: 10px')).toBe('text-10px')
+  })
+  it('inherit', () => {
+    expect(toUnocss('font-size: inherit')).toBe('font-size-inherit')
   })
 })
 
