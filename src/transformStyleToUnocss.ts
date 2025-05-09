@@ -38,7 +38,7 @@ export function transformStyleToUnocss(
         if (cache.has(key))
           return result
         cache.add(key)
-        const val = toUnocss(cur, isRem) || ''
+        const val = toUnocss(key, isRem) || ''
         if (!val)
           noTransfer.push(cur)
         return (result += `${val} `)

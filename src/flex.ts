@@ -8,6 +8,8 @@ import {
 
 const lastMaps = ['flex-basis', 'flex-grow', 'flex-shrink']
 export function flex(key: string, val: string) {
+  if (['flex-negative', 'flex-positive'].includes(key))
+    return ''
   const [value, important] = transformImportant(val)
 
   if (lastMaps.includes(key))
