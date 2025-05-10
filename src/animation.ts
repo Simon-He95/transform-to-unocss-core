@@ -15,7 +15,7 @@ export function animation(key: string, val: string) {
 
   if (key === 'animation-name') {
     // 处理 animation-name
-    return `animate-[${value}]${important}`
+    return `animate-name-[${value}]${important}`
   }
 
   // 处理 animation-timing-function
