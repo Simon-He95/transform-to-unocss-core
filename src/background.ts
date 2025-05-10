@@ -45,8 +45,10 @@ export function background(key: string, val: string) {
           : getLinearGradientPosition(from, via, to)
       }
       const matcher1 = newValue.match(linearGradientReg1)
-      if (!matcher1)
-        return
+      if (!matcher1) {
+        // 直接使用-[处理]
+        return `bg="[${matchMultipleBgAttrs(value)}]"`
+      }
 
       return `bg-gradient-linear bg-gradient-[${matcher1[1]}${matcher1[2] ? `,${matcher1[2].replace(/\s+/, '_').replaceAll(commaReplacer, ',')}` : ''},${matcher1[3].replace(/\s+/, '_').replaceAll(commaReplacer, ',')}]`
     }

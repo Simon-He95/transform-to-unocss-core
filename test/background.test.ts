@@ -189,6 +189,26 @@ describe('background', () => {
     )
   })
 
+  it('background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%)', () => {
+    expect(
+      toUnocss(
+        'background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%)',
+      ),
+    ).toBe(
+      'bg="[linear-gradient(90deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.5)_50%,rgba(255,255,255,0)_100%)]"',
+    )
+  })
+
+  it('background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%) no-repeat', () => {
+    expect(
+      toUnocss(
+        'background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%) no-repeat',
+      ),
+    ).toBe(
+      'bg="[linear-gradient(90deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.5)_50%,rgba(255,255,255,0)_100%)_no-repeat]"',
+    )
+  })
+
   it('background: linear-gradient(to bottom, #00ffff 0, #0ea5e9 30 ,#0066ff 100%);', () => {
     expect(
       toUnocss(

@@ -52,7 +52,7 @@ describe('animation', () => {
     )
   })
 
-    it('animation-name: order-collapse-2;', () => {
+  it('animation-name: order-collapse-2;', () => {
     expect(toUnocss('animation-name: order-collapse-2;')).toBe(
       'animate-name-[order-collapse-2]',
     )
