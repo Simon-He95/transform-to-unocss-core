@@ -49,6 +49,14 @@ describe('font-family', () => {
     ).toBe('font-sans')
   })
 
+  it('font-family: Arial, sans-serif', () => {
+    expect(
+      toUnocss(
+        'font-family: Arial, sans-serif',
+      ),
+    ).toBe('font-[Arial,_sans-serif]')
+  })
+
   it('mono', () => {
     expect(
       toUnocss(
