@@ -110,7 +110,7 @@ export function trim(s: string, type: TrimType = 'around'): string {
 }
 
 export function transformImportant(v: string) {
-  v = v.replace(/\s+/, ' ')
+  v = v.replace(/\s+/g, ' ')
     .replace(/\s*,\s*/g, ',')
     .replace(/\s*\/\s*/, '/')
   if (/rgb/.test(v)) {

@@ -97,6 +97,24 @@ describe('background', () => {
     )
   })
 
+  it('background-position: 0 0, 5px 5px', () => {
+    expect(toUnocss('background-position: 0 0, 5px var(--xxxx, 5px)')).toBe(
+      'bg-[position:0_0,5px_var(--xxxx,5px)]',
+    )
+  })
+
+  it('background: left 5% / 15% 60% repeat-x url("/shared-assets/images/examples/star.png");', () => {
+    expect(toUnocss('background: left 5% / 15% 60% repeat-x   url("/shared-assets/images/examples/star.png");')).toBe(
+      'bg-[position:left_5%] bg-[length:15%_60%] bg-repeat-x bg="[url(/shared-assets/images/examples/star.png)]"',
+    )
+  })
+
+  it('background: 0 0, 5px 5px', () => {
+    expect(toUnocss('background: 0 0, 5px 5px url("/shared-assets/images/examples/star.png") no-repeat')).toBe(
+      'bg-[position:0_0,5px_5px] bg="[url(/shared-assets/images/examples/star.png)]" bg-no-repeat',
+    )
+  })
+
   // repeats
   it('background-repeat:repeat', () => {
     expect(toUnocss('background-repeat:repeat')).toBe('bg-repeat')
