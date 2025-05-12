@@ -20,8 +20,19 @@ export function transition(key: string, val: string) {
       return `transition-shadow${important}`
     return `transition-${value}${important}`
   }
-  if (times.includes(key))
-    return `${key.split('-')[1]}-${value.slice(0, -2)}${important}`
+  const _val = getVal(value)
+
+  if (_val === `-${value}` && times.includes(key)) {
+    let num = value.trim()
+    if (num.endsWith('ms')) {
+      num = num.replace(/ms$/, '')
+    }
+    else if (num.endsWith('s')) {
+      num = (Number.parseFloat(num.replace(/s$/, '')) * 1000).toString()
+    }
+    return `${key.split('-')[1]}-${num}${important}`
+  }
+  return `${key.split('-')[1]}${_val}${important}`
 }
 
 function transformTransition(v: string, important: string) {

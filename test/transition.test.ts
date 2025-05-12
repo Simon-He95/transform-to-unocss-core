@@ -40,6 +40,14 @@ describe('transition', () => {
     expect(toUnocss('transition-duration: 75ms;')).toBe('duration-75')
   })
 
+  it('transition-duration: 0.3s;', () => {
+    expect(toUnocss('transition-duration: 0.3s;')).toBe('duration-300')
+  })
+
+  it('transition-duration: var(--xxx, 0.3s);', () => {
+    expect(toUnocss('transition-duration: var(--xxx, 0.3s);')).toBe('duration="[var(--xxx,0.3s)]"')
+  })
+
   it('transition-delay: 75ms;', () => {
     expect(toUnocss('transition-delay: 75ms;')).toBe('delay-75')
   })
