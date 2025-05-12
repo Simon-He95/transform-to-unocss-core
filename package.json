@@ -1,7 +1,7 @@
 {
   "name": "transform-to-unocss-core",
   "type": "module",
-  "version": "0.0.58",
+  "version": "0.0.59",
   "description": "A utility to transform CSS to UnoCSS syntax. Supports various CSS properties and custom parsing.",
   "author": "Simon He",
   "license": "MIT",
