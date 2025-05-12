@@ -139,7 +139,7 @@ export function toUnocss(css: string, isRem = false) {
   const result = typeMap[first]?.(key, val)
   if (result && isRem) {
     return result.replace(
-      /-([0-9.]+)px/,
+      /-([0-9.]+)px/g,
       (_: string, v: string) => `-${+v / 4}`,
     ).replace(/\[[^\]]+\]/g, (match: string) => match.replace(/([0-9.]+)px/g, (_: string, v: string) => `${+v / 16}rem`))
   }

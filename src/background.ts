@@ -1,4 +1,4 @@
-import { commaReplacer, getVal, isRgb, isSize, linearGradientReg, linearGradientReg1, otherGradientReg, transformImportant } from './utils'
+import { commaReplacer, getVal, isRgb, isSize, joinWithLine, joinWithUnderLine, linearGradientReg, linearGradientReg1, otherGradientReg, transformImportant } from './utils'
 
 const backgroundMap = [
   'background-color',
@@ -12,19 +12,19 @@ export function background(key: string, val: string): string {
   const [value, important] = transformImportant(val)
 
   if (key === 'background-size')
-    return `bg${getVal(value, /\d/.test(value) ? transformSpaceToUnderLine : transformSpaceToLine, false, 'length:')}${important}`
+    return `bg${getVal(value, /\d/.test(value) ? joinWithUnderLine : joinWithLine, false, 'length:')}${important}`
 
   if (backgroundMap.includes(key))
-    return `bg${getVal(value, transformSpaceToLine)}${important}`
+    return `bg${getVal(value, joinWithLine)}${important}`
   if (key === 'background-position') {
     if (/\d/.test(value))
-      return `bg${getVal(value, transformSpaceToUnderLine, false, 'position:')}${important}`
-    return `bg${getVal(value, transformSpaceToLine)}${important}`
+      return `bg${getVal(value, joinWithUnderLine, false, 'position:')}${important}`
+    return `bg${getVal(value, joinWithLine)}${important}`
   }
 
   if (['background', 'background-image'].includes(key)) {
     if (isSize(value))
-      return `bg${getVal(value, transformSpaceToUnderLine, false, 'position:')}${important}`
+      return `bg${getVal(value, joinWithUnderLine, false, 'position:')}${important}`
 
     const temp = value.replace(/rgba?\([^)]+\)/g, 'temp')
     if (/\)\s*,/.test(temp))
@@ -178,7 +178,7 @@ export function background(key: string, val: string): string {
 
       return r
     }
-    return `bg${getVal(value, transformSpaceToLine)}${important}`
+    return `bg${getVal(value, joinWithLine)}${important}`
   }
 
   if (key === 'background-blend-mode')
@@ -199,15 +199,7 @@ function transformBox(s: string) {
     return s.replace('-box', '')
   if (s.startsWith('repeat-'))
     return s.replace('repeat-', '')
-  return transformSpaceToLine(s)
-}
-
-function transformSpaceToLine(s: string) {
-  return s.replace(/\s+/, ' ').replace(/\s/g, '-')
-}
-
-function transformSpaceToUnderLine(s: string) {
-  return s.replace(/\s+/, ' ').replace(/\s/g, '_')
+  return joinWithLine(s)
 }
 
 function getLinearGradientPosition(from: string, via: string, to: string) {
@@ -262,7 +254,7 @@ const CONSTANTFLAG = '__transform_to_unocss__'
 function matchMultipleBgAttrs(value: string) {
   const map: any = {}
   let i = 0
-  value = value.replace(/(rgba?|hsla?|lab|lch|hwb|color)\(\)*\)/, (_) => {
+  value = value.replace(/(rgba?|hsla?|lab|lch|hwb|color)\(\)*\)/g, (_) => {
     map[i++] = _
     return `${CONSTANTFLAG}${i}}`
   })
