@@ -20,6 +20,9 @@ export function text(key: string, val: string) {
   if (key === 'text-underline-offset')
     return `underline-offset-${value}${important}`
 
+  if (key === 'text-align-last')
+    return `${important}[${key}:${value}]`
+
   if (['inherit', 'initial', 'revert', 'unset', 'revert-layer'].includes(value))
     return `${important}text-align-${value}`
 

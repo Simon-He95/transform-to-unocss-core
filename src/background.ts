@@ -66,13 +66,13 @@ export function background(key: string, val: string): string {
 
       const matcher = newValue.match(otherGradientReg)
       if (!matcher)
-        return ''
+        return `${important}[${key}:${joinWithUnderLine(value)}]`
 
       const name = matcher[1]
       // eslint-ignore @typescript-eslint/no-non-null-assertion
       const [from, via, to] = matcher.slice(2)
 
-      return `bg-gradient-${name}${getLinearGradientPosition(from, via, to)}`
+      return `bg-gradient-${name}${getLinearGradientPosition(from, via, to)}${important}`
     }
     const match = value.match(/^rgba?\([^)]+\)$/)
     if (match) {

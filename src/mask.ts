@@ -1,4 +1,4 @@
-import { commaReplacer, getFirstName, getGradient, getVal, isCalc, isCubicBezier, isHex, isHsl, isPercent, isRgb, isUrl, isVar, joinWithLine, linearGradientReg, transformImportant } from './utils'
+import { commaReplacer, getFirstName, getGradient, getVal, isCalc, isCubicBezier, isHex, isHsl, isPercent, isRgb, isUrl, isVar, joinWithLine, joinWithUnderLine, linearGradientReg, transformImportant } from './utils'
 
 export function mask(key: string, val: string) {
   const [value, important] = transformImportant(val)
@@ -13,6 +13,9 @@ export function mask(key: string, val: string) {
     if (isCalc(value) || isUrl(value) || isHex(value) || isRgb(value) || isHsl(value) || isPercent(value) || isVar(value) || isCubicBezier(value)) {
       return `${important}${key}${getVal(value)}`
     }
+    if (/\d/.test(value))
+      return `${important}[${key}:${joinWithUnderLine(value)}]`
+
     return `${important}${getFirstName(key)}-${joinWithLine(value)}`
   }
   if (key === 'mask-repeat')
@@ -27,8 +30,9 @@ export function mask(key: string, val: string) {
 
       const matcher = newValue.match(linearGradientReg)
 
-      if (!matcher)
-        return
+      if (!matcher) {
+        return `${important}[${key}:${joinWithUnderLine(value)}]`
+      }
 
       let [direction, from, via, to] = matcher.slice(1)
       direction = direction
