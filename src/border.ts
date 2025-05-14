@@ -62,11 +62,25 @@ export function border(key: string, val: string) {
 
   if (/^\d[%|(px)rem]$/.test(value) || key === 'border-collapse')
     return `border-${value}${important}`
-  if (key === 'border-width' || key === 'border-style')
+  if (key === 'border-width')
     return `border${getVal(value)}${important}`
   if (key === 'border-color') {
     if (value === 'currentColor')
       return `border-current${important}`
+    return `border${getVal(value)}${important}`
+  }
+
+  if (key === 'border-style') {
+    const styles = value.split(' ')
+    if (styles.length === 4) {
+      return `border-t-${styles[0]} border-r-${styles[1]} border-b-${styles[2]} border-l-${styles[3]}`
+    }
+    if (styles.length === 3) {
+      return `border-t-${styles[0]} border-x-${styles[1]} border-b-${styles[2]}`
+    }
+    if (styles.length === 2) {
+      return `border-y-${styles[0]} border-x-${styles[1]}`
+    }
     return `border${getVal(value)}${important}`
   }
 

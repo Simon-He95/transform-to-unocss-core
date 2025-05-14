@@ -57,6 +57,7 @@ describe('border', () => {
 
   it('style', () => {
     expect(toUnocss('border-style: inset;')).toBe('border-inset')
+    expect(toUnocss('border-style: solid hidden hidden solid;')).toBe('border-t-solid border-r-hidden border-b-hidden border-l-solid')
   })
 
   it('collapse', () => {
