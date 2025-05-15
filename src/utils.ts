@@ -63,22 +63,14 @@ export function isEnv(s: string) {
 }
 
 export function getVal(val: string, transform?: (v: string) => string, inClass?: boolean, prefix = '') {
-  let processedVal = val
-  // 如果是calc，先把括号内的空格替换成_
-  const _isCalc = isCalc(val)
-  if (_isCalc) {
-    processedVal = val.replace(/calc\(([^)]+)\)/g, (all, inner) => {
-      return `calc(${inner.replace(/\s+/g, '_')})`
-    })
-  }
   if (
-    _isCalc || isUrl(val) || isHex(val) || isRgb(val) || isHsl(val) || isPercent(val)
+    isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isHsl(val) || isPercent(val)
     || isVar(val) || isCubicBezier(val) || isConstant(val) || isAttr(val) || isEnv(val)
     || isRepeatingLinearGradient(val) || isRepeatingRadialGradient(val)
   ) {
     return inClass
-      ? `-[${prefix}${trim(processedVal, 'all').replace(/['"]/g, '')}]`
-      : `="[${prefix}${trim(processedVal, 'all').replace(/['"]/g, '')}]"`
+      ? `-[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]`
+      : `="[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]"`
   }
   return prefix
     ? `-[${prefix}${transform ? transform(val) : val}]`
@@ -128,6 +120,13 @@ export function transformImportant(v: string, trimSpace = true) {
       .replace(/\s*,\s*/g, ',')
       .replace(/\s*\/\s*/g, '/')
   }
+
+  if (/calc\([^)]+\)/.test(v)) {
+    v = v.replace(/calc\(([^)]+)\)/g, (all, k) => {
+      return all.replace(k, k.replace(/\s/g, '_'))
+    })
+  }
+
   if (/rgb/.test(v)) {
     v = v.replace(/rgba?\(([^)]+)\)/g, (all, k) => {
       const _k = k.trim().split(' ')
@@ -145,8 +144,6 @@ export function transformImportant(v: string, trimSpace = true) {
   if (/var\([^)]+\)/.test(v)) {
     v = v.replace(/var\(([^)]+)\)/g, (all, k) => {
       return all.replace(k, k.replace(/\s/g, '_'))
-      const _k = k.trim().split(' ')
-      return all.replace(k, _k.map((i: string, index: number) => i.endsWith(',') ? i : i + ((_k.length - 1 === index) ? '' : ',')).join(''))
     })
   }
 

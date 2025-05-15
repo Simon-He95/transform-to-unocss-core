@@ -1,7 +1,7 @@
 import { transformImportant } from './utils'
 
 const whiteMap = [
-  'writing-mode'
+  'writing-mode',
 ]
 export function writing(key: string, val: string) {
   if (!whiteMap.includes(key))
