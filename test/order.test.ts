@@ -13,4 +13,8 @@ describe('order', () => {
   it('align-self: center;', () => {
     expect(toUnocss('order: 0;')).toBe('order-0')
   })
+
+  it('align-self: calc(--order * -1);', () => {
+    expect(toUnocss('order: calc(--order * -1);')).toBe('order="[calc(--order_*_-1)]"')
+  })
 })

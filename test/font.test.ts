@@ -29,6 +29,10 @@ describe('font-weight', () => {
   it('bold', () => {
     expect(toUnocss('font-weight: bold')).toBe('font-bold')
   })
+
+  it('var', () => {
+    expect(toUnocss('font-weight: var(--font)')).toBe('font="[var(--font)]"')
+  })
 })
 
 describe('font-style', () => {

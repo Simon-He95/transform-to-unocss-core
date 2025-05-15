@@ -1,21 +1,35 @@
 import { commaReplacer, getVal, isRgb, isSize, joinWithLine, joinWithUnderLine, linearGradientReg, linearGradientReg1, otherGradientReg, transformImportant } from './utils'
 
 const backgroundMap = [
-  'background-color',
+  'background',
   'background-attachment',
+  'background-blend-mode',
+  'background-clip',
+  'background-color',
+  'background-image',
+  'background-origin',
+  'background-position',
+  'background-repeat',
+  'background-size',
 ]
 
 const lengthRe = '\\d*\\.?\\d+(?:px|em|rem|%|vw|vh)?'
 const positionPair = `(${lengthRe})\\s+(${lengthRe})`
 const optimizedReg = new RegExp(`${positionPair}\\s*,\\s*${positionPair}`)
-export function background(key: string, val: string): string {
+export function background(key: string, val: string): string | undefined {
+  if (!backgroundMap.includes(key))
+    return
   const [value, important] = transformImportant(val)
 
   if (key === 'background-size')
     return `bg${getVal(value, /\d/.test(value) ? joinWithUnderLine : joinWithLine, false, 'length:')}${important}`
 
-  if (backgroundMap.includes(key))
+  if ([
+    'background-color',
+    'background-attachment',
+  ].includes(key)) {
     return `bg${getVal(value, joinWithLine)}${important}`
+  }
   if (key === 'background-position') {
     if (/\d/.test(value))
       return `bg${getVal(value, joinWithUnderLine, false, 'position:')}${important}`

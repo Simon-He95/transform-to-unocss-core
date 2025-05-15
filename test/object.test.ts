@@ -17,4 +17,7 @@ describe('object', () => {
   it('object-position: left bottom;', () => {
     expect(toUnocss('object-position: left bottom;')).toBe('object-left-bottom')
   })
+  it('object-position: var;', () => {
+    expect(toUnocss('object-position: var(--position);')).toBe('object="[var(--position)]"')
+  })
 })

@@ -28,6 +28,16 @@ describe('backdrop-filter', () => {
     )
   })
 
+  it('grayscale var()', () => {
+    expect(toUnocss('backdrop-filter: grayscale(var(--grayscale));')).toBe(
+      'backdrop-grayscale="[var(--grayscale)]"',
+    )
+  })
+
+  it('backdrop-filter var()', () => {
+    expect(toUnocss('backdrop-filter: var(--grayscale);')).toBeUndefined()
+  })
+
   it('grayscale %', () => {
     expect(toUnocss('backdrop-filter: grayscale(10%);')).toBe(
       'backdrop-grayscale-10',

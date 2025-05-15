@@ -17,4 +17,11 @@ describe('position', () => {
   it('max-height:max-content', () => {
     expect(toUnocss('max-height:max-content')).toBe('max-h-max')
   })
+
+  it('max-height:var(--container-3xs)', () => {
+    expect(toUnocss('max-height:var(--container-3xs)')).toBe('max-h="[var(--container-3xs)]"')
+  })
+  it('max-inline-size: var(--size);', () => {
+    expect(toUnocss('max-inline-size: var(--size);')).toBe('max-inline="[var(--size)]"')
+  })
 })

@@ -4,7 +4,12 @@ const map: any = {
   vertical: 'y',
   horizontal: 'x',
 }
+const resizeMap = [
+  'resize',
+]
 export function resize(key: string, val: string) {
+  if (!resizeMap.includes(key))
+    return
   const [value, important] = transformImportant(val)
 
   if (value === 'both')

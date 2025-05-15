@@ -25,4 +25,8 @@ describe('opacity', () => {
   it('opacity: 0%', () => {
     expect(toUnocss('opacity: 0%')).toBe('op-0')
   })
+
+  it('opacity: var', () => {
+    expect(toUnocss('opacity: var(--op)')).toBe('opacity="[var(--op)]"')
+  })
 })

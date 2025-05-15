@@ -9,4 +9,8 @@ describe('float', () => {
   it('float-none', () => {
     expect(toUnocss('float:none')).toBe('float-none')
   })
+
+  it('float: inline-start;', () => {
+    expect(toUnocss('float: inline-start;')).toBe('float-start')
+  })
 })

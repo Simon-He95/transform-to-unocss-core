@@ -6,8 +6,16 @@ describe('grid', () => {
     expect(toUnocss('grid-column: auto;')).toBe('col-auto')
   })
 
-  it('grid-column: span 1 / span 1;', () => {
+  it('grid-column: span 2 / span 2;', () => {
     expect(toUnocss('grid-column: span 2 / span 2;')).toBe('col-span-2')
+  })
+
+  it('grid-column: span var(--xxx) / span var(--xxx);', () => {
+    expect(toUnocss('grid-column: span var(--xxx) / span var(--xxx);')).toBe('col-span="[var(--xxx)]"')
+  })
+
+  it('grid-column: span 2 / span 3;', () => {
+    expect(toUnocss('grid-column: span 2 / span 3;')).toBeUndefined()
   })
 
   it('grid-column: 1 / -1;', () => {
@@ -25,6 +33,16 @@ describe('grid', () => {
   it('grid-template-rows: repeat(1, minmax(0, 1fr));', () => {
     expect(toUnocss('grid-template-rows: repeat(1, minmax(0, 1fr));')).toBe(
       'grid-rows-1',
+    )
+  })
+
+  it('grid-template-rows: repeat(var(--xxx), minmax(0, 1fr));', () => {
+    expect(toUnocss('grid-template-rows: repeat(var(--xxx), minmax(0, 1fr));')).toBeUndefined()
+  })
+
+  it('grid-template-rows: var;', () => {
+    expect(toUnocss('grid-template-rows: var(--grid, repeat(1, minmax(0, 1fr));')).toBe(
+      'grid-rows="[var(--grid,repeat(1,minmax(0,1fr))]"',
     )
   })
 
@@ -75,7 +93,7 @@ describe('grid', () => {
   })
 
   it('grid-auto-columns: minmax(0, 1fr);', () => {
-    expect(toUnocss('grid-auto-columns: minmax(0, 1fr);')).toBe('auto-cols-fr')
+    expect(toUnocss('grid-auto-columns: minmax(0, 1fr);')).toBe('auto-cols-[minmax(0,1fr)]')
   })
 
   it('grid-auto-rows: auto;', () => {
@@ -87,7 +105,7 @@ describe('grid', () => {
   })
 
   it('grid-auto-rows: minmax(0, 1fr);', () => {
-    expect(toUnocss('grid-auto-rows: minmax(0, 1fr);')).toBe('auto-rows-fr')
+    expect(toUnocss('grid-auto-rows: minmax(0, 1fr);')).toBe('auto-rows-[minmax(0,1fr)]')
   })
 
   it('grid-template-columns: 60px 60px;', () => {
@@ -100,5 +118,17 @@ describe('grid', () => {
 
   it('grid-template-columns:120px auto;', () => {
     expect(toUnocss('grid-template-columns:120px auto;')).toBe('grid-cols-[120px_auto]')
+  })
+
+  it('grid-column-start: auto;', () => {
+    expect(toUnocss('grid-column-start: auto;')).toBe('col-start-auto')
+  })
+
+  it('grid-column-start: calc(<number> * -1);', () => {
+    expect(toUnocss('grid-column-start: calc(<number> * -1);')).toBe('col-start="[calc(<number>_*_-1)]"')
+  })
+
+  it('grid-row-end: calc(<number> * -1);', () => {
+    expect(toUnocss('grid-row-end: calc(<number> * -1);')).toBe('row-end="[calc(<number>_*_-1)]"')
   })
 })

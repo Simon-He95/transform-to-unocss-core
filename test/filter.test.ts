@@ -41,18 +41,23 @@ describe('filter', () => {
   it('grayscale %', () => {
     expect(toUnocss('filter: grayscale(10%);')).toBe('grayscale-10')
   })
+
   it('hue', () => {
     expect(toUnocss('filter: hue-rotate(0deg);')).toBe('hue-rotate-0')
+    expect(toUnocss('filter: hue-rotate(calc(<number>deg * -1))')).toBe('hue-rotate="[calc(<number>deg_*_-1)]"')
   })
+
   it('invert', () => {
     expect(toUnocss('filter: invert(0.1);')).toBe('invert-10')
   })
 
   it('saturate', () => {
     expect(toUnocss('filter: saturate(0);')).toBe('saturate-0')
+    expect(toUnocss('filter: saturate(var(--saturate));')).toBe('saturate="[var(--saturate)]"')
   })
 
   it('sepia', () => {
     expect(toUnocss('filter: sepia(0);')).toBe('sepia-0')
+    expect(toUnocss('filter: sepia(calc(<number>deg * -1))')).toBe('sepia="[calc(<number>deg_*_-1)]"')
   })
 })

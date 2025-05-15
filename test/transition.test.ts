@@ -28,6 +28,12 @@ describe('transition', () => {
     )
   })
 
+  it('transition-property: none;', () => {
+    expect(toUnocss('transition-property: none;')).toBe(
+      'transition-none',
+    )
+  })
+
   it('transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;', () => {
     expect(
       toUnocss(
@@ -52,6 +58,14 @@ describe('transition', () => {
     expect(toUnocss('transition-delay: 75ms;')).toBe('delay-75')
   })
 
+  it('transition-delay: var(--delay);', () => {
+    expect(toUnocss('transition-delay: var(--delay);')).toBe('delay="[var(--delay)]"')
+  })
+
+  it('transition-behavior: allow-discrete', () => {
+    expect(toUnocss('transition-behavior: allow-discrete')).toBe('transition-discrete')
+  })
+
   it('transition-timing-function: linear', () => {
     expect(toUnocss('transition-timing-function: linear')).toBe('ease-linear')
   })
@@ -60,6 +74,12 @@ describe('transition', () => {
     expect(
       toUnocss('transition-timing-function: cubic-bezier(0.4, 0, 1, 1);'),
     ).toBe('ease="[cubic-bezier(0.4,0,1,1)]"')
+  })
+
+  it('transition-timing-function: var(--ease-out);', () => {
+    expect(
+      toUnocss('transition-timing-function: var(--ease-out);'),
+    ).toBe('ease="[var(--ease-out)]"')
   })
 
   it('transition: margin-left .28s;', () => {

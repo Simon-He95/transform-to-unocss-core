@@ -1,6 +1,16 @@
-import { joinWithUnderLine, transformImportant } from './utils'
+import { getVal, joinWithUnderLine, transformImportant } from './utils'
 
+const fontMap = [
+  'font',
+  'font-size',
+  'font-weight',
+  'font-family',
+  'font-style',
+  'font-variant-numeric',
+]
 export function font(key: string, val: string) {
+  if (!fontMap.includes(key))
+    return
   const [value, important] = transformImportant(val)
 
   if (key === 'font-size') {
@@ -9,9 +19,10 @@ export function font(key: string, val: string) {
     return `text-${value}${important}`
   }
   if (key === 'font-weight')
-    return `font-${value}${important}`
+    return `font${getVal(value)}${important}`
   if (key === 'font-family') {
     const match = value.match(/ui-(\w{0,4})/)!
+    // 等待改造成 font-[family-name:xxx]
     if (!match)
       return `font-[${joinWithUnderLine(val)}]${important}`
 

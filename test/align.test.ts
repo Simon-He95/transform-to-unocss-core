@@ -2,6 +2,10 @@ import { describe, expect, it } from 'vitest'
 import { toUnocss } from '../src/toUnocss'
 
 describe('align', () => {
+  it('align-items: last baseline;', () => {
+    expect(toUnocss('align-items: last baseline;')).toBe('items-baseline-last')
+  })
+
   it('align-items: flex-start;', () => {
     expect(toUnocss('align-items: flex-start;')).toBe('items-start')
   })

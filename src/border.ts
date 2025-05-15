@@ -14,6 +14,7 @@ const borderSize = [
   'border-bottom',
   'border-left',
 ]
+
 export function border(key: string, val: string) {
   // eslint-disable-next-line prefer-const
   let [value, important] = transformImportant(val)

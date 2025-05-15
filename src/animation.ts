@@ -1,6 +1,28 @@
 import { getVal, transformImportant } from './utils'
 
+const animationMap = [
+  'animation',
+  'animation-delay',
+  'animation-direction',
+  'animation-duration',
+  'animation-fill-mode',
+  'animation-iteration-count',
+  'animation-name',
+  'animation-play-state',
+  'animation-timing-function',
+]
 export function animation(key: string, val: string) {
+  if (!animationMap.includes(key))
+    return
+  // animation
+  // animation-delay
+  // animation-direction
+  // animation-duration
+  // animation-fill-mode
+  // animation-iteration-count
+  // animation-name
+  // animation-play-state
+  // animation-timing-function
   const [value, important] = transformImportant(val)
 
   // 处理 animation-delay

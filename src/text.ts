@@ -1,6 +1,24 @@
 import { getVal, transformImportant } from './utils'
 
+const textMap = [
+  'text-align',
+  'text-align-last',
+  'text-decoration-line',
+  'text-decoration-style',
+  'text-decoration-color',
+  'text-decoration-thickness',
+  'text-indent',
+  'text-underline-offset',
+  'text-transform',
+  'text-wrap',
+  'text-overflow',
+  'text-justify',
+  'text-shadow',
+
+]
 export function text(key: string, val: string) {
+  if (!textMap.includes(key))
+    return
   const [value, important] = transformImportant(val)
 
   if (key === 'text-decoration-line') {
@@ -18,7 +36,7 @@ export function text(key: string, val: string) {
     return `${key.split('-')[1]}${getVal(value)}${important}`
 
   if (key === 'text-underline-offset')
-    return `underline-offset-${value}${important}`
+    return `underline-offset${getVal(value)}${important}`
 
   if (key === 'text-align-last')
     return `${important}[${key}:${value}]`

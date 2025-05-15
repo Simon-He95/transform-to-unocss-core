@@ -1,13 +1,27 @@
 import { commaReplacer, getFirstName, getGradient, getVal, isCalc, isCubicBezier, isHex, isHsl, isPercent, isRgb, isUrl, isVar, joinWithLine, joinWithUnderLine, linearGradientReg, transformImportant } from './utils'
 
+const maskMap = [
+  'mask-position',
+  'mask-origin',
+  'mask-repeat',
+  'mask-size',
+  'mask-type',
+  'mask-image',
+  'mask-mode',
+  'mask-composite',
+  'mask-clip',
+  'mask-type',
+]
 export function mask(key: string, val: string) {
+  if (!maskMap.includes(key))
+    return
   const [value, important] = transformImportant(val)
 
   if (['mask-clip', 'mask-origin', 'mask-type'].includes(key))
-    return `${important}${key}-${getFirstName(value)}`
+    return `${key}-${getFirstName(value)}${important}`
 
   if (['mask-mode', 'mask-composite'].includes(key))
-    return `${important}${getFirstName(key)}-${getFirstName(value)}`
+    return `${getFirstName(key)}-${getFirstName(value)}${important}`
 
   if (['mask-position', 'mask-size'].includes(key)) {
     if (isCalc(value) || isUrl(value) || isHex(value) || isRgb(value) || isHsl(value) || isPercent(value) || isVar(value) || isCubicBezier(value)) {
@@ -18,8 +32,11 @@ export function mask(key: string, val: string) {
 
     return `${important}${getFirstName(key)}-${joinWithLine(value)}`
   }
-  if (key === 'mask-repeat')
-    return `${important}${key}-${value}`
+  if (key === 'mask-repeat') {
+    if (value.includes('-'))
+      return `mask-${value}${important}`
+    return `${key}-${value}${important}`
+  }
 
   if (key === 'mask-image') {
     const type = getGradient(value)
@@ -31,7 +48,7 @@ export function mask(key: string, val: string) {
       const matcher = newValue.match(linearGradientReg)
 
       if (!matcher) {
-        return `${important}[${key}:${joinWithUnderLine(value)}]`
+        return `[${key}:${joinWithUnderLine(value)}]${important}`
       }
 
       let [direction, from, via, to] = matcher.slice(1)
@@ -50,9 +67,9 @@ export function mask(key: string, val: string) {
         : getLinearGradientPosition(`mask-${type}`, from, via, to).trim()
     }
 
-    return `${important}mask${getVal(value)}`
+    return `mask${getVal(value)}${important}`
   }
-  return `${important}${key}${getVal(value)}`
+  return `${key}${getVal(value)}${important}`
 }
 
 function getLinearGradientPosition(prefix: string, from: string, via: string, to: string) {

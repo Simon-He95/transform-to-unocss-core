@@ -24,14 +24,14 @@ describe('letter', () => {
     expect(toUnocss('width:auto')).toBe('w-auto')
   })
   it('calc', () => {
-    expect(toUnocss('width:calc(100% - 50px)')).toBe('w="[calc(100%-50px)]"')
+    expect(toUnocss('width:calc(100% - 50px)')).toBe('w="[calc(100%_-_50px)]"')
   })
   it('calc not space', () => {
     expect(toUnocss('width:calc(100%-50px)')).toBe('w="[calc(100%-50px)]"')
   })
 
   it('calc space', () => {
-    expect(toUnocss('width:calc(100%  -  50px)')).toBe('w="[calc(100%-50px)]"')
+    expect(toUnocss('width:calc(100%  -  50px)')).toBe('w="[calc(100%_-_50px)]"')
   })
 
   it('min-width: 0px;', () => {

@@ -17,4 +17,8 @@ describe('will', () => {
   it('will-change: transform;', () => {
     expect(toUnocss('will-change: transform;')).toBe('will-change-transform')
   })
+
+  it('will-change: var(<custom-property>);', () => {
+    expect(toUnocss('will-change: var(<custom-property>);')).toBe('will-change-[var(<custom-property>)]')
+  })
 })

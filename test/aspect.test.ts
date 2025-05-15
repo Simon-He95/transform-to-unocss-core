@@ -13,4 +13,8 @@ describe('aspect', () => {
   it('aspect-ratio: 16 / 9;', () => {
     expect(toUnocss('aspect-ratio: 16 / 9;')).toBe('aspect="[16/9]"')
   })
+
+  it('aspect-ratio: var(--aspect-ratio-video);', () => {
+    expect(toUnocss('aspect-ratio: var(--aspect-ratio-video);')).toBe('aspect="[var(--aspect-ratio-video)]"')
+  })
 })

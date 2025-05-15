@@ -11,12 +11,26 @@ describe('content', () => {
   })
 
   it('content: " ";', () => {
-    expect(toUnocss('content: " ";')).toBe('content-[\'_\']')
+    expect(toUnocss('content: "   ";')).toBe('content-[\'___\']')
   })
+
   it('content: \' \'', () => {
-    expect(toUnocss('content: \' \';')).toBe('content-[\'_\']')
+    expect(toUnocss('content: \'   \';')).toBe('content-[\'___\']')
   })
+
   it('content: ""', () => {
     expect(toUnocss('content: "";')).toBe('content-[\'\']')
+  })
+
+  it('content: "\/"', () => {
+    expect(toUnocss('content: "/";')).toBe('content-[\'/\']')
+  })
+
+  it('content: "\'""\'"', () => {
+    expect(toUnocss('content: "\'""\'";')).toBe('content-[\'\'""\'\']')
+  })
+
+  it('content-visibility', () => {
+    expect(toUnocss('content-visibility: revert-layer;')).toBe('content-visibility-revert-layer')
   })
 })

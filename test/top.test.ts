@@ -14,6 +14,6 @@ describe('top', () => {
   })
 
   it('calc', () => {
-    expect(toUnocss('top: calc(100% - 20px);')).toBe('top="[calc(100%-20px)]"')
+    expect(toUnocss('top: calc(100% - 20px);')).toBe('top="[calc(100%_-_20px)]"')
   })
 })

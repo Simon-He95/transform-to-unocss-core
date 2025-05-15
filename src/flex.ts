@@ -7,9 +7,17 @@ import {
 } from './utils'
 
 const lastMaps = ['flex-basis', 'flex-grow', 'flex-shrink']
+const flexMap = [
+  'flex',
+  'flex-grow',
+  'flex-shrink',
+  'flex-basis',
+  'flex-wrap',
+  'flex-direction',
+]
 export function flex(key: string, val: string) {
-  if (['flex-negative', 'flex-positive'].includes(key))
-    return ''
+  if (!flexMap.includes(key))
+    return
   const [value, important] = transformImportant(val)
 
   if (lastMaps.includes(key))

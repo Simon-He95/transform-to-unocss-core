@@ -6,12 +6,17 @@ describe('flex', () => {
     expect(toUnocss('flex: none;')).toBe('flex-none')
   })
 
+  it('flex-grow;', () => {
+    expect(toUnocss('flex-grow: var(--x);')).toBe('grow="[var(--x)]"')
+    expect(toUnocss('flex-grow: 1;')).toBe('grow-1')
+  })
+
   it('flex: 2;', () => {
     expect(toUnocss('flex: 2;')).toBe('flex-[2]')
   })
 
   it('flex-basis: calc(50% - 20px);', () => {
-    expect(toUnocss('flex-basis: calc(50% - 20px);')).toBe('basis="[calc(50%-20px)]"')
+    expect(toUnocss('flex-basis: calc(50% - 20px);')).toBe('basis="[calc(50%_-_20px)]"')
   })
 
   it('flex-direction: column-reverse;', () => {

@@ -34,6 +34,10 @@ describe('scroll', () => {
     expect(toUnocss('scroll-snap-stop: normal;')).toBe('snap-normal')
   })
 
+  it('scroll-snap-type: x var(--tw-scroll-snap-strictness)', () => {
+    expect(toUnocss('scroll-snap-type: x var(--tw-scroll-snap-strictness, xxx)')).toBe('snap-x="[var(--tw-scroll-snap-strictness,xxx)]"')
+  })
+
   it('scroll-snap-type: none;', () => {
     expect(toUnocss('scroll-snap-type: none;')).toBe('snap-none')
   })
@@ -44,5 +48,9 @@ describe('scroll', () => {
 
   it('scroll-padding-inline-end: 1px;', () => {
     expect(toUnocss('scroll-padding-inline-end: 1px;')).toBe('scroll-pe-1px')
+  })
+
+  it('scroll-padding: calc(var(--spacing) * <number>)', () => {
+    expect(toUnocss('scroll-padding: calc(var(--spacing) * <number>)')).toBe('scroll-p="[calc(var(--spacing)*<number>)]"')
   })
 })

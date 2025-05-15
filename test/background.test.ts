@@ -294,7 +294,7 @@ describe('background', () => {
         'background: var(--sim-col, linear-gradient(90deg, #25AE6A 0%, #68D94B 100%));',
       ),
     ).toBe(
-      'bg="[var(--sim-col,linear-gradient(90deg,#25AE6A,0%,#68D94B,100%))]"',
+      'bg="[var(--sim-col,linear-gradient(90deg,#25AE6A_0%,#68D94B_100%))]"',
     )
   })
   it('background: url(\'@/assets/images/guide/line.png\') no-repeat 8px 25px;', () => {

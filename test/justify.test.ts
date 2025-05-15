@@ -13,4 +13,10 @@ describe('justify', () => {
   it('justify-self: auto;', () => {
     expect(toUnocss('justify-self: auto;')).toBe('justify-self-auto')
   })
+
+  it('justify-items: safe end;', () => {
+    // 目前还不支持
+    // expect(toUnocss('justify-items: safe flex-end;')).toBe('justify-items-end-safe')
+    expect(toUnocss('justify-items: safe flex-end;')).toBeUndefined()
+  })
 })

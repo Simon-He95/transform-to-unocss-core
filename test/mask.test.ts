@@ -6,6 +6,10 @@ describe('maks', () => {
     expect(toUnocss('mask-clip: border-box;')).toBe('mask-clip-border')
   })
 
+  it('mask-type: alpha;', () => {
+    expect(toUnocss('mask-type: alpha;')).toBe('mask-type-alpha')
+  })
+
   it('mask-composite: add;', () => {
     expect(toUnocss('mask-composite: add;')).toBe('mask-add')
   })
@@ -46,7 +50,19 @@ describe('maks', () => {
     expect(toUnocss('mask-size: 40rpx 100%')).toBe('[mask-size:40rpx_100%]')
   })
 
+  it('mask-size: var;', () => {
+    expect(toUnocss('mask-size: var(--size, 20px)')).toBe('mask-size="[var(--size,20px)]"')
+  })
+
   it('mask-image: radial-gradient(circle at 50% 10rpx, transparent 10rpx, red 12rpx)', () => {
     expect(toUnocss('mask-image: radial-gradient(circle at 50% 10rpx, transparent 10rpx, red 12rpx)')).toBe('[mask-image:radial-gradient(circle_at_50%_10rpx,transparent_10rpx,red_12rpx)]')
+  })
+
+  it('mask-repeat: no-repeat;', () => {
+    expect(toUnocss('mask-repeat: no-repeat;')).toBe('mask-no-repeat')
+  })
+
+  it('mask-repeat: round;', () => {
+    expect(toUnocss('mask-repeat: round;')).toBe('mask-repeat-round')
   })
 })

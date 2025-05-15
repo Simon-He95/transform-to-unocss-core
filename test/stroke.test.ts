@@ -14,7 +14,15 @@ describe('stroke', () => {
     expect(toUnocss('stroke: none;')).toBe('stroke-none')
   })
 
+  it('stroke: var;', () => {
+    expect(toUnocss('stroke: var(--stroke);')).toBe('stroke="[var(--stroke)]"')
+  })
+
   it('stroke-width: 0;', () => {
     expect(toUnocss('stroke-width: 0;')).toBe('stroke-0')
+  })
+
+  it('stroke-width: var;', () => {
+    expect(toUnocss('stroke-width: var(--width);')).toBe('stroke="[var(--width)]"')
   })
 })

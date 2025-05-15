@@ -6,6 +6,10 @@ describe('transform', () => {
     expect(toUnocss('transform-origin: center;')).toBe('origin-center')
   })
 
+  it('transform-style: preserve-3d;', () => {
+    expect(toUnocss('transform-style: preserve-3d;')).toBe('transform-preserve-3d')
+  })
+
   it('transform:none', () => {
     expect(toUnocss('transform:none;')).toBe('transform-none')
   })
@@ -16,6 +20,10 @@ describe('transform', () => {
 
   it('transform-origin: 0 0;', () => {
     expect(toUnocss('transform-origin: 0 0;')).toBe('origin-[0_0]')
+  })
+
+  it('transform-origin: transform-origin: var;', () => {
+    expect(toUnocss('transform-origin: var(--custom-property, 0 0);')).toBe('origin="[var(--custom-property,0_0)]"')
   })
 
   it('transform-origin: 50% 50%;', () => {
@@ -77,10 +85,10 @@ describe('transform', () => {
     ).toBe('translate="[-26px,16px]" skew="50" scale="y-60"')
   })
 
-  it('transform: translate(-26px, var(--translatey)) skew(var(--skew,60)) scaleY(var(--scale));', () => {
+  it('transform: translate(-26px, var(--translatey)) skew(var(--skew,60)) scaleY(var(--scale, calc(--xxx, 20)));', () => {
     expect(
-      toUnocss('transform: translate(-26px, var(--translatey,20px)) skew(var(--skew,60)) scale(var(--scale, 30%))'),
-    ).toBe('translate="[-26px,var(--translatey,20px)]" skew="[var(--skew,60)]" scale="[var(--scale,30%)]"')
+      toUnocss('transform: translate(-26px, var(--translatey,20px)) skew(var(--skew,60)) scale(var(--scale, calc(--x * 30%)))'),
+    ).toBe('translate="[-26px,var(--translatey,20px)]" skew="[var(--skew,60)]" scale="[var(--scale,calc(--x_*_30%))]"')
   })
   it('transform: translate3d(-50%, -50%, 0);', () => {
     expect(

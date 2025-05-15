@@ -18,5 +18,6 @@ describe('place', () => {
 
   it('place-self: auto;', () => {
     expect(toUnocss('place-self: auto;')).toBe('place-self-auto')
+    expect(toUnocss('place-self: safe end;')).toBeUndefined()
   })
 })

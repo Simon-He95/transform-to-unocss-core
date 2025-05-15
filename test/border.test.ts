@@ -45,7 +45,7 @@ describe('border', () => {
 
   it('radius-calc', () => {
     expect(toUnocss('border-radius: calc(100% - 20px)')).toBe(
-      'border-rd="[calc(100%-20px)]"',
+      'border-rd="[calc(100%_-_20px)]"',
     )
   })
 

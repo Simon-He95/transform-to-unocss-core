@@ -62,6 +62,12 @@ describe('text', () => {
     expect(toUnocss('text-decoration-thickness: 1px;')).toBe('decoration-1px')
   })
 
+  it('text-underline-offset: calc(<number>px * -1);', () => {
+    expect(toUnocss('text-underline-offset: calc(<number>px * -1);')).toBe(
+      'underline-offset="[calc(<number>px_*_-1)]"',
+    )
+  })
+
   it('text-underline-offset: auto;', () => {
     expect(toUnocss('text-underline-offset: auto;')).toBe(
       'underline-offset-auto',
@@ -74,5 +80,9 @@ describe('text', () => {
 
   it('text-indent: 0px;', () => {
     expect(toUnocss('text-indent: 0px;')).toBe('indent-0px')
+  })
+
+  it('text-indent:  calc(var(--spacing) * <number>);', () => {
+    expect(toUnocss('text-indent:  calc(var(--spacing) * <number>);')).toBe('indent="[calc(var(--spacing)*<number>)]"')
   })
 })

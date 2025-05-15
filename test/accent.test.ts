@@ -4,7 +4,13 @@ import { toUnocss } from '../src/toUnocss'
 describe('accent', () => {
   it('accent-color: inherit;', () => {
     expect(toUnocss('accent-color: inherit !important;')).toBe(
-      'accent-inherit!',
+      'accent-[inherit]!',
+    )
+  })
+
+  it('accent-color: hsl(228 4% 24%);', () => {
+    expect(toUnocss('accent-color: hsl(228 4% 24%);')).toBe(
+      'accent="[hsl(228,4%,24%)]"',
     )
   })
 
