@@ -33,7 +33,7 @@ export function background(key: string, val: string): string | undefined {
   if (key === 'background-position') {
     if (/\d/.test(value))
       return `bg${getVal(value, joinWithUnderLine, false, 'position:')}${important}`
-    return `bg${getVal(value, joinWithLine)}${important}`
+    return `bg${getVal(value, joinWithLine, false, 'position:')}${important}`
   }
 
   if (['background', 'background-image'].includes(key)) {

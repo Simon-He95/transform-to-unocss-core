@@ -88,12 +88,12 @@ describe('background', () => {
 
   // position
   it('background-position:center', () => {
-    expect(toUnocss('background-position:center')).toBe('bg-center')
+    expect(toUnocss('background-position:center')).toBe('bg-[position:center]')
   })
 
   it('background-position:center center', () => {
     expect(toUnocss('background-position:center center')).toBe(
-      'bg-center-center',
+      'bg-[position:center-center]',
     )
   })
 
