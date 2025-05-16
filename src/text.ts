@@ -14,7 +14,6 @@ const textMap = [
   'text-overflow',
   'text-justify',
   'text-shadow',
-
 ]
 export function text(key: string, val: string) {
   if (!textMap.includes(key))
@@ -44,5 +43,5 @@ export function text(key: string, val: string) {
   if (['inherit', 'initial', 'revert', 'unset', 'revert-layer'].includes(value))
     return `${important}text-align-${value}`
 
-  return `text-${value}${important}`
+  return `text${getVal(value)}${important}`
 }
