@@ -146,9 +146,9 @@ describe('background', () => {
     expect(toUnocss('background-image:none')).toBe('bg-none')
   })
 
-  it('background-image:url(\'picture.png\')', () => {
-    expect(toUnocss('background-image:url(\'picture.png\')')).toBe(
-      'bg="[url(picture.png)]"',
+  it('background-image: linear-gradient(to top, var(--tw-gradient-stops));', () => {
+    expect(toUnocss('background-image: linear-gradient(to top, var(--tw-gradient-stops));')).toBe(
+      'bg-gradient-to-t to="[var(--tw-gradient-stops)]"',
     )
   })
 

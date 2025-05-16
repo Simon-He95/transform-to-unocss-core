@@ -1,4 +1,4 @@
-import { commaReplacer, getVal, isRgb, isSize, joinWithLine, joinWithUnderLine, linearGradientReg, linearGradientReg1, otherGradientReg, transformImportant } from './utils'
+import { commaReplacer, getVal, isRgb, isSize, isVar, joinWithLine, joinWithUnderLine, linearGradientReg, linearGradientReg1, otherGradientReg, transformImportant } from './utils'
 
 const backgroundMap = [
   'background',
@@ -227,11 +227,11 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
     const [fromColor, fromPosition] = from
       .split(' ')
     if (fromPosition) {
-      result += ` from="${isRgb(fromColor) ? `[${fromColor}]` : fromColor
+      result += ` from="${isRgb(fromColor) || isVar(fromColor) ? `[${fromColor}]` : fromColor
       } ${fromPosition}"`
     }
     else if (fromColor) {
-      result += ` from="${isRgb(fromColor) ? `[${fromColor}]` : fromColor}"`
+      result += ` from="${isRgb(fromColor) || isVar(fromColor) ? `[${fromColor}]` : fromColor}"`
     }
   }
 
@@ -240,11 +240,11 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
     const [viaColor, viaPosition] = via
       .split(' ')
     if (viaPosition) {
-      result += ` via="${isRgb(viaColor) ? `[${viaColor}]` : viaColor
+      result += ` via="${isRgb(viaColor) || isVar(viaColor) ? `[${viaColor}]` : viaColor
       } ${viaPosition}"`
     }
     else if (viaColor) {
-      result += ` via="${isRgb(viaColor) ? `[${viaColor}]` : viaColor}"`
+      result += ` via="${isRgb(viaColor) || isVar(viaColor) ? `[${viaColor}]` : viaColor}"`
     }
   }
 
@@ -253,11 +253,11 @@ function getLinearGradientPosition(from: string, via: string, to: string) {
     const [toColor, toPosition] = to
       .split(' ')
     if (toPosition) {
-      result += ` to="${isRgb(toColor) ? `[${toColor}]` : toColor
+      result += ` to="${isRgb(toColor) || isVar(toColor) ? `[${toColor}]` : toColor
       } ${toPosition}"`
     }
     else if (toColor) {
-      result += ` to="${isRgb(toColor) ? `[${toColor}]` : toColor}"`
+      result += ` to="${isRgb(toColor) || isVar(toColor) ? `[${toColor}]` : toColor}"`
     }
   }
   return result
