@@ -102,7 +102,7 @@ export function background(key: string, val: string): string | undefined {
     }
 
     const safeValueMap = new Map()
-    // 先替换 url(...) 和 rgba(...)，避免误 split
+    // 先替换 url(...) 和 rgba(...),避免误 split
     let i = 0
     const safeValue = value
       .replace(/url\([^)]+\)/g, (m) => {
@@ -118,7 +118,7 @@ export function background(key: string, val: string): string | undefined {
 
     // 检查 position/size 语法
     if (safeValue.includes('/')) {
-      // 用 safeValue 分割，避免 url/rgba 中的 /
+      // 用 safeValue 分割,避免 url/rgba 中的 /
       const [positionRawSafe, afterSlashRawSafe] = safeValue.split('/').map(v => v.trim())
       // 还原原始 value 的对应部分
       // 用 safeValue 分割后再用原始 afterSlashRaw 处理
@@ -144,7 +144,7 @@ export function background(key: string, val: string): string | undefined {
       }
       return [posStr, sizeStr, othersStr].filter(Boolean).join(' ')
     }
-    // 检查空格分隔（同样用 safeValue 判断）
+    // 检查空格分隔()同样用 safeValue 判断)
     else if (safeValue.includes(' ')) {
       // 先按逗号分割多背景
       const m = safeValue.match(optimizedReg)
@@ -169,7 +169,7 @@ export function background(key: string, val: string): string | undefined {
 
         return [posStr, othersStr].filter(Boolean).join(' ')
       }
-      // 处理 rgba(...) 和 url(...)，避免误 split
+      // 处理 rgba(...) 和 url(...),避免误 split
       const parts = safeValue.split(/\s+/).map((v) => {
         const m = v.match(/__URL__(\d+)/)
         if (m) {
