@@ -15,6 +15,6 @@ describe('order', () => {
   })
 
   it('align-self: calc(--order * -1);', () => {
-    expect(toUnocss('order: calc(--order * -1);')).toBe('order="[calc(--order_*_-1)]"')
+    expect(toUnocss('order: calc(--order * -1);')).toBe('order="[calc(--order*-1)]"')
   })
 })

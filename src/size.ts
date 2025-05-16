@@ -1,4 +1,4 @@
-import { getFirstName, getVal, transformImportant } from './utils'
+import { getFirstName, getVal, isCalc, isVar, transformImportant } from './utils'
 
 const sizeMap = [
   'z-index',
@@ -8,9 +8,13 @@ const sizeMap = [
 export function size(key: string, val: string) {
   if (!sizeMap.includes(key))
     return
-  const [value, important] = transformImportant(val)
+  let [value, important] = transformImportant(val)
+  let prefix = ''
   if (value.startsWith('-')) {
-    return `-${key[0]}${getVal(value.slice(1), getFirstName)}${important}`
+    prefix = '-'
+    value = value.slice(1)
   }
-  return `${key[0]}${getVal(value, getFirstName)}${important}`
+  if (isCalc(value) || isVar(value) || /\d/.test(value))
+    return `${prefix}${key[0]}${getVal(value)}${important}`
+  return `${key[0]}-${getFirstName(value)}${important}`
 }

@@ -62,15 +62,16 @@ export function isEnv(s: string) {
   return /^env\(/.test(s)
 }
 
-export function getVal(val: string, transform?: (v: string) => string, inClass?: boolean, prefix = '') {
+export function getVal(val: string, transform?: (v: string) => string, inClass?: boolean, prefix = '', dynamicFlag = false) {
   if (
-    isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isHsl(val) || isPercent(val)
+    dynamicFlag
+    || isCalc(val) || isUrl(val) || isHex(val) || isRgb(val) || isHsl(val) || isPercent(val)
     || isVar(val) || isCubicBezier(val) || isConstant(val) || isAttr(val) || isEnv(val)
     || isRepeatingLinearGradient(val) || isRepeatingRadialGradient(val)
   ) {
     return inClass
-      ? `-[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]`
-      : `="[${prefix}${trim(val, 'all').replace(/['"]/g, '')}]"`
+      ? `-[${prefix}${trim(transform ? transform(val) : val, 'all').replace(/['"]/g, '')}]`
+      : `="[${prefix}${trim(transform ? transform(val) : val, 'all').replace(/['"]/g, '')}]"`
   }
   return prefix
     ? `-[${prefix}${transform ? transform(val) : val}]`
@@ -123,7 +124,7 @@ export function transformImportant(v: string, trimSpace = true) {
 
   if (/calc\([^)]+\)/.test(v)) {
     v = v.replace(/calc\(([^)]+)\)/g, (all, k) => {
-      return all.replace(k, k.replace(/\s/g, '_'))
+      return all.replace(k, k.replace(/\s/g, ''))
     })
   }
 

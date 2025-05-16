@@ -10,12 +10,12 @@ describe('accent', () => {
 
   it('accent-color: hsl(228 4% 24%);', () => {
     expect(toUnocss('accent-color: hsl(228 4% 24%);')).toBe(
-      'accent="[hsl(228,4%,24%)]"',
+      'accent-[hsl(228,4%,24%)]',
     )
   })
 
   it('accent-color: #fff;', () => {
-    expect(toUnocss('accent-color: #fff;')).toBe('accent="[#fff]"')
+    expect(toUnocss('accent-color: #fff;')).toBe('accent-[#fff]')
   })
 
   it('align-self: center;', () => {

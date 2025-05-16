@@ -16,7 +16,7 @@ describe('flex', () => {
   })
 
   it('flex-basis: calc(50% - 20px);', () => {
-    expect(toUnocss('flex-basis: calc(50% - 20px);')).toBe('basis="[calc(50%_-_20px)]"')
+    expect(toUnocss('flex-basis: calc(50% - 20px);')).toBe('basis="[calc(50%-20px)]"')
   })
 
   it('flex-direction: column-reverse;', () => {

@@ -27,14 +27,14 @@ describe('width', () => {
     expect(toUnocss('width:auto')).toBe('w-auto')
   })
   it('calc', () => {
-    expect(toUnocss('width:calc(100% - 50px)')).toBe('w="[calc(100%_-_50px)]"')
+    expect(toUnocss('width:calc(100% - 50px)')).toBe('w="[calc(100%-50px)]"')
   })
   it('calc not space', () => {
-    expect(toUnocss('width:calc(100% - 50px)')).toBe('w="[calc(100%_-_50px)]"')
+    expect(toUnocss('width:calc(100% - 50px)')).toBe('w="[calc(100%-50px)]"')
   })
 
   it('calc space', () => {
-    expect(toUnocss('width:calc(100%  -  50px)')).toBe('w="[calc(100%_-_50px)]"')
+    expect(toUnocss('width:calc(100%  -  50px)')).toBe('w="[calc(100%-50px)]"')
   })
 
   it('min-width: 0px;', () => {
@@ -45,14 +45,14 @@ describe('width', () => {
     expect(toUnocss('min-width: 100%;')).toBe('min-w="[100%]"')
   })
   it('min-width calc', () => {
-    expect(toUnocss('min-width:calc(100% - 50px)')).toBe('min-w="[calc(100%_-_50px)]"')
+    expect(toUnocss('min-width:calc(100% - 50px)')).toBe('min-w="[calc(100%-50px)]"')
   })
   it('min-width calc not space', () => {
-    expect(toUnocss('min-width:calc(100% - 50px)')).toBe('min-w="[calc(100%_-_50px)]"')
+    expect(toUnocss('min-width:calc(100% - 50px)')).toBe('min-w="[calc(100%-50px)]"')
   })
 
   it('min-width calc space', () => {
-    expect(toUnocss('min-width:calc(100%  -  50px)')).toBe('min-w="[calc(100%_-_50px)]"')
+    expect(toUnocss('min-width:calc(100%  -  50px)')).toBe('min-w="[calc(100%-50px)]"')
   })
 
   it('max-width: 0px;', () => {
@@ -63,14 +63,14 @@ describe('width', () => {
   })
 
   it('max-width calc', () => {
-    expect(toUnocss('max-width:calc(100% - 50px)')).toBe('max-w="[calc(100%_-_50px)]"')
+    expect(toUnocss('max-width:calc(100% - 50px)')).toBe('max-w="[calc(100%-50px)]"')
   })
   it('max-width calc not space', () => {
-    expect(toUnocss('max-width:calc(100% - 50px)')).toBe('max-w="[calc(100%_-_50px)]"')
+    expect(toUnocss('max-width:calc(100% - 50px)')).toBe('max-w="[calc(100%-50px)]"')
   })
 
   it('max-width calc space', () => {
-    expect(toUnocss('max-width:calc(100%  -  50px)')).toBe('max-w="[calc(100%_-_50px)]"')
+    expect(toUnocss('max-width:calc(100%  -  50px)')).toBe('max-w="[calc(100%-50px)]"')
   })
   it('cssvar', () => {
     expect(toUnocss('max-width: var(--height)')).toBe('max-w="[var(--height)]"')

@@ -44,7 +44,7 @@ describe('filter', () => {
 
   it('hue', () => {
     expect(toUnocss('filter: hue-rotate(0deg);')).toBe('hue-rotate-0')
-    expect(toUnocss('filter: hue-rotate(calc(<number>deg * -1))')).toBe('hue-rotate="[calc(<number>deg_*_-1)]"')
+    expect(toUnocss('filter: hue-rotate(calc(<number>deg * -1))')).toBe('hue-rotate="[calc(<number>deg*-1)]"')
   })
 
   it('invert', () => {
@@ -58,6 +58,6 @@ describe('filter', () => {
 
   it('sepia', () => {
     expect(toUnocss('filter: sepia(0);')).toBe('sepia-0')
-    expect(toUnocss('filter: sepia(calc(<number>deg * -1))')).toBe('sepia="[calc(<number>deg_*_-1)]"')
+    expect(toUnocss('filter: sepia(calc(<number>deg * -1))')).toBe('sepia="[calc(<number>deg*-1)]"')
   })
 })

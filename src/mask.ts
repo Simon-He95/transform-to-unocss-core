@@ -83,11 +83,11 @@ function getLinearGradientPosition(prefix: string, from: string, via: string, to
     const [fromColor, fromPosition] = from
       .split(' ')
     if (fromPosition) {
-      result += ` ${prefix}-from="${isRgb(fromColor) ? `[${fromColor}]` : fromColor
+      result += ` ${prefix}-from="${isRgb(fromColor) || isVar(fromColor) ? `[${fromColor}]` : fromColor
       } ${fromPosition}"`
     }
     else if (fromColor) {
-      result += ` ${prefix}-from-${isRgb(fromColor) ? `[${fromColor}]` : fromColor}`
+      result += ` ${prefix}-from-${isRgb(fromColor) || isVar(fromColor) ? `[${fromColor}]` : fromColor}`
     }
   }
 
@@ -96,11 +96,11 @@ function getLinearGradientPosition(prefix: string, from: string, via: string, to
     const [viaColor, viaPosition] = via
       .split(' ')
     if (viaPosition) {
-      result += ` ${prefix}-via="${isRgb(viaColor) ? `[${viaColor}]` : viaColor
+      result += ` ${prefix}-via="${isRgb(viaColor) || isVar(viaColor) ? `[${viaColor}]` : viaColor
       } ${viaPosition}"`
     }
     else if (viaColor) {
-      result += ` ${prefix}-via${isRgb(viaColor) ? `[${viaColor}]` : viaColor}`
+      result += ` ${prefix}-via${isRgb(viaColor) || isVar(viaColor) ? `[${viaColor}]` : viaColor}`
     }
   }
 
@@ -109,11 +109,11 @@ function getLinearGradientPosition(prefix: string, from: string, via: string, to
     const [toColor, toPosition] = to
       .split(' ')
     if (toPosition) {
-      result += ` ${prefix}-to="${isRgb(toColor) ? `[${toColor}]` : toColor
+      result += ` ${prefix}-to="${isRgb(toColor) || isVar(toColor) ? `[${toColor}]` : toColor
       } ${toPosition}"`
     }
     else if (toColor) {
-      result += ` ${prefix}-to-${isRgb(toColor) ? `[${toColor}]` : toColor}`
+      result += ` ${prefix}-to-${isRgb(toColor) || isVar(toColor) ? `[${toColor}]` : toColor}`
     }
   }
   return result

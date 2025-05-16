@@ -88,7 +88,7 @@ describe('transform', () => {
   it('transform: translate(-26px, var(--translatey)) skew(var(--skew,60)) scaleY(var(--scale, calc(--xxx, 20)));', () => {
     expect(
       toUnocss('transform: translate(-26px, var(--translatey,20px)) skew(var(--skew,60)) scale(var(--scale, calc(--x * 30%)))'),
-    ).toBe('translate="[-26px,var(--translatey,20px)]" skew="[var(--skew,60)]" scale="[var(--scale,calc(--x_*_30%))]"')
+    ).toBe('translate="[-26px,var(--translatey,20px)]" skew="[var(--skew,60)]" scale="[var(--scale,calc(--x*30%))]"')
   })
   it('transform: translate3d(-50%, -50%, 0);', () => {
     expect(

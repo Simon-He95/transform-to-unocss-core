@@ -48,7 +48,7 @@ describe('line-height', () => {
 
   it('calc', () => {
     expect(toUnocss('line-height: calc(100% - 20px);')).toBe(
-      'lh="[calc(100%_-_20px)]"',
+      'lh="[calc(100%-20px)]"',
     )
   })
 })

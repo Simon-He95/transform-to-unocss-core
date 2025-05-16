@@ -64,7 +64,7 @@ describe('text', () => {
 
   it('text-underline-offset: calc(<number>px * -1);', () => {
     expect(toUnocss('text-underline-offset: calc(<number>px * -1);')).toBe(
-      'underline-offset="[calc(<number>px_*_-1)]"',
+      'underline-offset="[calc(<number>px*-1)]"',
     )
   })
 

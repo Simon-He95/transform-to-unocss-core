@@ -125,10 +125,10 @@ describe('grid', () => {
   })
 
   it('grid-column-start: calc(<number> * -1);', () => {
-    expect(toUnocss('grid-column-start: calc(<number> * -1);')).toBe('col-start="[calc(<number>_*_-1)]"')
+    expect(toUnocss('grid-column-start: calc(<number> * -1);')).toBe('col-start="[calc(<number>*-1)]"')
   })
 
   it('grid-row-end: calc(<number> * -1);', () => {
-    expect(toUnocss('grid-row-end: calc(<number> * -1);')).toBe('row-end="[calc(<number>_*_-1)]"')
+    expect(toUnocss('grid-row-end: calc(<number> * -1);')).toBe('row-end="[calc(<number>*-1)]"')
   })
 })

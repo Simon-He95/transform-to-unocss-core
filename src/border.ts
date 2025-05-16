@@ -1,6 +1,5 @@
 import {
   getVal,
-  isCalc,
   isHex,
   isHsl,
   isRgb,
@@ -14,6 +13,25 @@ const borderSize = [
   'border-bottom',
   'border-left',
 ]
+
+const widthMatchMap: Record<string, string> = {
+  'inline': 'x',
+  'block': 'y',
+  'inline-start': 's',
+  'inline-end': 'e',
+  'top': 't',
+  'right': 'r',
+  'bottom': 'b',
+  'left': 'l',
+}
+const radiusMatchMap: Record<string, string> = {
+  top: 't',
+  right: 'r',
+  bottom: 'b',
+  left: 'l',
+  end: 'e',
+  start: 's',
+}
 
 export function border(key: string, val: string) {
   // eslint-disable-next-line prefer-const
@@ -38,10 +56,25 @@ export function border(key: string, val: string) {
     return `border${getVal(value)}${important}`
   }
 
-  if (key === 'border-radius') {
-    return isCalc(value) || !value.includes(' ')
-      ? `border-rd${getVal(value)}${important}`
-      : `border-rd="[${joinWithUnderLine(value)}]${important}"`
+  const radiusMatch = key.match(/border(-start|-end|-top|-bottom)?(-start|-end|-left|-right)?-radius/)
+  if (radiusMatch) {
+    const [_, start, end] = radiusMatch
+    if (start && end) {
+      return `${important}rounded-${radiusMatchMap[start.slice(1)]}${radiusMatchMap[end.slice(1)]}${getVal(value, joinWithUnderLine)}`
+    }
+    if (start || end) {
+      return `${important}rounded-${radiusMatchMap[start?.slice(1) || end?.slice(1)]}${getVal(value, joinWithUnderLine)}`
+    }
+    return `${important}rounded${getVal(value, joinWithUnderLine, false, '', true)}`
+  }
+
+  const widthMatch = key.match(/border(-inline|-block|-inline-start|-inline-end|-top|-right|-bottom|-left)?-(width|color)/)
+  if (widthMatch) {
+    if (widthMatch[1]) {
+      const widthType = widthMatchMap[widthMatch[1].slice(1)]
+      return `${important}border-${widthType}${getVal(value, joinWithUnderLine, false, 'length:')}`
+    }
+    return `${important}border${getVal(value, joinWithUnderLine, false, 'length:')}`
   }
 
   if (borderSize.some(b => key.startsWith(b))) {
@@ -51,10 +84,7 @@ export function border(key: string, val: string) {
 
     return value.split(' ').map(v => `border-${key.split('-')[1][0]}${getVal(v)}${important}`).join(' ')
   }
-  if (key === 'border-inline-end-width')
-    return `border-e${getVal(value)}${important}`
-  if (key === 'border-inline-start-width')
-    return `border-s${getVal(value)}${important}`
+
   if (key.startsWith('border-image'))
     return ''
   // fix: https://github.com/Simon-He95/unot/issues/18
