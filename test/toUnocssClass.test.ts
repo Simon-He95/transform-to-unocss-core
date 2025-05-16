@@ -21,4 +21,10 @@ describe('toUnocssClass', () => {
       )[0],
     ).toBe('h-[100%] scale-150')
   })
+
+  expect(
+    toUnocssClass(
+      'undefined',
+    )[0],
+  ).toBe('')
 })

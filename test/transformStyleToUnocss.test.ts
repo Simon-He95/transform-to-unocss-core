@@ -89,4 +89,12 @@ describe('transformStyleToUnocss', () => {
       ]
     `)
   })
+
+  it('error', () => {
+    expect(transformStyleToUnocss(`width`)[1]).toMatchInlineSnapshot(`
+      [
+        "width",
+      ]
+    `)
+  })
 })

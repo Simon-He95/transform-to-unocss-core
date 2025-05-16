@@ -117,10 +117,10 @@ const transformer: Record<string, (v: Record<string, string>) => { transformedRe
 export function transformStyleToUnocssPre(styles: string) {
   const preTransformedList = []
   // 需要一次性把所有的key和value都给transformer中处理，完全匹配返回新的结果，并且把使用到的属性从原来的结果中删除
-  const styleToObj = styles.split(';').reduce((r: Record<string, string>, item) => {
+  const styleToObj = styles.split(';').filter(Boolean).reduce((r: Record<string, string>, item) => {
     const [key, value] = item.split(':')
     // 导入规则函数去转换，如果没有转换成功就返回原来的值，并且从结果中删除
-    if (key.trim() && value.trim()) {
+    if (key.trim() && value?.trim()) {
       r[key.trim()] = value.trim()
     }
     return r
