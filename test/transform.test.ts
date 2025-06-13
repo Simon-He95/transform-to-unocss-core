@@ -95,4 +95,10 @@ describe('transform', () => {
       toUnocss('transform: translate3d(-50%, -50%, 0)'),
     ).toBe('translate="[-50%,-50%,0]"')
   })
+
+  it('transform: scale(1.5);', () => {
+    expect(
+      toUnocss('transform: scale(1.15)'),
+    ).toBe('scale="115"')
+  })
 })

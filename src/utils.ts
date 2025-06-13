@@ -81,7 +81,7 @@ export function getVal(val: string, transform?: (v: string) => string, inClass?:
 export function getHundred(n: string | number) {
   if (typeof n === 'string' && n.endsWith('%'))
     return +n.slice(0, -1)
-  return +n * 100
+  return Math.round(Number(n) * 100)
 }
 
 export function joinWithLine(s: string) {
