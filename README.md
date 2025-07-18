@@ -7,10 +7,10 @@
   - 使用：toUnocss('width:100px', isRem) isRem 为true时，会将px转换为rem
 - transformStyleToUnocss
   - 用于行内属性
-  - 使用：transformStyleToUnocss("width:100px;height:100px;") isRem 为true时，会将px转换为rem[100px]"
+  - 使用：transformStyleToUnocss("width:100px;height:100px;") isRem 为true时，会将px转换为 "rem[100px]"
 - toUnocssClass
   - 用于类名
-  - 使用：toUnocssClass('width:100px', isRem) isRem 为true时，isRem 为true时，会将px转换为rem
+  - 使用：toUnocssClass('width:100px', isRem) isRem 为true时，会将px转换为rem
 
 ## License
 
