@@ -1,3 +1,21 @@
+// 找到第一个不在方括号内的冒号位置
+function findFirstColonOutsideBrackets(str: string): number {
+  let bracketDepth = 0
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i]
+    if (char === '[') {
+      bracketDepth++
+    }
+    else if (char === ']') {
+      bracketDepth--
+    }
+    else if (char === ':' && bracketDepth === 0) {
+      return i
+    }
+  }
+  return -1
+}
+
 // 通用的规则处理函数
 function createRuleProcessor(config: {
   allMatch: Record<string, string | RegExp>
@@ -118,10 +136,16 @@ export function transformStyleToUnocssPre(styles: string) {
   const preTransformedList = []
   // 需要一次性把所有的key和value都给transformer中处理，完全匹配返回新的结果，并且把使用到的属性从原来的结果中删除
   const styleToObj = styles.split(';').filter(Boolean).reduce((r: Record<string, string>, item) => {
-    const [key, value] = item.split(':')
-    // 导入规则函数去转换，如果没有转换成功就返回原来的值，并且从结果中删除
-    if (key.trim() && value?.trim()) {
-      r[key.trim()] = value.trim()
+    // 智能分割CSS属性和值，处理方括号中的冒号情况（如 [&:hover]）
+    const splitIndex = findFirstColonOutsideBrackets(item)
+    if (splitIndex === -1)
+      return r
+
+    const key = item.substring(0, splitIndex).trim()
+    const value = item.substring(splitIndex + 1).trim()
+
+    if (key && value) {
+      r[key] = value
     }
     return r
   }, {})
