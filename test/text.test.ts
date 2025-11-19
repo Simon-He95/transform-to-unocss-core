@@ -39,8 +39,20 @@ describe('text', () => {
     expect(toUnocss('text-decoration-line: underline;')).toBe('underline')
   })
 
-  it('text-decoration-line: none;', () => {
-    expect(toUnocss('text-decoration-line: none;')).toBe('no-underline')
+  it('text-decoration: underline;', () => {
+    expect(toUnocss('text-decoration: underline;')).toBe('underline')
+  })
+
+  it('text-decoration: line-through;', () => {
+    expect(toUnocss('text-decoration: line-through;')).toBe('line-through')
+  })
+
+  it('text-decoration: overline;', () => {
+    expect(toUnocss('text-decoration: overline;')).toBe('overline')
+  })
+
+  it('text-decoration: underline overline;', () => {
+    expect(toUnocss('text-decoration: underline overline;')).toBe('underline overline')
   })
 
   it('text-decoration-color: inherit;', () => {

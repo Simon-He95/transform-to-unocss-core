@@ -4,6 +4,7 @@ const textMap = [
   'text-align',
   'text-align-last',
   'text-decoration-line',
+  'text-decoration',
   'text-decoration-style',
   'text-decoration-color',
   'text-decoration-thickness',
@@ -19,7 +20,6 @@ export function text(key: string, val: string) {
   if (!textMap.includes(key))
     return
   const [value, important] = transformImportant(val)
-
   if (key === 'text-decoration-line') {
     if (value === 'none')
       return `no-underline${important}`
@@ -31,6 +31,10 @@ export function text(key: string, val: string) {
       return `normal-case${important}`
     return `${value}${important}`
   }
+  if (key === 'text-decoration') {
+    return value
+  }
+
   if (key.startsWith('text-decoration') || key === 'text-indent')
     return `${key.split('-')[1]}${getVal(value)}${important}`
 
