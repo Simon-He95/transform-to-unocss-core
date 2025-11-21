@@ -32,7 +32,7 @@ export function text(key: string, val: string) {
     return `${value}${important}`
   }
   if (key === 'text-decoration') {
-    return value
+    return value.split(' ').map(v => v ? `${important}${v}` : '').join(' ')
   }
 
   if (key.startsWith('text-decoration') || key === 'text-indent')
