@@ -55,7 +55,6 @@
     "lint": "eslint . --cache",
     "lint:fix": "pnpm run lint --fix",
     "prepublishOnly": "npm run build",
-    "publish": "npm publish",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
     "test": "vitest",
