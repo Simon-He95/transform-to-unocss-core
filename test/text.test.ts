@@ -39,6 +39,18 @@ describe('text', () => {
     expect(toUnocss('text-decoration-line: underline;')).toBe('underline')
   })
 
+  it('text-decoration-line: overline;', () => {
+    expect(toUnocss('text-decoration-line: overline;')).toBe('overline')
+  })
+
+  it('text-decoration-line: line-through;', () => {
+    expect(toUnocss('text-decoration-line: line-through;')).toBe('line-through')
+  })
+
+  it('text-decoration-line: none;', () => {
+    expect(toUnocss('text-decoration-line: none;')).toBe('no-underline')
+  })
+
   it('text-decoration: underline;', () => {
     expect(toUnocss('text-decoration: underline;')).toBe('underline')
   })
@@ -58,6 +70,12 @@ describe('text', () => {
   it('text-decoration-color: inherit;', () => {
     expect(toUnocss('text-decoration-color: inherit;')).toBe(
       'decoration-inherit',
+    )
+  })
+
+  it('text-decoration: none;', () => {
+    expect(toUnocss('text-decoration: none;')).toBe(
+      'no-underline',
     )
   })
 

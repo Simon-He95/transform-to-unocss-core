@@ -21,12 +21,15 @@ export function font(key: string, val: string) {
   if (key === 'font-weight')
     return `font${getVal(value)}${important}`
   if (key === 'font-family') {
-    const match = value.match(/ui-(\w{0,4})/)!
-    // 等待改造成 font-[family-name:xxx]
+    const match = value.match(/ui-(sans-serif|serif|monospace)/)
     if (!match)
       return `font-[${joinWithUnderLine(val)}]${important}`
 
-    const [_, family] = match
+    const family = match[1] === 'sans-serif'
+      ? 'sans'
+      : match[1] === 'monospace'
+        ? 'mono'
+        : 'serif'
     return `font-${family}${important}`
   }
   if (key === 'font-style') {

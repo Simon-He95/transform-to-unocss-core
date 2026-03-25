@@ -32,6 +32,8 @@ export function text(key: string, val: string) {
     return `${value}${important}`
   }
   if (key === 'text-decoration') {
+    if (value === 'none')
+      return `no-underline${important}`
     return value.split(' ').map(v => v ? `${important}${v}` : '').join(' ')
   }
 
