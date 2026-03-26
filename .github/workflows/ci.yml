@@ -70,8 +70,6 @@ jobs:
           node-version: ${{ matrix.node_version }}
           cache: pnpm
 
-      - run: corepack enable
-
       - name: Setup
         run: npm i -g @antfu/ni
 
