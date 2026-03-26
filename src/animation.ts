@@ -83,19 +83,21 @@ export function animation(key: string, val: string) {
       const part = parts[i]
 
       // 判断部分的类型
-      if (/^\d+(?:\.\d+)?s?$/.test(part)) {
+      if (/^\d+(?:\.\d+)?(?:ms|s)?$/.test(part)) {
+        // Strip ms suffix (UnoCSS defaults to ms)
+        const cleanPart = part.endsWith('ms') ? part.slice(0, -2) : part
         // 时间值
         if (timeValuesFound === 0) {
           // 第一个时间值对应 duration
-          result.push(`animate-duration${getVal(part)}`)
+          result.push(`animate-duration${getVal(cleanPart)}`)
         }
         else if (timeValuesFound === 1) {
           // 第二个时间值对应 delay
-          result.push(`animate-delay${getVal(part)}`)
+          result.push(`animate-delay${getVal(cleanPart)}`)
         }
         else {
           // 额外的时间值
-          result.push(`animate-[${part}]`)
+          result.push(`animate-[${cleanPart}]`)
         }
         timeValuesFound++
       }
