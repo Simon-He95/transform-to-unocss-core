@@ -57,4 +57,10 @@ describe('animation', () => {
       'animate-name-[order-collapse-2]',
     )
   })
+
+  it('animation: shake-horizontal 8000ms ease-in-out', () => {
+    expect(toUnocss('animation: shake-horizontal 8000ms ease-in-out')).toBe(
+      'animate-[shake-horizontal] animate-duration-8000 animate-ease-[ease-in-out]',
+    )
+  })
 })
