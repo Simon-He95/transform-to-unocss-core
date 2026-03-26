@@ -13,4 +13,5 @@ logs
 *-error.log
 .eslintcache
 tmp
+package-lock.json
 
