@@ -83,7 +83,7 @@ export function animation(key: string, val: string) {
       const part = parts[i]
 
       // 判断部分的类型
-      if (/^\d+(?:\.\d+)?(ms|s)?$/.test(part)) {
+      if (/^\d+(?:\.\d+)?(?:ms|s)?$/.test(part)) {
         // Strip ms suffix (UnoCSS defaults to ms)
         const cleanPart = part.endsWith('ms') ? part.slice(0, -2) : part
         // 时间值
